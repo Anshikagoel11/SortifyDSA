@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 export default function Headers() {
@@ -12,7 +12,7 @@ export default function Headers() {
     gsap.from(nodes.current, {
       scale: 0,
       opacity: 0,
-      duration: 0.6,
+      duration: 0.8,
       stagger: 0.2,
       ease: "back.out",
       onComplete: animateGraph
@@ -106,8 +106,8 @@ export default function Headers() {
               background: "linear-gradient(90deg, #E2E8F0, #7DD3FC, #A78BFA, #E2E8F0)",
               backgroundSize: "300% 100%",
               WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent"
+              backgroundClip: "text", //gardient bs text me show hoga
+              color: "transparent" //taki ab text me bg color show ho
             }}
           >
             Visualize <span className="text-sky-400">Algorithms</span> in Action
@@ -115,7 +115,7 @@ export default function Headers() {
           
           <p 
             ref={el => leftElements.current[1] = el}
-            className="text-xl text-slate-300 italic"
+            className="text-xl text-slate-300 italic p-3"
           >
             Step-by-step animations that bring data structures to life
           </p>
@@ -153,16 +153,16 @@ export default function Headers() {
               strokeDasharray="100"
             />
             <line 
-              ref={el => edges.current[1] = el}
+              ref={el => edges.current[1] = el} // edges array me index1 pe iss element ka reference assign kr rhe h
               x1="100" y1="100" x2="200" y2="150" 
               stroke="#7DD3FC" 
               strokeWidth="2"
               strokeDasharray="100"
             />
             <line 
-              ref={el => edges.current[2] = el}
+              ref={el => edges.current[2] = el} // it draws A horizontal line from point (200, 50) ➝ (300, 50)
               x1="200" y1="50" x2="300" y2="50" 
-              stroke="#A78BFA" 
+              stroke="#A78BFA"  //line color
               strokeWidth="2"
               strokeDasharray="100"
             />

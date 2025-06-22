@@ -1,0 +1,24 @@
+{
+  "name": "sortifydsa",
+  "version": "1.0.0",
+  "description": "A DSA visualizer",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "author": "Anshika Goel",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.10",
+    "@vitejs/plugin-react": "^4.5.2",
+    "framer-motion": "^12.18.1",
+    "gsap": "^3.13.0",
+    "link": "^2.1.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.2",
+    "tailwindcss": "^4.1.10",
+    "vite": "^6.3.5"
+  }
+}

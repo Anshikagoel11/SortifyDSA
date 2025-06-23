@@ -13,8 +13,8 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans py-2">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans py-2 ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div className="flex items-center justify-between h-16">
           {/* Logo with improved typography */}
           <div className="flex items-center">

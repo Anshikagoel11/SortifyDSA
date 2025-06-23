@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import getSorting from "../utils/GetSorting";
 
 function Sorting_navBar({ sorting }) {
   return (
@@ -28,6 +29,11 @@ export default function Sorting() {
   const [arraySize, setArraySize] = useState(8);
   const [customArray, setCustomArray] = useState("");
   const [bars, setBars] = useState([30, 80, 45, 90, 20, 60, 75, 40]);
+  const [compareInfo, setCompareInfo] = useState({
+    smaller: null,
+    larger: null,
+  });
+  const [speed, setSpeed] = useState(3);
 
   function generateRandomArray() {
     const newArray = [];
@@ -57,9 +63,9 @@ export default function Sorting() {
   return (
     <div className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] min-h-screen flex overflow-hidden">
       {/* Fixed Left sidebar */}
-      <div className="w-[20%] bg-[#1E293B]/30 p-6 border-r border-gray-700/50 backdrop-blur-lg fixed h-screen overflow-y-auto">
+      <div className="w-[20%] bg-[#1E293B]/30 p-1 rounded m-3 border-r border-gray-700/50 backdrop-blur-lg fixed h-screen overflow-y-auto">
         <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 text-xl font-bold mb-6 flex items-center">
-          <span className="mr-2">📊</span> Sorting
+          <span className="mr-1">📊</span> Sorting
         </h2>
         <div className="space-y-3">
           {[
@@ -75,7 +81,7 @@ export default function Sorting() {
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
               className={`
-  text-white/90 relative w-full text-left px-4 py-3 rounded-lg transition-all
+  text-white/90 relative w-[80%] text-left px-2 py-3 rounded-lg transition-all
   bg-gradient-to-r from-blue-400/10 to-blue-700/10
   ${sorting === item ? "bg-blue-600/20" : "hover:bg-blue-500/20"}
   duration-300 overflow-hidden border border-gray-600/30 shadow-sm
@@ -116,31 +122,33 @@ export default function Sorting() {
 
           {/* Graph Visualizer */}
           <div className="h-64 mb-4 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50">
-            {bars.map((height, index) => (
-              //   <motion.div
-              //     key={index}
-              //     layout
-              //     initial={{ opacity: 0 }}
-              //     animate={{ opacity: 1 }}
-              //     transition={{ duration: 0.5 }}
-              //     className="bg-gradient-to-t from-blue-400 to-cyan-300 w-8 rounded-t-md hover:bg-cyan-400 cursor-pointer"
-              //     style={{ height: `${height}%` }}
-              //     whileHover={{ scaleY: 1.05 }}
+            {bars.map((height, index) => {
+              let barColor = "bg-gradient-to-t from-blue-400 to-cyan-300";
 
-              //   />
-              <motion.div
-                key={index}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="bg-gradient-to-t from-blue-400 to-cyan-300 w-8 rounded-t-md hover:bg-cyan-400 cursor-pointer "
-                style={{ height: `${height}%` }}
-                whileHover={{ scaleY: 1.05 }}
-              >
-                <p className="text-blue-900 text-center">{height}</p>
-              </motion.div>
-            ))}
+              if (index === compareInfo.smaller) {
+                // console.log(compareInfo.smaller)
+                barColor = "bg-red-400";
+              }
+              if (index === compareInfo.larger) {
+                //  console.log(compareInfo.larger)
+                barColor = "bg-green-700";
+              }
+
+              return (
+                <motion.div
+                  key={index}
+                  layout
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className={`${barColor} w-8 rounded-t-md hover:bg-cyan-400 cursor-pointer`}
+                  style={{ height: `${height}%` }}
+                  whileHover={{ scaleY: 1.05 }}
+                >
+                  <p className="text-blue-900 text-center">{height}</p>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Controls Section */}
@@ -154,7 +162,7 @@ export default function Sorting() {
                 <span className="text-white/80">Size</span>
                 <input
                   type="number"
-                  min="5"
+                  min="2"
                   max="50"
                   value={arraySize}
                   onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}
@@ -173,8 +181,10 @@ export default function Sorting() {
                 <span className="text-white/80">Speed</span>
                 <input
                   type="range"
-                  min="5"
+                  min="1"
                   max="20"
+                  value={speed}
+                  onChange={(e) => setSpeed(Number(e.target.value))}
                   className="w-full accent-blue-500"
                 />
               </div>
@@ -234,7 +244,10 @@ export default function Sorting() {
               }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all"
-              //   onClick={}
+              onClick={() => {
+                 const actualSpeed = (21 - speed) * 30; 
+                getSorting[sorting](bars, setBars, setCompareInfo, actualSpeed);
+              }}
             >
               Start Visualization
             </motion.button>

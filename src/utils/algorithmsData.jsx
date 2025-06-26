@@ -17,7 +17,7 @@ const AlgorithmsData = [
         <path d="M6 2L3 6h6L6 2zm0 7H3l3 4 3-4H6zm9 9h3l-3 4-3-4h3zm0-3l-3-4-3 4h6zm-9 1h12v2H6v-2z"/>
       </svg>
     ),
-    path:"/sorting"
+    path:"/sorting/bubble-sort"
   },
   {
     title: "Tree Algorithms",

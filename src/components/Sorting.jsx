@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import getSorting from "../utils/GetSorting";
+import { tr } from "framer-motion/client";
 
 function Sorting_navBar({ sorting }) {
   return (
@@ -34,6 +35,8 @@ export default function Sorting() {
     larger: null,
   });
   const [speed, setSpeed] = useState(3);
+ const [isActive , setIsActive] = useState(false);
+const stopSorting = useRef(false);  //not use useState beacuse useState function call me value freeze kr deta h mtlb jo value gyi vhi jeygi agar vo baad m change hue toh vha reflect nhi hogi aur stop hume loop m har time check krna hoga current situation ke leye ki khi agar user n abhi click toh nhi kr deya
 
   function generateRandomArray() {
     const newArray = [];
@@ -57,7 +60,6 @@ export default function Sorting() {
 
   const clearCustomArray = () => {
     setCustomArray([]);
-    generateRandomArray();
   };
 
   return (
@@ -165,6 +167,7 @@ export default function Sorting() {
                   min="2"
                   max="50"
                   value={arraySize}
+                  disabled={isActive}
                   onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}
                   className="bg-gray-800/50 text-white px-3 py-1 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                 />
@@ -173,6 +176,7 @@ export default function Sorting() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-4 py-1 bg-blue-600/80 text-white rounded hover:bg-blue-600 transition-colors"
+                  disabled={isActive}
                 >
                   Apply
                 </motion.button>
@@ -184,6 +188,7 @@ export default function Sorting() {
                   min="1"
                   max="20"
                   value={speed}
+                  disabled={isActive}
                   onChange={(e) => setSpeed(Number(e.target.value))}
                   className="w-full accent-blue-500"
                 />
@@ -201,6 +206,7 @@ export default function Sorting() {
                   type="text"
                   placeholder="Enter comma separated numbers"
                   value={customArray}
+                  disabled={isActive}
                   onChange={(e) => setCustomArray(e.target.value)}
                   className="w-full mt-1 bg-gray-800/50 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                 />
@@ -210,14 +216,16 @@ export default function Sorting() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-4 py-1 bg-blue-600/80 text-white rounded hover:bg-blue-600 transition-colors mr-2"
+                disabled={isActive}
               >
-                Apply Custom Array
+                Get Custom Array
               </motion.button>
               <motion.button
                 onClick={clearCustomArray}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-4 py-1 bg-blue-500/80 text-white rounded hover:bg-blue-500 transition-colors"
+                disabled={isActive}
               >
                 Clear
               </motion.button>
@@ -232,6 +240,7 @@ export default function Sorting() {
                 scale: 1.05,
                 boxShadow: "0 0 15px rgba(59, 130, 246, 0.3)",
               }}
+              disabled={isActive}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all"
             >
@@ -244,12 +253,31 @@ export default function Sorting() {
               }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:shadow-lg transition-all"
+              disabled={isActive}
               onClick={() => {
+                setIsActive(true);
                  const actualSpeed = (21 - speed) * 30; 
-                getSorting[sorting](bars, setBars, setCompareInfo, actualSpeed);
+                getSorting[sorting](bars, setBars, setCompareInfo, actualSpeed , setIsActive ,stopSorting);
+               
               }}
             >
               Start Visualization
+            </motion.button>
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(16, 185, 129, 0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-2 ${stopSorting}bg-red-500: bg-red-500 text-white rounded-lg hover:shadow-lg transition-all`}
+              disabled={!isActive}
+              onClick={() => {
+               setIsActive(false)
+               stopSorting.current=true;
+
+              }}
+            >
+            {!stopSorting.current? 'STOP' : 'Resume'}
             </motion.button>
           </div>
         </motion.div>

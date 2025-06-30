@@ -58,6 +58,7 @@ export default function Algorithms() {
           variants={container}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
+          
         >
           {AlgorithmsData.map((algo) => (
             <motion.div

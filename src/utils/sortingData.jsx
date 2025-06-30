@@ -1,8 +1,10 @@
-const sortingAlgorithms = [
-  {
+const sortingAlgorithms = {
+  "bubble-sort": {
     sortingName: "Bubble Sort",
-    definition: "A simple comparison-based sorting algorithm that repeatedly steps through the list and swaps adjacent elements if they are in the wrong order.",
-    detailTheory: "Bubble Sort works by repeatedly iterating through the array, comparing each pair of adjacent items, and swapping them if they are in the wrong order. After each full pass, the largest unsorted element 'bubbles' to its correct position at the end of the array. This process is repeated until no more swaps are needed.",
+    definition:
+      "A simple comparison-based sorting algorithm that repeatedly steps through the list and swaps adjacent elements if they are in the wrong order.",
+    detailTheory:
+      "Bubble Sort works by repeatedly iterating through the array, comparing each pair of adjacent items, and swapping them if they are in the wrong order. After each full pass, the largest unsorted element 'bubbles' to its correct position at the end of the array. This process is repeated until no more swaps are needed.",
     code: [
       {
         language: "C++",
@@ -75,10 +77,13 @@ function bubbleSort(arr) {
     spaceComplexity: "O(1)",
     extra: "Very slow for large data sets. Good for educational purposes."
   },
-  {
+
+  "selection-sort": {
     sortingName: "Selection Sort",
-    definition: "A simple comparison-based sorting algorithm that divides the list into sorted and unsorted parts, repeatedly selecting the minimum element from the unsorted part.",
-    detailTheory: "Selection Sort works by selecting the smallest (or largest) element from the unsorted section and swapping it with the first unsorted element. This process continues, growing the sorted portion of the list one element at a time.",
+    definition:
+      "A simple comparison-based sorting algorithm that divides the list into sorted and unsorted parts, repeatedly selecting the minimum element from the unsorted part.",
+    detailTheory:
+      "Selection Sort works by selecting the smallest (or largest) element from the unsorted section and swapping it with the first unsorted element. This process continues, growing the sorted portion of the list one element at a time.",
     code: [
       {
         language: "C++",
@@ -161,4 +166,6 @@ function selectionSort(arr) {
     spaceComplexity: "O(1)",
     extra: "Performs fewer swaps than bubble sort. Still inefficient for large data sets."
   }
-];
+};
+
+export default sortingAlgorithms;

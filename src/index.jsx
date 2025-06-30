@@ -4,26 +4,24 @@ import './index.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import { BrowserRouter ,Routes,Route} from 'react-router';
-import Sorting from './components/Sorting';
-import BubbleSort from './components/BubbleComp';
-
+import Sorting from './components/Sorting/sorting';
+import SortingComp from './components/Sorting/SortingComp';
+import {SortingProvider} from './context/sortingContext'
 function App(){
     return(
        <>
        <BrowserRouter>
+       <SortingProvider>
        <Routes>
         <Route element={<Navbar/>}>
        <Route path={"/"} element={ <Home/>}></Route>
         <Route element={<Sorting/>}>
-        <Route path='/sorting/bubble-sort' element={<BubbleSort/>}></Route>
-        {/* <Route path='/sorting/selection-sort' element={<SelectionSort/>}></Route>
-        <Route path='/sorting/merge-sort' element={<MergeSort/>}></Route>
-        <Route path='/sorting/quick-sort' element={<QuickSort/>}></Route>
-        <Route path='/sorting/insertation-sort' element={<InsertationSort/>}></Route> */}
+        <Route path='/sorting/:type' element={<SortingComp/>}></Route>
         </Route>
         </Route>
        
        </Routes>
+       </SortingProvider>
         </BrowserRouter>
        </>
     )

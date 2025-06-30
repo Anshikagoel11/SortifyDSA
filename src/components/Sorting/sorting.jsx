@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
-
+import SortingTypeComp from "./SortingComp"
+import { useSorting } from "../../context/sortingContext";
 const sortingAlgorithms = [
   "Bubble Sort", 
   "Selection Sort", 
@@ -87,17 +88,7 @@ function SortingNavBar({ sorting }) {
           </div>
         </div>
         
-        <motion.div
-          className="flex items-center bg-[#1E293B]/50 rounded-lg px-2 py-2 border border-gray-700/50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm text-gray-300">O(n) complexity varies</span>
-        </motion.div>
+    
       </motion.div>
     </div>
   );
@@ -252,7 +243,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 }
 
 export default function Sorting() {
-  const [sorting, setSorting] = useState("Bubble Sort");
+ const {sorting,setSorting} = useSorting();
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
   
@@ -270,7 +261,7 @@ export default function Sorting() {
   );
 
   return (
-    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex overflow-hidden">
+    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex overflow-hidden ">
       {/* Sidebar */}
       <motion.div 
         className="w-[22%] min-w-[260px] bg-[#1E293B]/20 p-4 rounded-lg m-3 border border-gray-700/30 backdrop-blur-xl fixed h-[calc(100vh-1.5rem)] overflow-y-auto"
@@ -395,19 +386,12 @@ export default function Sorting() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-[#1E293B]/30 backdrop-blur-sm rounded-xl border border-gray-700/30 p-6 shadow-lg"
         >
-          <Outlet />
+         
+         <SortingTypeComp/>
+
         </motion.div>
         
-        {/* Footer */}
-        <motion.div
-          className="mt-8 text-center text-gray-500 text-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ delay: 1 }}
-        >
-          <p>Sorting Algorithm Visualization Tool</p>
-          <p className="mt-1">Click on different algorithms to see how they work</p>
-        </motion.div>
+       
       </div>
     </div>
   );

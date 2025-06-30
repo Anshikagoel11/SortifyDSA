@@ -1,22 +1,37 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import bubbleSort from "./sorting_algo/bubbleSort";
+import { useParams } from "react-router-dom";
+import { useSorting } from "../../context/sortingContext";
+import sortingType from "../../utils/sortingType";
+import SortingTheory from "./sortingTheory";
 
-export default function BubbleSort() {
-  const [arraySize, setArraySize] = useState(8);
-  const [customArray, setCustomArray] = useState("");
-  const [bars, setBars] = useState([30, 80, 45, 90, 20, 60, 75, 40]);
-  const [compareInfo, setCompareInfo] = useState({
-    smaller: null,
-    larger: null,
-  });
-  const [speed, setSpeed] = useState(3);
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [hasReset, setHasReset] = useState(false);
 
-  const stopSorting = useRef(false);
-  const reset = useRef(false);
+export default function SortingComp() {
+   const {
+    bars,
+    setBars,
+    arraySize,
+    compareInfo,
+    setCompareInfo,
+    setCustomArray,
+    setArraySize,
+    stopSorting,
+    customArray,
+    reset,
+    isPaused,
+    setIsPaused,
+    hasReset,
+    setHasReset,
+    speed,
+    setSpeed,
+    isActive,
+    setIsActive,
+  } = useSorting();
+
+ const {type} = useParams();
+//  console.log(type)
+
 
   function generateRandomArray() {
     const newArray = Array.from({ length: arraySize }, () =>
@@ -36,32 +51,16 @@ export default function BubbleSort() {
   const clearCustomArray = () => setCustomArray("");
 
   return (
+
     <motion.div
+
       className="bg-white/5 backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-
-      <div className="h-64 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50">
-        {bars.map((height, index) => {
-          let barColor = "bg-gradient-to-t from-blue-400 to-cyan-300";
-          if (index === compareInfo.smaller) barColor = "bg-red-400";
-          if (index === compareInfo.larger) barColor = "bg-green-700";
-          return (
-            <motion.div
-              key={index}
-              layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className={`${barColor} w-8 rounded-t-md hover:bg-cyan-400 cursor-pointer`}
-              style={{ height: `${height}%` }}
-              whileHover={{ scaleY: 1.05 }}
-            >
-              <p className="text-blue-900 text-center">{height}</p>
-            </motion.div>
-          );
-        })}
+      <div className="h-64 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50 ">
+        {sortingType[type].BarComponent}
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-1">
@@ -154,7 +153,8 @@ export default function BubbleSort() {
             reset.current = false;
             setHasReset(false);
             const actualSpeed = (21 - speed) * 30;
-            bubbleSort(
+            //function call for specific sorting
+            sortingType[type].sortFn(
               bars,
               setBars,
               setCompareInfo,
@@ -222,7 +222,9 @@ export default function BubbleSort() {
         >
           Reset
         </motion.button>
+        
       </div>
+      <SortingTheory/>
     </motion.div>
   );
 }

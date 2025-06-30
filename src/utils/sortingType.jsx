@@ -1,6 +1,10 @@
 
 import BubbleBar from "../components/Sorting/bars/bubbleBar";
+import SelectionBar from "../components/Sorting/bars/selectionBar";
+
+
 import bubbleSort from "../components/Sorting/sorting_algo/bubbleSort";
+import selectionSort from "../components/Sorting/sorting_algo/selectionSort";
 
 const sortingType = {
   "bubble-sort": {
@@ -8,8 +12,8 @@ const sortingType = {
     sortFn: bubbleSort,
   },
   "selection-sort": {
-    // BarComponent: <SelectionBar />,
-    // sortFn: selectionSort,
+    BarComponent: <SelectionBar />,
+    sortFn: selectionSort,
   },
   "insertion-sort": {
     // BarComponent: <InsertionBar />,

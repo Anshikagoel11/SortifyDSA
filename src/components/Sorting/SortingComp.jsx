@@ -211,6 +211,7 @@ export default function SortingComp() {
             setCompareInfo({ smaller: null, larger: null });
             generateRandomArray();
             setHasReset(true);
+            setIsPaused(false);
           }}
           whileHover={hasReset ? { scale: 1.05 } : {}}
           whileTap={hasReset ? { scale: 0.95 } : {}}

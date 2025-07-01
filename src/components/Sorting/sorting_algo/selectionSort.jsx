@@ -14,11 +14,14 @@ const selectionSort = async (
   for (let i = 0; i < array.length; i++) {
     let minIndex = i;
 
+    
+    setCompareInfo({ smaller: minIndex, larger: null });
+     await sleep(speed);
+     
     for (let j = i + 1; j < array.length; j++) {
       if (stopSorting.current || reset.current) return;
 
-      setCompareInfo({ smaller: minIndex, larger: j });
-
+      setCompareInfo({ smaller: i, larger: j });
       await sleep(speed);
 
       if (array[j] < array[minIndex]) {
@@ -31,7 +34,6 @@ const selectionSort = async (
 
       if (stopSorting.current || reset.current) return;
       setBars([...array]);
-
       await sleep(speed);
     }
   }

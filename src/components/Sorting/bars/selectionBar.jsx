@@ -8,8 +8,8 @@ export default function SelectionBar() {
     <div className="flex items-end justify-center space-x-1 p-2 h-full w-full">
       {bars.map((height, index) => {
         let barColor = "bg-gradient-to-t from-blue-400 to-cyan-300";
-        if (index === compareInfo.smaller) barColor = "bg-red-400";
-        if (index === compareInfo.larger) barColor = "bg-green-700";
+        if (index === compareInfo.smaller) barColor = "bg-green-700";
+        if (index === compareInfo.larger) barColor = "bg-red-500";
 
         return (
           <motion.div

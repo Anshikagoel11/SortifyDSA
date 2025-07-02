@@ -5,6 +5,7 @@ import { useSorting } from "../../context/sortingContext";
 import sortingType from "../../utils/sortingType";
 import SortingTheory from "./sortingTheory";
 import useSortingUtils from "../../utils/commanFn";
+import BarFunction from "./bars/barFunction";
 
 
 export default function SortingComp() {
@@ -12,7 +13,6 @@ export default function SortingComp() {
     bars,
     setBars,
     arraySize,
-    compareInfo,
     setCompareInfo,
     setCustomArray,
     setArraySize,
@@ -27,25 +27,16 @@ export default function SortingComp() {
     setSpeed,
     isActive,
     setIsActive,
-    setMergeLevels,
-    mergeLevels
+    resumeIndex,
+    setResumeIndex
   } = useSorting();
 
 
-
-const scrollRef =   useRef(null);
+// console.log("resume index is" , resumeIndex)
+// const scrollRef =   useRef(null);
 
  const {type} = useParams();
 //  console.log(type)
-
-
-  useEffect(()=>{
-    if(type==='merge-sort' && scrollRef.current){
-     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-
-    }
-  },[mergeLevels,type])
-
 
 const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSortingUtils();
 
@@ -61,7 +52,7 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
     
     {/* bar */}
       <div className={`h-70 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50`}>
-  {sortingType[type].BarComponent}
+  <BarFunction/>
 </div>
 
 
@@ -161,12 +152,12 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
         </motion.button>
         <motion.button
          onClick={() => {
-  // Step 1: Tell the current sort to stop
+  // current sort to stop
   stopSorting.current = true;
 
   // Step 2: Use a slightly longer delay to ensure it's fully stopped
   setTimeout(() => {
-    // Optional safeguard: Reset values again
+  
     reset.current = false;
     stopSorting.current = false;
 
@@ -185,6 +176,8 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
       setIsActive,
       stopSorting,
       reset,
+      resumeIndex,
+      setResumeIndex
     );
   }, 300); // Increased to 300ms for better cleanup
 }}
@@ -213,13 +206,17 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
                 actualSpeed,
                 setIsActive,
                 stopSorting,
-                reset
+                reset,
+                resumeIndex,
+                setResumeIndex
               );
             } else {
               stopSorting.current = true;
               setIsPaused(true);
             }
           }}
+
+
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`px-4 py-2  text-white rounded-lg ${

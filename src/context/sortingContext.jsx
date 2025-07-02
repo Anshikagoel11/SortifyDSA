@@ -17,7 +17,7 @@ export const SortingProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [hasReset, setHasReset] = useState(false);
-
+ const [resumeIndex, setResumeIndex] = useState({ idxI: 0, idxJ: 0 });
   const stopSorting = useRef(false);
   const reset = useRef(false);
 
@@ -45,6 +45,8 @@ export const SortingProvider = ({ children }) => {
         reset,
         sorting,
         setSorting,
+        resumeIndex,
+        setResumeIndex
       }}
     >
       {children}

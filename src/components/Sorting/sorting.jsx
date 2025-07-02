@@ -391,9 +391,10 @@ const {generateRandomArray} = useSortingUtils();
                        setSorting(item);
   setIsActive(false);
   setCompareInfo({ smaller: null, larger: null });
+   setArraySize(8)
   generateRandomArray();
   stopSorting.current = true; 
-                      
+                       
                       }}
                     />
                   </Link>

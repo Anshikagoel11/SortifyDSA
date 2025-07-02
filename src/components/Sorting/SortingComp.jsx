@@ -45,7 +45,7 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
 
     <motion.div
 
-      className="bg-white/5 backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
+      className=" backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >

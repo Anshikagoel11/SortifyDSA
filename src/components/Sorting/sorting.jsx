@@ -286,10 +286,10 @@ const {generateRandomArray} = useSortingUtils();
 
   
   return (
-    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex overflow-hidden ">
+    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
       <motion.div
-        className="w-[22%] min-w-[260px] bg-[#1E293B]/20 p-4 rounded-lg m-3 border border-gray-700/30 backdrop-blur-xl fixed h-[calc(100vh-1.5rem)] overflow-y-auto"
+        className="w-full md:w-[22%] min-w-[260px] bg-[#1E293B]/20 p-4 rounded-lg m-3 border border-gray-700/30 backdrop-blur-xl max-h-[calc(100vh-1.5rem)] overflow-y-auto"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -423,7 +423,7 @@ const {generateRandomArray} = useSortingUtils();
       </motion.div>
 
       {/* Main content */}
-      <div className="w-[78%] ml-[22%] px-8 py-6 overflow-y-auto h-screen">
+      <div className="w-full md:w-[78%]  px-6 py-6 overflow-y-auto h-screen">
         <SortingNavBar sorting={sorting} />
 
         <motion.div

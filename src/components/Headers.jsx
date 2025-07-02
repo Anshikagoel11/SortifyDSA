@@ -150,6 +150,9 @@ export default function Headers() {
             Experience computer science concepts through interactive animations and step-by-step visualizations
           </p>
           
+        <p>Sorting Algorithm Visualization Tool</p>
+        <p className="mt-1">Click on different algorithms to see how they work</p>
+          
           <div className="relative inline-block">
             <button
               ref={buttonRef}

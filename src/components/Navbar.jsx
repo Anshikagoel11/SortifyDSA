@@ -20,13 +20,15 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans py-2">
+      <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to={'/'}> <span className="h-10 w-10 flex items-center justify-center text-2xl text-white bg-gray-700 rounded-full shadow-md hover:text-blue-400 transition-all ">
-  <TiArrowBack />
-</span></Link>
-         
+            
+            <Link to={"/"}>
+              <span className="h-10 w-10 flex items-center justify-center text-2xl text-white bg-gray-700 rounded-full shadow-md hover:text-blue-400 transition-all ">
+                <TiArrowBack />
+              </span>
+            </Link>
 
             {/* Logo */}
             <div className="flex items-center">
@@ -106,6 +108,7 @@ export default function Navbar() {
       </nav>
 
       <Outlet />
+
       <Footer />
     </>
   );

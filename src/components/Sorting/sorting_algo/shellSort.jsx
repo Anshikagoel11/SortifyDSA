@@ -1,3 +1,5 @@
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 export default async function shellSort(
   bars,
   setBars,
@@ -5,21 +7,34 @@ export default async function shellSort(
   speed,
   setIsActive,
   stopSorting,
-  reset
+  reset,
+  resumeIndex,
+  setResumeIndex
 ) {
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const arr = [...bars];
   const n = arr.length;
 
-  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    for (let i = gap; i < n; i++) {
-      if (stopSorting.current || reset.current) return;
+  let startGap = resumeIndex?.gap ?? Math.floor(n / 2);
+  let startI = resumeIndex?.i ?? startGap;
+  let resume = true;
+
+  for (let gap = startGap; gap > 0; gap = Math.floor(gap / 2)) {
+    for (let i = resume ? startI : gap; i < n; i++) {
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ gap, i });
+        if (reset.current) setResumeIndex({ gap: Math.floor(n / 2), i: Math.floor(n / 2) });
+        return;
+      }
 
       const temp = arr[i];
       let j = i;
 
       while (j >= gap && arr[j - gap] > temp) {
-        if (stopSorting.current || reset.current) return;
+        if (stopSorting.current || reset.current) {
+          if (stopSorting.current) setResumeIndex({ gap, i });
+          if (reset.current) setResumeIndex({ gap: Math.floor(n / 2), i: Math.floor(n / 2) });
+          return;
+        }
 
         setCompareInfo({ smaller: j, larger: j - gap });
         arr[j] = arr[j - gap];
@@ -32,8 +47,10 @@ export default async function shellSort(
       setBars([...arr]);
       await delay(speed);
     }
+    resume = false;
   }
 
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
+  setResumeIndex({ gap: Math.floor(n / 2), i: Math.floor(n / 2) });
 }

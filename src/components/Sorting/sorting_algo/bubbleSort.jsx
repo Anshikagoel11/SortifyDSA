@@ -18,22 +18,23 @@ const bubbleSort = async (
 
   for (let i = startI; i < array.length - 1; i++) {
     for (let j = i === startI ? startJ : 0; j < array.length - i - 1; j++) {
-
+      
       if (stopSorting.current || reset.current) {
-  if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
-  if(reset.current) setResumeIndex({idexI:0,IdxJ:0})
-  return;
-}
-
+        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+        if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
+        await sleep(speed);
+        return;
+      }
 
       const isGreater = array[j] > array[j + 1];
-      
-      // checking again if stop/reset btn gets clicked
-        if (stopSorting.current || reset.current) {
-  if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
-  if(reset.current) setResumeIndex({idexI:0,IdxJ:0})
-  return;
-}
+
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+        if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
+        await sleep(speed);
+        return;
+      }
+
       setCompareInfo({
         smaller: isGreater ? j + 1 : j,
         larger: isGreater ? j : j + 1,
@@ -44,15 +45,21 @@ const bubbleSort = async (
       if (isGreater) {
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
         setBars([...array]);
-
         await sleep(speed);
+      }
+
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+        if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
+        await sleep(speed);
+        return;
       }
     }
   }
 
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
-  setResumeIndex({ idxI: 0, idxJ: 0 }); // Reset after full sort
+  setResumeIndex({ idxI: 0, idxJ: 0 }); // Fully reset after completion
 };
 
 export default bubbleSort;

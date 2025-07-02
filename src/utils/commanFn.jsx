@@ -13,7 +13,8 @@ export default function useSortingUtils() {
     customArray,
     setCustomArray,
     arraySize,
-    hasReset
+    hasReset,
+    setResumeIndex
   } = useSorting();
 
   const resetfn = () => {
@@ -22,6 +23,7 @@ export default function useSortingUtils() {
     stopSorting.current = false;
     reset.current = true;
     setCompareInfo({ smaller: null, larger: null });
+    setResumeIndex({ idxI: 0, idxJ: 0 })
     generateRandomArray();
     setHasReset(true);
     setIsPaused(false);

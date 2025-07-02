@@ -7,17 +7,37 @@ const quickSort = async (
   speed,
   setIsActive,
   stopSorting,
-  reset
+  reset,
+  resumeIndex,
+  setResumeIndex
 ) => {
   const array = [...arr];
+  const stack = [{ low: 0, high: array.length - 1 }];
+  const visited = new Set();
 
-  async function partition(low, high) {
+  while (stack.length) {
+    if (stopSorting.current || reset.current) {
+      if (stopSorting.current) setResumeIndex({ stack });
+      if (reset.current) setResumeIndex({ stack: [] });
+      return;
+    }
+
+    const { low, high } = stack.pop();
+    const key = `${low}-${high}`;
+    if (visited.has(key)) continue;
+    visited.add(key);
+
     const pivot = array[high];
     let i = low - 1;
 
     for (let j = low; j < high; j++) {
-      if (stopSorting.current || reset.current) return -1;
-      setCompareInfo({ smaller: j, larger: high }); // comparing with pivot
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ stack: [...stack, { low, high }] });
+        if (reset.current) setResumeIndex({ stack: [] });
+        return;
+      }
+
+      setCompareInfo({ smaller: j, larger: high });
       await sleep(speed);
 
       if (array[j] < pivot) {
@@ -31,22 +51,15 @@ const quickSort = async (
     [array[i + 1], array[high]] = [array[high], array[i + 1]];
     setBars([...array]);
     await sleep(speed);
-    return i + 1;
-  }
 
-  async function quick(low, high) {
-    if (low < high) {
-      const pi = await partition(low, high);
-      if (pi === -1) return; // stop triggered
-      await quick(low, pi - 1);
-      await quick(pi + 1, high);
-    }
+    const pi = i + 1;
+    if (pi - 1 > low) stack.push({ low, high: pi - 1 });
+    if (pi + 1 < high) stack.push({ low: pi + 1, high });
   }
-
-  await quick(0, array.length - 1);
 
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
+  setResumeIndex({ stack: [] });
 };
 
 export default quickSort;

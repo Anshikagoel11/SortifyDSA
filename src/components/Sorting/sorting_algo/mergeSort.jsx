@@ -17,16 +17,13 @@ const merge = async (
 
   while (i < left.length && j < right.length) {
     if (stopSorting.current || reset.current) return;
-
     setCompareInfo({ smaller: start + i, larger: mid + 1 + j });
     await sleep(speed);
-
     if (left[i] <= right[j]) {
       array[k++] = left[i++];
     } else {
       array[k++] = right[j++];
     }
-
     setBars([...array]);
     await sleep(speed);
   }
@@ -57,7 +54,6 @@ const mergeSortHelper = async (
   reset
 ) => {
   if (start >= end || stopSorting.current || reset.current) return;
-
   const mid = Math.floor((start + end) / 2);
   await mergeSortHelper(array, start, mid, setBars, setCompareInfo, speed, stopSorting, reset);
   await mergeSortHelper(array, mid + 1, end, setBars, setCompareInfo, speed, stopSorting, reset);
@@ -71,14 +67,15 @@ const mergeSort = async (
   speed,
   setIsActive,
   stopSorting,
-  reset
+  reset,
+  resumeIndex,
+  setResumeIndex
 ) => {
   const array = [...arr];
   await mergeSortHelper(array, 0, array.length - 1, setBars, setCompareInfo, speed, stopSorting, reset);
-
-  // Cleanup
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
+  setResumeIndex({ stage: 0 });
 };
 
 export default mergeSort;

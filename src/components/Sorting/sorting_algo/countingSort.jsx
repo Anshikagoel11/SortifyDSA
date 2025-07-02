@@ -5,48 +5,79 @@ export default async function countingSort(
   speed,
   setIsActive,
   stopSorting,
-  reset
+  reset,
+  resumeIndex,
+  setResumeIndex
 ) {
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const arr = [...bars];
   const n = arr.length;
-
   const max = Math.max(...arr);
   const count = new Array(max + 1).fill(0);
   const output = new Array(n).fill(0);
 
-  // Count occurrences
-  for (let i = 0; i < n; i++) {
-    if (stopSorting.current || reset.current) return;
-    count[arr[i]]++;
-    setCompareInfo({ smaller: i, larger: null });
-    await delay(speed / 2);
+  let stage = resumeIndex?.stage ?? 0;
+  let idx = resumeIndex?.idx ?? 0;
+
+  if (stage <= 0) {
+    for (let i = idx; i < n; i++) {
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ stage: 0, idx: i });
+        if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
+        return;
+      }
+      count[arr[i]]++;
+      setCompareInfo({ smaller: i, larger: null });
+      await delay(speed / 2);
+    }
+    idx = 1;
+    stage = 1;
   }
 
-  // Cumulative count
-  for (let i = 1; i <= max; i++) {
-    if (stopSorting.current || reset.current) return;
-    count[i] += count[i - 1];
+  if (stage <= 1) {
+    for (let i = idx; i <= max; i++) {
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ stage: 1, idx: i });
+        if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
+        return;
+      }
+      count[i] += count[i - 1];
+    }
+    idx = n - 1;
+    stage = 2;
   }
 
-  // Build output array
-  for (let i = n - 1; i >= 0; i--) {
-    if (stopSorting.current || reset.current) return;
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-    setCompareInfo({ smaller: i, larger: count[arr[i]] });
-    await delay(speed / 2);
+  if (stage <= 2) {
+    for (let i = idx; i >= 0; i--) {
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ stage: 2, idx: i });
+        if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
+        return;
+      }
+      output[count[arr[i]] - 1] = arr[i];
+      count[arr[i]]--;
+      setCompareInfo({ smaller: i, larger: count[arr[i]] });
+      await delay(speed / 2);
+    }
+    idx = 0;
+    stage = 3;
   }
 
-  // Copy output back to bars
-  for (let i = 0; i < n; i++) {
-    if (stopSorting.current || reset.current) return;
-    arr[i] = output[i];
-    setBars([...arr]);
-    setCompareInfo({ smaller: i, larger: null });
-    await delay(speed);
+  if (stage <= 3) {
+    for (let i = idx; i < n; i++) {
+      if (stopSorting.current || reset.current) {
+        if (stopSorting.current) setResumeIndex({ stage: 3, idx: i });
+        if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
+        return;
+      }
+      arr[i] = output[i];
+      setBars([...arr]);
+      setCompareInfo({ smaller: i, larger: null });
+      await delay(speed);
+    }
   }
 
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
+  setResumeIndex({ stage: 0, idx: 0 });
 }

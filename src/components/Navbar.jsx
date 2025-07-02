@@ -1,6 +1,8 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState } from "react";
 import Footer from "./Footer";
+import { TiArrowBack } from "react-icons/ti";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +23,11 @@ export default function Navbar() {
       <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
+            <Link to={'/'}> <span className="h-10 w-10 flex items-center justify-center text-2xl text-white bg-gray-700 rounded-full shadow-md hover:text-blue-400 transition-all ">
+  <TiArrowBack />
+</span></Link>
+         
+
             {/* Logo */}
             <div className="flex items-center">
               <span className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent tracking-tight">

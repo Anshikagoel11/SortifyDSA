@@ -259,7 +259,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 }
 
 export default function Sorting() {
-  const { sorting, setSorting ,setCompareInfo,setIsActive,stopSorting} = useSorting();
+  const { sorting, setSorting ,setCompareInfo,setIsActive,stopSorting,setArraySize} = useSorting();
 const {generateRandomArray} = useSortingUtils();
 
   const location = useLocation();
@@ -393,7 +393,7 @@ const {generateRandomArray} = useSortingUtils();
   setCompareInfo({ smaller: null, larger: null });
   generateRandomArray();
   stopSorting.current = true; 
-                        
+                      
                       }}
                     />
                   </Link>

@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Sorting", path: "/sorting" },
+    { label: "Sorting", path: "/sorting/bubble-sort" },
     { label: "Searching", path: "/searching" },
     { label: "Tree", path: "/tree" },
     { label: "Graph", path: "/graph" },

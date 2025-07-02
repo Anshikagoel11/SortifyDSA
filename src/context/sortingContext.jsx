@@ -1,11 +1,8 @@
 import { createContext, useContext, useState, useRef } from "react";
 
-
 const SortingContext = createContext();
 
-
 export const useSorting = () => useContext(SortingContext);
-
 
 export const SortingProvider = ({ children }) => {
   const [arraySize, setArraySize] = useState(8);
@@ -15,7 +12,7 @@ export const SortingProvider = ({ children }) => {
     smaller: null,
     larger: null,
   });
-   const [sorting, setSorting] = useState("Bubble Sort");
+  const [sorting, setSorting] = useState("Bubble Sort");
   const [speed, setSpeed] = useState(3);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -23,6 +20,7 @@ export const SortingProvider = ({ children }) => {
 
   const stopSorting = useRef(false);
   const reset = useRef(false);
+
 
   return (
     <SortingContext.Provider
@@ -46,7 +44,7 @@ export const SortingProvider = ({ children }) => {
         stopSorting,
         reset,
         sorting,
-        setSorting
+        setSorting,
       }}
     >
       {children}

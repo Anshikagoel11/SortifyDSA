@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef,useEffect} from "react";
 import { motion } from "framer-motion";
-import bubbleSort from "./sorting_algo/bubbleSort";
 import { useParams } from "react-router-dom";
 import { useSorting } from "../../context/sortingContext";
 import sortingType from "../../utils/sortingType";
 import SortingTheory from "./sortingTheory";
+import useSortingUtils from "../../utils/commanFn";
 
 
 export default function SortingComp() {
@@ -27,28 +27,28 @@ export default function SortingComp() {
     setSpeed,
     isActive,
     setIsActive,
+    setMergeLevels,
+    mergeLevels
   } = useSorting();
+
+
+
+const scrollRef =   useRef(null);
 
  const {type} = useParams();
 //  console.log(type)
 
 
-  function generateRandomArray() {
-    const newArray = Array.from({ length: arraySize }, () =>
-      Math.floor(Math.random() * 90 + 5)
-    );
-    setBars(newArray);
-  }
+  useEffect(()=>{
+    if(type==='merge-sort' && scrollRef.current){
+     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
 
-  const applyCustomArray = () => {
-    const numbers = customArray.split(",").map((num) => parseInt(num.trim()));
-    if (numbers.every((num) => !isNaN(num))) {
-      setBars(numbers);
-      setArraySize(numbers.length);
     }
-  };
+  },[mergeLevels,type])
 
-  const clearCustomArray = () => setCustomArray("");
+
+const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSortingUtils();
+
 
   return (
 
@@ -58,10 +58,23 @@ export default function SortingComp() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <div className="h-64 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50 ">
-        {sortingType[type].BarComponent}
-        
+    
+    {/* bar */}
+      <div className={`h-70 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50`}>
+  {sortingType[type].BarComponent}
+</div>
+
+
+
+      {/* for merge sort */}
+    {/* {type==='merge-sort' && 
+    <div className="max-h-64 overflow-y-auto mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50 ">
+      <MergeTree levels={mergeLevels} />
       </div>
+
+    } */}
+
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-1">
         <motion.div
@@ -147,23 +160,35 @@ export default function SortingComp() {
           Randomize
         </motion.button>
         <motion.button
-          onClick={() => {
-            setIsActive(true);
-            setIsPaused(false);
-            reset.current = false;
-            setHasReset(false);
-            const actualSpeed = (21 - speed) * 30;
-            //function call for specific sorting
-            sortingType[type].sortFn(
-              bars,
-              setBars,
-              setCompareInfo,
-              actualSpeed,
-              setIsActive,
-              stopSorting,
-              reset
-            );
-          }}
+         onClick={() => {
+  // Step 1: Tell the current sort to stop
+  stopSorting.current = true;
+
+  // Step 2: Use a slightly longer delay to ensure it's fully stopped
+  setTimeout(() => {
+    // Optional safeguard: Reset values again
+    reset.current = false;
+    stopSorting.current = false;
+
+    setIsActive(true);
+    setIsPaused(false);
+    setHasReset(false);
+
+    const actualSpeed = (21 - speed) * 30;
+
+    // Step 3: Start sorting
+    sortingType[type].sortFn(
+      bars,
+      setBars,
+      setCompareInfo,
+      actualSpeed,
+      setIsActive,
+      stopSorting,
+      reset,
+    );
+  }, 300); // Increased to 300ms for better cleanup
+}}
+
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg ${
@@ -172,14 +197,16 @@ export default function SortingComp() {
           disabled={isActive}
         >
           Start Visualization
+          
         </motion.button>
+       
         <motion.button
           onClick={() => {
             if (stopSorting.current) {
               stopSorting.current = false;
               setIsPaused(false);
               const actualSpeed = (21 - speed) * 30;
-              bubbleSort(
+              sortingType[type].sortFn(
                 bars,
                 setBars,
                 setCompareInfo,
@@ -204,14 +231,7 @@ export default function SortingComp() {
         </motion.button>
         <motion.button
           onClick={() => {
-            if (hasReset) return;
-            setIsActive(false);
-            stopSorting.current = false;
-            reset.current = true;
-            setCompareInfo({ smaller: null, larger: null });
-            generateRandomArray();
-            setHasReset(true);
-            setIsPaused(false);
+            resetfn();
           }}
           whileHover={hasReset ? { scale: 1.05 } : {}}
           whileTap={hasReset ? { scale: 0.95 } : {}}
@@ -225,7 +245,13 @@ export default function SortingComp() {
         </motion.button>
         
       </div>
+
+      {/* sorting algo data */}
       <SortingTheory/>
+
+
+
     </motion.div>
   );
 }
+

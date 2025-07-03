@@ -4,7 +4,7 @@ export default async function heapSort(
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -24,7 +24,7 @@ export default async function heapSort(
     let largest = i;
     const left = 2 * i + 1;
     const right = 2 * i + 2;
-    if (stopSorting.current || reset.current) return;
+    if (stop.current || reset.current) return;
     if (left < n && array[left] > array[largest]) largest = left;
     if (right < n && array[right] > array[largest]) largest = right;
     if (largest !== i) {
@@ -37,8 +37,8 @@ export default async function heapSort(
 
   if (stage <= 0) {
     for (let i = idx; i >= 0; i--) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 0, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 0, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: Math.floor(n / 2) - 1 });
         return;
       }
@@ -50,8 +50,8 @@ export default async function heapSort(
 
   if (stage <= 1) {
     for (let i = idx; i > 0; i--) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 1, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 1, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: Math.floor(n / 2) - 1 });
         return;
       }

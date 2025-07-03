@@ -6,7 +6,7 @@ const bubbleSort = async (
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -19,8 +19,8 @@ const bubbleSort = async (
   for (let i = startI; i < array.length - 1; i++) {
     for (let j = i === startI ? startJ : 0; j < array.length - i - 1; j++) {
       
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i, idxJ: j });
         if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
         await sleep(speed);
         return;
@@ -28,8 +28,8 @@ const bubbleSort = async (
 
       const isGreater = array[j] > array[j + 1];
 
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i, idxJ: j });
         if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
         await sleep(speed);
         return;
@@ -48,8 +48,8 @@ const bubbleSort = async (
         await sleep(speed);
       }
 
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i, idxJ: j });
         if (reset.current) setResumeIndex({ idxI: 0, idxJ: 0 });
         await sleep(speed);
         return;

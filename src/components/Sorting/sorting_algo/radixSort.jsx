@@ -6,7 +6,7 @@ export default async function radixSort(
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -16,8 +16,8 @@ export default async function radixSort(
   let exp = resumeIndex?.exp ?? 1;
 
   while (Math.floor(maxNum / exp) > 0) {
-    if (stopSorting.current || reset.current) {
-      if (stopSorting.current) setResumeIndex({ exp });
+    if (stop.current || reset.current) {
+      if (stop.current) setResumeIndex({ exp });
       if (reset.current) setResumeIndex({ exp: 1 });
       return;
     }
@@ -26,8 +26,8 @@ export default async function radixSort(
     const output = new Array(arr.length).fill(0);
 
     for (let i = 0; i < arr.length; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ exp });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ exp });
         if (reset.current) setResumeIndex({ exp: 1 });
         return;
       }
@@ -42,8 +42,8 @@ export default async function radixSort(
     }
 
     for (let i = arr.length - 1; i >= 0; i--) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ exp });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ exp });
         if (reset.current) setResumeIndex({ exp: 1 });
         return;
       }
@@ -55,8 +55,8 @@ export default async function radixSort(
     }
 
     for (let i = 0; i < arr.length; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ exp });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ exp });
         if (reset.current) setResumeIndex({ exp: 1 });
         return;
       }

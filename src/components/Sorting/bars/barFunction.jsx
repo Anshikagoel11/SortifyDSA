@@ -10,6 +10,7 @@ export default function BarFunction() {
   return (
     <div className="flex items-end justify-center space-x-1 p-2 h-72 w-full overflow-hidden">
       {bars.map((val, i) => {
+        
         const isSmaller = compareInfo.smaller === i;
         const isLarger = compareInfo.larger === i;
 

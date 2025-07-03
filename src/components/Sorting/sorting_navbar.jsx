@@ -10,6 +10,7 @@ export default function Sorting_navBar({ sorting }) {
       >
         <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 text-2xl font-bold mb-1">
           {sorting}
+          
         </h1>
         <motion.div
           className="h-1 w-24 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"

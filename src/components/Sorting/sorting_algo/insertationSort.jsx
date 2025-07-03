@@ -6,7 +6,7 @@ const insertionSort = async (
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -28,8 +28,8 @@ const insertionSort = async (
     await sleep(speed);
 
     while (j >= 0 && array[j] > key) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i, idxJ: j });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i, idxJ: j });
         if (reset.current) setResumeIndex({ idxI: 1, idxJ: 0 });
         return;
       }
@@ -48,8 +48,8 @@ const insertionSort = async (
     setBars([...array]);
     await sleep(speed);
 
-    if (stopSorting.current || reset.current) {
-      if (stopSorting.current) setResumeIndex({ idxI: i + 1, idxJ: i });
+    if (stop.current || reset.current) {
+      if (stop.current) setResumeIndex({ idxI: i + 1, idxJ: i });
       if (reset.current) setResumeIndex({ idxI: 1, idxJ: 0 });
       return;
     }

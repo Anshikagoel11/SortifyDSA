@@ -18,9 +18,9 @@ export const SortingProvider = ({ children }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [hasReset, setHasReset] = useState(false);
  const [resumeIndex, setResumeIndex] = useState({ idxI: 0, idxJ: 0 });
-  const stopSorting = useRef(false);
+  const stop = useRef(false);
   const reset = useRef(false);
-
+  const [searchingName,setSearchingName] = useState('Linear Search')
 
   return (
     <SortingContext.Provider
@@ -41,12 +41,14 @@ export const SortingProvider = ({ children }) => {
         setIsPaused,
         hasReset,
         setHasReset,
-        stopSorting,
+        stop,
         reset,
         sorting,
         setSorting,
         resumeIndex,
-        setResumeIndex
+        setResumeIndex,
+        searchingName,
+        setSearchingName
       }}
     >
       {children}

@@ -6,7 +6,7 @@ const quickSort = async (
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+ stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -16,8 +16,8 @@ const quickSort = async (
   const visited = new Set();
 
   while (stack.length) {
-    if (stopSorting.current || reset.current) {
-      if (stopSorting.current) setResumeIndex({ stack });
+    if (stop.current || reset.current) {
+      if (stop.current) setResumeIndex({ stack });
       if (reset.current) setResumeIndex({ stack: [] });
       return;
     }
@@ -31,8 +31,8 @@ const quickSort = async (
     let i = low - 1;
 
     for (let j = low; j < high; j++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stack: [...stack, { low, high }] });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stack: [...stack, { low, high }] });
         if (reset.current) setResumeIndex({ stack: [] });
         return;
       }

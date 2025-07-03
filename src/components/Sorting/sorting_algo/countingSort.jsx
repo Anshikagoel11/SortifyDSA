@@ -4,7 +4,7 @@ export default async function countingSort(
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -21,8 +21,8 @@ export default async function countingSort(
 
   if (stage <= 0) {
     for (let i = idx; i < n; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 0, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 0, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
         return;
       }
@@ -36,8 +36,8 @@ export default async function countingSort(
 
   if (stage <= 1) {
     for (let i = idx; i <= max; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 1, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 1, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
         return;
       }
@@ -49,8 +49,8 @@ export default async function countingSort(
 
   if (stage <= 2) {
     for (let i = idx; i >= 0; i--) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 2, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 2, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
         return;
       }
@@ -65,8 +65,8 @@ export default async function countingSort(
 
   if (stage <= 3) {
     for (let i = idx; i < n; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ stage: 3, idx: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ stage: 3, idx: i });
         if (reset.current) setResumeIndex({ stage: 0, idx: 0 });
         return;
       }

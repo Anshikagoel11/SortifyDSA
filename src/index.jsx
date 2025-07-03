@@ -7,6 +7,9 @@ import { BrowserRouter ,Routes,Route} from 'react-router';
 import Sorting from './components/Sorting/sorting';
 import SortingComp from './components/Sorting/SortingComp';
 import {SortingProvider} from './context/sortingContext'
+import Searching from './components/Searching/searching';
+import SearchingComp from './components/Searching/SearchingComp'
+
 function App(){
     return(
        <>
@@ -18,6 +21,9 @@ function App(){
         <Route element={<Sorting/>}>
         <Route path='/sorting/:type' element={<SortingComp/>}></Route>
         </Route>
+         <Route element={<Searching/>}>
+         <Route path='/searching/:type' element={<SearchingComp/>}></Route>
+         </Route>
         </Route>
        
        </Routes>

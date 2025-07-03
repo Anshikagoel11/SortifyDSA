@@ -6,7 +6,7 @@ const selectionSort = async (
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -21,8 +21,8 @@ const selectionSort = async (
     await sleep(speed);
 
     for (let j = i + 1; j < array.length; j++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i });
         if (reset.current) setResumeIndex({ idxI: 0 });
         return;
       }
@@ -37,8 +37,8 @@ const selectionSort = async (
 
     if (minIndex !== i) {
       [array[i], array[minIndex]] = [array[minIndex], array[i]];
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ idxI: i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ idxI: i });
         if (reset.current) setResumeIndex({ idxI: 0 });
         return;
       }

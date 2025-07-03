@@ -8,7 +8,7 @@ const merge = async (
   setBars,
   setCompareInfo,
   speed,
-  stopSorting,
+  stop,
   reset
 ) => {
   let left = array.slice(start, mid + 1);
@@ -16,7 +16,7 @@ const merge = async (
   let i = 0, j = 0, k = start;
 
   while (i < left.length && j < right.length) {
-    if (stopSorting.current || reset.current) return;
+    if (stop.current || reset.current) return;
     setCompareInfo({ smaller: start + i, larger: mid + 1 + j });
     await sleep(speed);
     if (left[i] <= right[j]) {
@@ -29,14 +29,14 @@ const merge = async (
   }
 
   while (i < left.length) {
-    if (stopSorting.current || reset.current) return;
+    if (stop.current || reset.current) return;
     array[k++] = left[i++];
     setBars([...array]);
     await sleep(speed);
   }
 
   while (j < right.length) {
-    if (stopSorting.current || reset.current) return;
+    if (stop.current || reset.current) return;
     array[k++] = right[j++];
     setBars([...array]);
     await sleep(speed);
@@ -50,15 +50,15 @@ const mergeSortHelper = async (
   setBars,
   setCompareInfo,
   speed,
-  stopSorting,
+  stop,
   reset
 ) => {
-  if (start >= end || stopSorting.current || reset.current) return;
+  if (start >= end || stop.current || reset.current) return;
   const mid = Math.floor((start + end) / 2);
-  await mergeSortHelper(array, start, mid, setBars, setCompareInfo, speed, stopSorting, reset);
-  await mergeSortHelper(array, mid + 1, end, setBars, setCompareInfo, speed, stopSorting, reset);
-  await merge(array, start, mid, end, setBars, setCompareInfo, speed, stopSorting, reset);
-};
+  await mergeSortHelper(array, start, mid, setBars, setCompareInfo, speed, stop, reset);
+  await mergeSortHelper(array, mid + 1, end, setBars, setCompareInfo, speed, stop, reset);
+  await merge(array, start, mid, end, setBars, setCompareInfo, speed, stop, reset);
+};stop
 
 const mergeSort = async (
   arr,
@@ -66,13 +66,13 @@ const mergeSort = async (
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
 ) => {
   const array = [...arr];
-  await mergeSortHelper(array, 0, array.length - 1, setBars, setCompareInfo, speed, stopSorting, reset);
+  await mergeSortHelper(array, 0, array.length - 1, setBars, setCompareInfo, speed, stop, reset);
   setCompareInfo({ smaller: null, larger: null });
   setIsActive(false);
   setResumeIndex({ stage: 0 });

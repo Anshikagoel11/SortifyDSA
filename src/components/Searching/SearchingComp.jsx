@@ -2,10 +2,10 @@
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useSorting } from "../../context/sortingContext";
-import sortingType from "../../utils/sortingType";
-import SortingTheory from "./sortingTheory";
+// import sortingType from "../../utils/sortingType";
+// import SortingTheory from "./sortingTheory";
 import useSortingUtils from "../../utils/commanFn";
-import BarFunction from "./bars/barFunction";
+// import BarFunction from "./bars/barFunction";
 
 
 export default function SortingComp() {
@@ -44,7 +44,6 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
   return (
 
     <motion.div
-
       className=" backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -52,18 +51,8 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
     
     {/* bar */}
       <div className={`h-70 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50`}>
-  <BarFunction/>
+  {/* <SearchingBar/> */}
 </div>
-
-
-
-      {/* for merge sort */}
-    {/* {type==='merge-sort' && 
-    <div className="max-h-64 overflow-y-auto mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50 ">
-      <MergeTree levels={mergeLevels} />
-      </div>
-
-    } */}
 
 
 
@@ -168,17 +157,17 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
     const actualSpeed = (21 - speed) * 30;
 
     // Step 3: Start sorting
-    sortingType[type].sortFn(
-      bars,
-      setBars,
-      setCompareInfo,
-      actualSpeed,
-      setIsActive,
-      stop,
-      reset,
-      resumeIndex,
-      setResumeIndex
-    );
+    // sortingType[type].sortFn(
+    //   bars,
+    //   setBars,
+    //   setCompareInfo,
+    //   actualSpeed,
+    //   setIsActive,
+    //   stop,
+    //   reset,
+    //   resumeIndex,
+    //   setResumeIndex
+    // );
   }, 300); // Increased to 300ms for better cleanup
 }}
 
@@ -199,17 +188,17 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
               stop.current = false;
               setIsPaused(false);
               const actualSpeed = (21 - speed) * 30;
-              sortingType[type].sortFn(
-                bars,
-                setBars,
-                setCompareInfo,
-                actualSpeed,
-                setIsActive,
-                stop,
-                reset,
-                resumeIndex,
-                setResumeIndex
-              );
+            //   sortingType[type].sortFn(
+            //     bars,
+            //     setBars,
+            //     setCompareInfo,
+            //     actualSpeed,
+            //     setIsActive,
+            //     stop,
+            //     reset,
+            //     resumeIndex,
+            //     setResumeIndex
+            //   );
             } else {
               stop.current = true;
               setIsPaused(true);
@@ -244,7 +233,7 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
       </div>
 
       {/* sorting algo data */}
-      <SortingTheory/>
+      {/* <SortingTheory/> */}
 
 
 

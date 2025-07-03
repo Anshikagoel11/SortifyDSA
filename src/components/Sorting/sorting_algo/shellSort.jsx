@@ -6,7 +6,7 @@ export default async function shellSort(
   setCompareInfo,
   speed,
   setIsActive,
-  stopSorting,
+  stop,
   reset,
   resumeIndex,
   setResumeIndex
@@ -20,8 +20,8 @@ export default async function shellSort(
 
   for (let gap = startGap; gap > 0; gap = Math.floor(gap / 2)) {
     for (let i = resume ? startI : gap; i < n; i++) {
-      if (stopSorting.current || reset.current) {
-        if (stopSorting.current) setResumeIndex({ gap, i });
+      if (stop.current || reset.current) {
+        if (stop.current) setResumeIndex({ gap, i });
         if (reset.current) setResumeIndex({ gap: Math.floor(n / 2), i: Math.floor(n / 2) });
         return;
       }
@@ -30,8 +30,8 @@ export default async function shellSort(
       let j = i;
 
       while (j >= gap && arr[j - gap] > temp) {
-        if (stopSorting.current || reset.current) {
-          if (stopSorting.current) setResumeIndex({ gap, i });
+        if (stop.current || reset.current) {
+          if (stop.current) setResumeIndex({ gap, i });
           if (reset.current) setResumeIndex({ gap: Math.floor(n / 2), i: Math.floor(n / 2) });
           return;
         }

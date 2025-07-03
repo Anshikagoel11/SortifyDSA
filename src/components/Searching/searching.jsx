@@ -1,38 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import SortingComp from "./SortingComp";
 import { useSorting } from "../../context/sortingContext";
 import useSortingUtils from "../../utils/commanFn";
+import SearchingComp from "./SearchingComp";
 
-const sortingAlgorithms = [
-  "Bubble Sort",
-  "Selection Sort",
-  "Insertion Sort",
-  "Merge Sort",
-  "Quick Sort",
-  "Heap Sort",
-  "Radix Sort",
-  "Shell Sort",
-  "Counting Sort",
-  "Bucket Sort",
+const searchingAlgorithms = [
+  "Linear Search",
+  "Binary Search",
 ];
 
 const algorithmIcons = {
-  "Bubble Sort": "🫧",
-  "Selection Sort": "🔍",
-  "Insertion Sort": "📥",
-  "Merge Sort": "🔄",
-  "Quick Sort": "⚡",
-  "Heap Sort": "📊",
-  "Radix Sort": "🔢",
-  "Shell Sort": "🐚",
-  "Counting Sort": "🧮",
-  "Bucket Sort": "🪣",
+  "Linear Search": "➡️ ",
+  "Binary Search": "📗"
 };
 
-function SortingNavBar({ sorting }) {
-  
+function SearchingNavBar({ searching }) {
   return (
     <div className="mb-4">
       <motion.div
@@ -54,7 +37,7 @@ function SortingNavBar({ sorting }) {
               ease: "easeInOut",
             }}
           >
-            {algorithmIcons[sorting] || "📊"}
+            {algorithmIcons[searching] || "📊"}
           </motion.div>
           <div>
             <motion.h1
@@ -68,7 +51,7 @@ function SortingNavBar({ sorting }) {
                 ease: "linear",
               }}
             >
-              {sorting}
+              {searching}
             </motion.h1>
             <motion.div
               className="h-1.5 w-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-400 rounded-full mt-1"
@@ -258,31 +241,27 @@ function AlgorithmButton({ item, isActive, onClick }) {
   );
 }
 
-export default function Sorting() {
-  const { sorting, setSorting ,setCompareInfo,setIsActive,stop
-    ,setArraySize} = useSorting();
+export default function Searching() {
+
+  const {searchingName,setSearchingName ,setCompareInfo,setIsActive,stop,setArraySize} = useSorting();
 const {generateRandomArray} = useSortingUtils();
 
+
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
 
 
 
   useEffect(() => {
     // Update active sorting based on route
-    const currentSort = sortingAlgorithms.find((alg) =>
+    const currentSort = searchingAlgorithms.find((alg) =>
       location.pathname.includes(alg.toLowerCase().replaceAll(" ", "-"))
     );
     if (currentSort) {
-      setSorting(currentSort);
+        // console.log(currentSort)
+      setSearchingName(currentSort);
     }
   }, [location]);
 
-
-
-  const filteredAlgorithms = sortingAlgorithms.filter((alg) =>
-    alg.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
 
   
@@ -314,7 +293,7 @@ const {generateRandomArray} = useSortingUtils();
               >
                 📊
               </motion.span>
-              Sorting Visualizer
+              Searching Visualizer
             </h2>
 
             <motion.div
@@ -340,41 +319,13 @@ const {generateRandomArray} = useSortingUtils();
             </motion.div>
           </div>
 
-          <motion.div
-            className="relative mb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <input
-              type="text"
-              placeholder="Search algorithms..."
-              className="w-full bg-[#1E293B]/50 border border-gray-700/50 rounded-lg px-4 py-2 text-white/80 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-500 absolute right-3 top-2.5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </motion.div>
         </motion.div>
 
         <div className="space-y-3 mt-2">
           <AnimatePresence>
-            {filteredAlgorithms.length > 0 ? (
-              filteredAlgorithms.map((item) => (
-                <motion.div
+            
+             { searchingAlgorithms.map((item) => {
+               return( <motion.div
                   key={item}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -383,13 +334,12 @@ const {generateRandomArray} = useSortingUtils();
                   layout
                 >
                   <Link
-                    to={`/sorting/${item.toLowerCase().replaceAll(" ", "-")}`}
+                    to={`/searching/${item.toLowerCase().replaceAll(" ", "-")}`}
                   >
                     <AlgorithmButton
                       item={item}
-                      isActive={sorting === item}
+                      isActive={searchingName === item}
                       onClick={() => {
-                       setSorting(item);
   setIsActive(false);
   setCompareInfo({ smaller: null, larger: null });
    setArraySize(8)
@@ -400,17 +350,9 @@ const {generateRandomArray} = useSortingUtils();
                     />
                   </Link>
                 </motion.div>
-              ))
-            ) : (
-              <motion.div
-                className="text-center py-8 text-gray-500"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                No algorithms found
-              </motion.div>
-            )}
+               )
+              })
+}
           </AnimatePresence>
         </div>
 
@@ -423,9 +365,10 @@ const {generateRandomArray} = useSortingUtils();
         />
       </motion.div>
 
+
       {/* Main content */}
       <div className="w-full md:w-[78%]  px-6 py-6 overflow-y-auto h-screen">
-        <SortingNavBar sorting={sorting} />
+        <SearchingNavBar searching={searchingName} />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -433,7 +376,7 @@ const {generateRandomArray} = useSortingUtils();
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-[#1E293B]/30 backdrop-blur-sm rounded-xl border border-gray-700/30 p-6 shadow-lg"
         >
-          <SortingComp />
+          <SearchingComp />
         </motion.div>
       </div>
     </div>

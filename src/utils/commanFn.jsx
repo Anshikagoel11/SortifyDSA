@@ -7,26 +7,31 @@ export default function useSortingUtils() {
     setCompareInfo,
     setHasReset,
     setIsPaused,
-    stopSorting,
+    stop,
     setBars,
     setArraySize,
     customArray,
     setCustomArray,
     arraySize,
     hasReset,
-    setResumeIndex
+    setResumeIndex,
+    setSearchIndex,
+    setCurrentCompare
   } = useSorting();
 
   const resetfn = () => {
     if (hasReset) return;
     setIsActive(false);
-    stopSorting.current = false;
+    stop.current = false;
     reset.current = true;
     setCompareInfo({ smaller: null, larger: null });
     setResumeIndex({ idxI: 0, idxJ: 0 })
     generateRandomArray();
     setHasReset(true);
     setIsPaused(false);
+     setSearchIndex(-1);
+  setCurrentCompare(-1);
+  setIsElementFound(false);
   };
 
   const generateRandomArray = () => {

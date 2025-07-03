@@ -7,7 +7,7 @@ const AlgorithmsData = [
         <path d="M10 2a8 8 0 105.3 14.3l4.4 4.4-1.4 1.4-4.4-4.4A8 8 0 0010 2zm0 2a6 6 0 110 12A6 6 0 0110 4z"/>
       </svg>
     ),
-    path:"/searching"
+    path:"/searching/linear-search"
   },
   {
     title: "Sorting Algorithms",

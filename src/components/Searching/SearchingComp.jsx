@@ -1,19 +1,15 @@
-
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { useSorting } from "../../context/sortingContext";
-// import sortingType from "../../utils/sortingType";
-// import SortingTheory from "./sortingTheory";
+import searchingType from "../../utils/searchingType";
+import SearchingTheory from "./searchingTheory";
 import useSortingUtils from "../../utils/commanFn";
-// import BarFunction from "./bars/barFunction";
-
 
 export default function SortingComp() {
-   const {
+  const {
     bars,
     setBars,
     arraySize,
-    setCompareInfo,
     setCustomArray,
     setArraySize,
     stop,
@@ -28,50 +24,72 @@ export default function SortingComp() {
     isActive,
     setIsActive,
     resumeIndex,
-    setResumeIndex
+    setResumeIndex,
+    searchInput,
+    setSearchInput,
+    searchIndex,
+    setSearchIndex,
+    currentCompare,
+    setCurrentCompare,
+    IsElementFound,
+        setIsElementFound,
   } = useSorting();
 
+  // console.log("resume index is" , resumeIndex)
+  // const scrollRef =   useRef(null);
 
-// console.log("resume index is" , resumeIndex)
-// const scrollRef =   useRef(null);
+  const { type } = useParams();
+//   console.log(type);
 
- const {type} = useParams();
-//  console.log(type)
-
-const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSortingUtils();
-
+  const { applyCustomArray, clearCustomArray, generateRandomArray, resetfn } =
+    useSortingUtils();
 
   return (
-
     <motion.div
       className=" backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-    
-    {/* bar */}
-      <div className={`h-70 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-end justify-center space-x-1 p-2 border border-gray-700/50`}>
-  {/* <SearchingBar/> */}
-</div>
-
-
+      {/* bar */}
+      <div
+        className={`h-70 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-center justify-center space-x-1 p-2 border border-gray-700/50`}
+      >
+        {searchingType[type].barComponent}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-1">
         <motion.div
           className="bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg p-1 border border-gray-700/50"
           whileHover={{ y: -2 }}
         >
-          <div className="flex items-center space-x-4">
-            <span className="text-white/80">Size</span>
-            <input
-              type="number"
-              min="2"
-              max="50"
-              value={arraySize}
-              disabled={isActive}
-              onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}
-              className="bg-gray-800/50 text-white px-3 py-1 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            />
+          <div className="flex ">
+            <div className="flex items-center space-x-4 mr-4">
+              <span className="text-white/80">Size</span>
+              <input
+                type="number"
+                min="2"
+                max="50"
+                value={arraySize}
+                disabled={isActive}
+                onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}
+                className="bg-gray-800/50 text-white px-3 py-1 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              />
+            </div>
+            <div className="flex items-center space-x-4">
+              <span className="text-white/80 font-bold text-sm">
+                Search Element
+              </span>
+              <input
+                value={searchInput}
+                type="number"
+                disabled={isActive}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSearchInput(val === "" ? "" : parseInt(val));
+                }}
+                className="bg-gray-800/50 text-white px-3 py-1 w-[50%] rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              />
+            </div>
           </div>
           <div className="mt-1">
             <span className="text-white/80">Speed</span>
@@ -140,37 +158,41 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
           Randomize
         </motion.button>
         <motion.button
-         onClick={() => {
-  // current sort to stop
-  stop.current = true;
+          onClick={() => {
+            // current sort to stop
+            stop.current = true;
 
-  // Step 2: Use a slightly longer delay to ensure it's fully stopped
-  setTimeout(() => {
-  
-    reset.current = false;
-    stop.current = false;
+            // Step 2: Use a slightly longer delay to ensure it's fully stopped
+            setTimeout(() => {
+              reset.current = false;
+              stop.current = false;
 
-    setIsActive(true);
-    setIsPaused(false);
-    setHasReset(false);
+              setIsActive(true);
+              setIsPaused(false);
+              setHasReset(false);
 
-    const actualSpeed = (21 - speed) * 30;
+              const actualSpeed = (21 - speed) * 30;
 
-    // Step 3: Start sorting
-    // sortingType[type].sortFn(
-    //   bars,
-    //   setBars,
-    //   setCompareInfo,
-    //   actualSpeed,
-    //   setIsActive,
-    //   stop,
-    //   reset,
-    //   resumeIndex,
-    //   setResumeIndex
-    // );
-  }, 300); // Increased to 300ms for better cleanup
-}}
-
+              // Step 3: Start sorting
+              searchingType[type].sortFn(
+                bars,
+                setBars,
+                searchIndex,
+                setSearchIndex,
+                actualSpeed,
+                setIsActive,
+                stop,
+                reset,
+                resumeIndex,
+                setResumeIndex,
+                searchInput,
+                currentCompare,
+                setCurrentCompare,
+                IsElementFound,
+        setIsElementFound,
+              );
+            }, 300); // Increased to 300ms for better cleanup
+          }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg ${
@@ -179,33 +201,30 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
           disabled={isActive}
         >
           Start Visualization
-          
         </motion.button>
-       
+
         <motion.button
           onClick={() => {
             if (stop.current) {
               stop.current = false;
               setIsPaused(false);
               const actualSpeed = (21 - speed) * 30;
-            //   sortingType[type].sortFn(
-            //     bars,
-            //     setBars,
-            //     setCompareInfo,
-            //     actualSpeed,
-            //     setIsActive,
-            //     stop,
-            //     reset,
-            //     resumeIndex,
-            //     setResumeIndex
-            //   );
+              //   sortingType[type].sortFn(
+              //     bars,
+              //     setBars,
+              //     setCompareInfo,
+              //     actualSpeed,
+              //     setIsActive,
+              //     stop,
+              //     reset,
+              //     resumeIndex,
+              //     setResumeIndex
+              //   );
             } else {
               stop.current = true;
               setIsPaused(true);
             }
           }}
-
-
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`px-4 py-2  text-white rounded-lg ${
@@ -229,15 +248,10 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
         >
           Reset
         </motion.button>
-        
       </div>
 
       {/* sorting algo data */}
-      {/* <SortingTheory/> */}
-
-
-
+      <SearchingTheory />
     </motion.div>
   );
 }
-

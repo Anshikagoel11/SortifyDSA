@@ -17,14 +17,26 @@ export const SortingProvider = ({ children }) => {
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [hasReset, setHasReset] = useState(false);
- const [resumeIndex, setResumeIndex] = useState({ idxI: 0, idxJ: 0 });
+  const [resumeIndex, setResumeIndex] = useState({ idxI: 0, idxJ: 0 });
   const stop = useRef(false);
   const reset = useRef(false);
-  const [searchingName,setSearchingName] = useState('Linear Search')
+  const [searchingName, setSearchingName] = useState("Linear Search");
+  const [searchInput, setSearchInput] = useState("");  // for showing input value
+  const [searchIndex,setSearchIndex]=useState(-1);  // 
+  const [currentCompare , setCurrentCompare] = useState(-1);
+  const [IsElementFound ,setIsElementFound] = useState(false);
 
   return (
     <SortingContext.Provider
       value={{
+        IsElementFound,
+        setIsElementFound,
+        currentCompare,
+        setCurrentCompare,
+        searchIndex,
+        setSearchIndex,
+        searchInput,
+        setSearchInput,
         arraySize,
         setArraySize,
         customArray,
@@ -48,7 +60,7 @@ export const SortingProvider = ({ children }) => {
         resumeIndex,
         setResumeIndex,
         searchingName,
-        setSearchingName
+        setSearchingName,
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import SortingComp from "./SortingComp";
-import { useSorting } from "../../context/sortingContext";
+import { UseAlgoControl } from "../../context/algoControlContext";
 import useSortingUtils from "../../utils/commanFn";
 
 const sortingAlgorithms = [
@@ -260,7 +260,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 
 export default function Sorting() {
   const { sorting, setSorting ,setCompareInfo,setIsActive,stop
-    ,setArraySize} = useSorting();
+    ,setArraySize} = UseAlgoControl();
 const {generateRandomArray} = useSortingUtils();
 
   const location = useLocation();

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
-import { useSorting } from "../../context/sortingContext";
+import { UseAlgoControl } from "../../context/algoControlContext";
 import searchingType from "../../utils/searchingType";
 import SearchingTheory from "./searchingTheory";
 import useSortingUtils from "../../utils/commanFn";
@@ -32,14 +32,14 @@ export default function SortingComp() {
     currentCompare,
     setCurrentCompare,
     IsElementFound,
-        setIsElementFound,
-  } = useSorting();
+    setIsElementFound,
+  } = UseAlgoControl();
 
   // console.log("resume index is" , resumeIndex)
   // const scrollRef =   useRef(null);
 
   const { type } = useParams();
-//   console.log(type);
+  //   console.log(type);
 
   const { applyCustomArray, clearCustomArray, generateRandomArray, resetfn } =
     useSortingUtils();
@@ -189,7 +189,7 @@ export default function SortingComp() {
                 currentCompare,
                 setCurrentCompare,
                 IsElementFound,
-        setIsElementFound,
+                setIsElementFound
               );
             }, 300); // Increased to 300ms for better cleanup
           }}
@@ -209,17 +209,23 @@ export default function SortingComp() {
               stop.current = false;
               setIsPaused(false);
               const actualSpeed = (21 - speed) * 30;
-              //   sortingType[type].sortFn(
-              //     bars,
-              //     setBars,
-              //     setCompareInfo,
-              //     actualSpeed,
-              //     setIsActive,
-              //     stop,
-              //     reset,
-              //     resumeIndex,
-              //     setResumeIndex
-              //   );
+              searchingType[type].sortFn(
+                bars,
+                setBars,
+                searchIndex,
+                setSearchIndex,
+                actualSpeed,
+                setIsActive,
+                stop,
+                reset,
+                resumeIndex,
+                setResumeIndex,
+                searchInput,
+                currentCompare,
+                setCurrentCompare,
+                IsElementFound,
+                setIsElementFound
+              );
             } else {
               stop.current = true;
               setIsPaused(true);

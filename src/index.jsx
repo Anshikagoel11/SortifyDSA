@@ -6,7 +6,7 @@ import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // ✅ FIXED
 import Sorting from './components/Sorting/sorting';
 import SortingComp from './components/Sorting/SortingComp';
-import { SortingProvider } from './context/sortingContext';
+import {AlgoControlProvider} from './context/algoControlContext'
 import Searching from './components/Searching/searching';
 import SearchingComp from './components/Searching/SearchingComp';
 
@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <SortingProvider>
+        <AlgoControlProvider>
           <Routes>
             <Route element={<Navbar />}>
               <Route path="/" element={<Home />} />
@@ -26,7 +26,7 @@ function App() {
               </Route>
             </Route>
           </Routes>
-        </SortingProvider>
+        </AlgoControlProvider>
       </BrowserRouter>
     </>
   );

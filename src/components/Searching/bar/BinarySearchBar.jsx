@@ -1,9 +1,9 @@
 
-import { useSorting } from "../../../context/sortingContext";
+import { UseAlgoControl } from "../../../context/algoControlContext";
 import {motion} from 'framer-motion'
 
 export default function BinarySearchBar(){
-    const {bars,setSearchIndex} = useSorting();
+    const {bars,setSearchIndex} = UseAlgoControl();
 
     return(
 

@@ -1,8 +1,8 @@
-import { useSorting } from "../../../context/sortingContext";
+import { UseAlgoControl } from "../../../context/algoControlContext";
 import { motion } from "framer-motion";
 
 export default function BarFunction() {
-  const { bars, compareInfo, sorting } = useSorting();
+  const { bars, compareInfo, sorting } = UseAlgoControl();
 
   // to make height optimize
   const maxVal = Math.max(...bars);

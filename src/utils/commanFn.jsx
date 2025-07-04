@@ -1,4 +1,4 @@
-import { useSorting } from "../context/sortingContext";
+import { UseAlgoControl } from "../context/algoControlContext";
 
 export default function useSortingUtils() {
   const {
@@ -17,7 +17,7 @@ export default function useSortingUtils() {
     setResumeIndex,
     setSearchIndex,
     setCurrentCompare
-  } = useSorting();
+  } = UseAlgoControl();
 
   const resetfn = () => {
     if (hasReset) return;

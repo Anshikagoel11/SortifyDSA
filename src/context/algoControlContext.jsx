@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useRef } from "react";
 
-const SortingContext = createContext();
+const AlgoControlContext = createContext();
 
-export const useSorting = () => useContext(SortingContext);
+export const UseAlgoControl = () => useContext(AlgoControlContext);
 
-export const SortingProvider = ({ children }) => {
+export const AlgoControlProvider = ({ children }) => {
   const [arraySize, setArraySize] = useState(8);
   const [customArray, setCustomArray] = useState("");
   const [bars, setBars] = useState([30, 80, 45, 90, 20, 60, 75, 40]);
@@ -20,14 +20,19 @@ export const SortingProvider = ({ children }) => {
   const [resumeIndex, setResumeIndex] = useState({ idxI: 0, idxJ: 0 });
   const stop = useRef(false);
   const reset = useRef(false);
+
+  
+  //searching context
   const [searchingName, setSearchingName] = useState("Linear Search");
   const [searchInput, setSearchInput] = useState("");  // for showing input value
-  const [searchIndex,setSearchIndex]=useState(-1);  // 
+  const [searchIndex,setSearchIndex]=useState(-1);   // index of searched value 
   const [currentCompare , setCurrentCompare] = useState(-1);
   const [IsElementFound ,setIsElementFound] = useState(false);
 
+
+
   return (
-    <SortingContext.Provider
+    <AlgoControlContext.Provider
       value={{
         IsElementFound,
         setIsElementFound,
@@ -64,6 +69,6 @@ export const SortingProvider = ({ children }) => {
       }}
     >
       {children}
-    </SortingContext.Provider>
+    </AlgoControlContext.Provider>
   );
 };

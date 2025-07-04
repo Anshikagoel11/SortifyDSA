@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
-import { useSorting } from "../../context/sortingContext";
+import { UseAlgoControl } from "../../context/algoControlContext";
 import sortingType from "../../utils/sortingType";
 import SortingTheory from "./sortingTheory";
 import useSortingUtils from "../../utils/commanFn";
@@ -29,7 +29,7 @@ export default function SortingComp() {
     setIsActive,
     resumeIndex,
     setResumeIndex
-  } = useSorting();
+  } = UseAlgoControl();
 
 
 // console.log("resume index is" , resumeIndex)

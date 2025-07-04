@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import { useSorting } from "../../context/sortingContext";
+import { UseAlgoControl } from "../../context/algoControlContext";
 import useSortingUtils from "../../utils/commanFn";
 import SearchingComp from "./SearchingComp";
 
@@ -243,7 +243,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 
 export default function Searching() {
 
-  const {searchingName,setSearchingName ,setCompareInfo,setIsActive,stop,setArraySize,setSearchIndex} = useSorting();
+  const {searchingName,setSearchingName ,setCompareInfo,setIsActive,stop,setArraySize,setSearchIndex} = UseAlgoControl();
 const {generateRandomArray} = useSortingUtils();
 
 

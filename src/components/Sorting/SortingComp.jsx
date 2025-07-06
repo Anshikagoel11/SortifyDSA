@@ -77,7 +77,7 @@ const {applyCustomArray,clearCustomArray,generateRandomArray,resetfn} = useSorti
             <input
               type="number"
               min="2"
-              max="50"
+              max="35"
               value={arraySize}
               disabled={isActive}
               onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}

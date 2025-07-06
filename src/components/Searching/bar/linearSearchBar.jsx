@@ -6,9 +6,13 @@ import { motion } from "framer-motion";
 export default function LinearSearchBar() {
   const { bars, searchIndex ,currentCompare,IsElementFound,IsSearchDone,searchInput} = UseAlgoControl();
 
+   const arrayLength = bars.length;
+  const shouldShrink = arrayLength > 10;
+  const barSize = shouldShrink ? Math.min(50, Math.floor(800 / arrayLength)) : 56;
+
   return (
-    <div className="flex flex-col items-center space-y-2 w-full ">
-    <div className="flex items-end justify-center  space-x-1 p-2  w-full overflow-hidden">
+    <div className="flex flex-col items-center space-y-2 w-full">
+    <div className="flex items-end justify-center flex-wrap gap-1 p-2 w-full">
 
       {bars.map((val, i) => {
         let barColor = 'bg-blue-500';
@@ -27,6 +31,10 @@ export default function LinearSearchBar() {
     className={`w-14 h-14 rounded-md flex items-center justify-center text-white font-semibold text-sm ${barColor}`}
     layout
     transition={{ duration: 0.2 }}
+     style={{
+                  width: `${barSize}px`,
+                  height: `${barSize}px`,
+                }}
   >
     {val}
   </motion.div>

@@ -76,7 +76,7 @@ export default function SearchingComp() {
               <input
                 type="number"
                 min="2"
-                max="50"
+                max="40"
                 value={arraySize}
                 disabled={isActive}
                 onChange={(e) => setArraySize(parseInt(e.target.value) || 8)}

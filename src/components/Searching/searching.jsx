@@ -240,6 +240,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 }
 
 export default function Searching() {
+  const {clearCustomArray} = useSortingUtils()
   const {
     searchingName,
     setSearchingName,

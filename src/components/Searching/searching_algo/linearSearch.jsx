@@ -1,4 +1,7 @@
+//need to wait after updating states (sleep) - becoz on state change , react re-render & that re-render must be allowed time to visibly happen before the loop continues.
+//if we not wait then update UI will not visible since loop always contiue to run and only final result will show
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 
 const LinearSearch = async (
   arr,

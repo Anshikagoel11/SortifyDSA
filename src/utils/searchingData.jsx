@@ -60,7 +60,7 @@ const searchingAlgorithms = {
       worst: "O(n)"
     },
     spaceComplexity: "O(1)",
-    extra: "Works on unsorted data. Simple to implement but inefficient for large datasets."
+    extra: "Simple to implement but inefficient for large datasets."
   },
 
   "binary-search": {

@@ -5,7 +5,7 @@ import searchingType from "../../utils/searchingType";
 import SearchingTheory from "./searchingTheory";
 import useSortingUtils from "../../utils/commanFn";
 
-export default function SortingComp() {
+export default function SearchingComp() {
   const {
     bars,
     setBars,
@@ -33,6 +33,11 @@ export default function SortingComp() {
     setCurrentCompare,
     IsElementFound,
     setIsElementFound,
+    IsSearchDone,
+    setIsSearchDone,
+    searchingName,
+    rangeRef,
+    setRangeVersion
   } = UseAlgoControl();
 
   // console.log("resume index is" , resumeIndex)
@@ -43,6 +48,9 @@ export default function SortingComp() {
 
   const { applyCustomArray, clearCustomArray, generateRandomArray, resetfn } =
     useSortingUtils();
+
+    const isBinarySearch = searchingName === 'Binary Search'
+    // console.log("from searchComponent",isBinarySearch)
 
   return (
     <motion.div
@@ -86,6 +94,7 @@ export default function SortingComp() {
                 onChange={(e) => {
                   const val = e.target.value;
                   setSearchInput(val === "" ? "" : parseInt(val));
+                  
                 }}
                 className="bg-gray-800/50 text-white px-3 py-1 w-[50%] rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               />
@@ -121,7 +130,7 @@ export default function SortingComp() {
             />
           </div>
           <motion.button
-            onClick={applyCustomArray}
+            onClick={()=>{applyCustomArray(isBinarySearch)}}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-2 py-1 mt-1 bg-blue-600/80 text-white rounded hover:bg-blue-600 transition-colors mr-2 ${
@@ -147,7 +156,7 @@ export default function SortingComp() {
 
       <div className="flex space-x-4 mt-2">
         <motion.button
-          onClick={generateRandomArray}
+          onClick={()=>{generateRandomArray(isBinarySearch)}}
           whileHover={{ scale: 1.05 }}
           disabled={isActive}
           whileTap={{ scale: 0.95 }}
@@ -160,6 +169,8 @@ export default function SortingComp() {
         <motion.button
           onClick={() => {
             // current sort to stop
+            if(searchInput==='') return;
+           
             stop.current = true;
 
             // Step 2: Use a slightly longer delay to ensure it's fully stopped
@@ -170,14 +181,12 @@ export default function SortingComp() {
               setIsActive(true);
               setIsPaused(false);
               setHasReset(false);
-
+              rangeRef.current={start:0,end:arraySize-1}
               const actualSpeed = (21 - speed) * 30;
-
+ 
               // Step 3: Start sorting
               searchingType[type].sortFn(
                 bars,
-                setBars,
-                searchIndex,
                 setSearchIndex,
                 actualSpeed,
                 setIsActive,
@@ -186,10 +195,11 @@ export default function SortingComp() {
                 resumeIndex,
                 setResumeIndex,
                 searchInput,
-                currentCompare,
                 setCurrentCompare,
-                IsElementFound,
-                setIsElementFound
+                setIsElementFound,
+                setIsSearchDone,
+                rangeRef,
+                setRangeVersion
               );
             }, 300); // Increased to 300ms for better cleanup
           }}
@@ -203,6 +213,7 @@ export default function SortingComp() {
           Start Visualization
         </motion.button>
 
+
         <motion.button
           onClick={() => {
             if (stop.current) {
@@ -211,8 +222,6 @@ export default function SortingComp() {
               const actualSpeed = (21 - speed) * 30;
               searchingType[type].sortFn(
                 bars,
-                setBars,
-                searchIndex,
                 setSearchIndex,
                 actualSpeed,
                 setIsActive,
@@ -221,10 +230,10 @@ export default function SortingComp() {
                 resumeIndex,
                 setResumeIndex,
                 searchInput,
-                currentCompare,
                 setCurrentCompare,
-                IsElementFound,
-                setIsElementFound
+                setIsElementFound,
+                setIsSearchDone,
+                rangeRef
               );
             } else {
               stop.current = true;

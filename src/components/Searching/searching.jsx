@@ -1,18 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { UseAlgoControl } from "../../context/algoControlContext";
 import useSortingUtils from "../../utils/commanFn";
 import SearchingComp from "./SearchingComp";
 
-const searchingAlgorithms = [
-  "Linear Search",
-  "Binary Search",
-];
+
+const searchingAlgorithms = ["Linear Search", "Binary Search"];
 
 const algorithmIcons = {
   "Linear Search": "➡️ ",
-  "Binary Search": "📗"
+  "Binary Search": "📗",
 };
 
 function SearchingNavBar({ searching }) {
@@ -242,29 +240,37 @@ function AlgorithmButton({ item, isActive, onClick }) {
 }
 
 export default function Searching() {
-
-  const {searchingName,setSearchingName ,setCompareInfo,setIsActive,stop,setArraySize,setSearchIndex} = UseAlgoControl();
-const {generateRandomArray} = useSortingUtils();
-
+  const {
+    searchingName,
+    setSearchingName,
+    setCompareInfo,
+    setIsActive,
+    stop,
+    setArraySize,
+    setSearchIndex,
+    setIsElementFound,
+    setHasReset,
+    setIsSearchDone,
+    setIsPaused,
+    setCurrentCompare,
+    rangeRef,
+  } = UseAlgoControl();
+  const { generateRandomArray } = useSortingUtils();
 
   const location = useLocation();
-
-
 
   useEffect(() => {
     // Update active sorting based on route
     const currentSort = searchingAlgorithms.find((alg) =>
       location.pathname.includes(alg.toLowerCase().replaceAll(" ", "-"))
     );
+
     if (currentSort) {
-        // console.log(currentSort)
+      // console.log(currentSort)
       setSearchingName(currentSort);
     }
   }, [location]);
 
-
-
-  
   return (
     <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
@@ -318,14 +324,13 @@ const {generateRandomArray} = useSortingUtils();
               <span className="text-xs font-bold text-white">VS</span>
             </motion.div>
           </div>
-
         </motion.div>
 
         <div className="space-y-3 mt-2">
           <AnimatePresence>
-            
-             { searchingAlgorithms.map((item) => {
-               return( <motion.div
+            {searchingAlgorithms.map((item) => {
+              return (
+                <motion.div
                   key={item}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -336,24 +341,31 @@ const {generateRandomArray} = useSortingUtils();
                   <Link
                     to={`/searching/${item.toLowerCase().replaceAll(" ", "-")}`}
                   >
+                    {/* algo button  */}
                     <AlgorithmButton
                       item={item}
                       isActive={searchingName === item}
                       onClick={() => {
-  setIsActive(false);
-  setCompareInfo({ smaller: null, larger: null });
-   setArraySize(8)
-  generateRandomArray();
- setSearchIndex(-1)
-  stop.current = true; 
-                       
+                        if (searchingName === item) return;
+                        setIsActive(false);
+                        setCompareInfo({ smaller: null, larger: null });
+                        setArraySize(8);
+                        generateRandomArray(item === "Binary Search"); // state not updated instant , so we cant use state here
+                        setSearchIndex(-1);
+                        setIsElementFound(false);
+                        setHasReset(true);
+                        setIsSearchDone(false);
+                        setIsPaused(false);
+                        setCurrentCompare(-1);
+                        setSearchIndex("");
+                        clearCustomArray()
+                        stop.current = true;
                       }}
                     />
                   </Link>
                 </motion.div>
-               )
-              })
-}
+              );
+            })}
           </AnimatePresence>
         </div>
 
@@ -365,7 +377,6 @@ const {generateRandomArray} = useSortingUtils();
           transition={{ delay: 0.6 }}
         />
       </motion.div>
-
 
       {/* Main content */}
       <div className="w-full md:w-[78%]  px-6 py-6 overflow-y-auto h-screen">

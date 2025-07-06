@@ -2,8 +2,6 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const LinearSearch = async (
   arr,
-  setBars,
-  searchIndex,
   setSearchIndex,
   actualSpeed,
   setIsActive,
@@ -12,15 +10,23 @@ const LinearSearch = async (
   resumeIndex,
   setResumeIndex,
   searchInput,
-  currentCompare,
   setCurrentCompare,
-  IsElementFound,
-  setIsElementFound
+  setIsElementFound,
+  setIsSearchDone,
 ) => {
   const array = [...arr];
   let startI = resumeIndex?.idxI ?? 0;
 
+  setIsSearchDone(false);
+  setIsElementFound(false); //reset here because sometimes after return react not able to re-render instant
+  setSearchIndex(-1)
+
   for (let i = startI; i < array.length; i++) {
+
+
+    if(searchInput === "") return;
+
+ 
     if (stop.current || reset.current) {
       if (stop.current) setResumeIndex({ idxI: i, idxJ: null });
       if (reset.current) {
@@ -53,12 +59,17 @@ const LinearSearch = async (
       return;
     }
   }
+ setIsSearchDone(true)  //search comp but element not found
 
+ //reset all states
   setSearchIndex(-1);
   setCurrentCompare(-1);
   setIsActive(false);
   setIsElementFound(false);
   setResumeIndex({ idxI: 0, idxJ: null });
+  // await sleep(actualSpeed);
+
+  //green color box is not removing on again clicking the start button
 };
 
 export default LinearSearch;

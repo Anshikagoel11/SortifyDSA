@@ -260,7 +260,7 @@ function AlgorithmButton({ item, isActive, onClick }) {
 
 export default function Sorting() {
   const { sorting, setSorting ,setCompareInfo,setIsActive,stop
-    ,setArraySize} = UseAlgoControl();
+    ,setArraySize,setIsPaused} = UseAlgoControl();
 const {generateRandomArray} = useSortingUtils();
 
   const location = useLocation();
@@ -285,6 +285,7 @@ const {generateRandomArray} = useSortingUtils();
   );
 
 
+  
   
   return (
     <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row">
@@ -389,10 +390,12 @@ const {generateRandomArray} = useSortingUtils();
                       item={item}
                       isActive={sorting === item}
                       onClick={() => {
+                        if(item === sorting) return;
                        setSorting(item);
   setIsActive(false);
   setCompareInfo({ smaller: null, larger: null });
    setArraySize(8)
+   setIsPaused(false);
   generateRandomArray();
   stop.current = true; 
                        

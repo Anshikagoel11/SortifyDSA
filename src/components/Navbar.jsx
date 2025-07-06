@@ -13,7 +13,8 @@ export default function Navbar() {
     { label: "Searching", path: "/searching/linear-search" },
     { label: "Tree", path: "/tree" },
     { label: "Graph", path: "/graph" },
-    { label: "Stack/Queue", path: "/stack-queue" },
+    { label: "Stack", path: "/stack" },
+    { label: "Queue", path: "/queue" },
     { label: "DP", path: "/dp" },
     { label: "Linked List", path: "/linked-list" },
   ];

@@ -22,7 +22,7 @@ export const AlgoControlProvider = ({ children }) => {
   const reset = useRef(false);
 
   
-  //searching context
+  //searching states
   const [searchingName, setSearchingName] = useState("Linear Search");
   const [searchInput, setSearchInput] = useState("");  // for showing input value
   const [searchIndex,setSearchIndex] = useState(-1);   // index of searched value 
@@ -31,6 +31,7 @@ export const AlgoControlProvider = ({ children }) => {
   const [IsSearchDone , setIsSearchDone] = useState(false);
   const rangeRef = useRef({start:-1,end:-1})
 const [rangeVersion , setRangeVersion] = useState(0);
+
 
   return (
     <AlgoControlContext.Provider

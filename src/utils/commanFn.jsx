@@ -1,4 +1,5 @@
 import { UseAlgoControl } from "../context/algoControlContext";
+import { useStackContext } from "../context/stackContext";
 
 
 export default function useSortingUtils() {
@@ -24,7 +25,7 @@ export default function useSortingUtils() {
     rangeRef
   } = UseAlgoControl();
 
-  
+  const {input,stack,setStack,setInput} = useStackContext()
 
   const resetfn = () => {
     if (hasReset) return;
@@ -80,11 +81,19 @@ export default function useSortingUtils() {
 
   const clearCustomArray = () => setCustomArray("");
 
-  
+  const pushToStack = () => {
+    if (!input.trim()) return; // don't allow empty
+    // setStack([...stack, input]); not using since not sure ki instant state update ho jeygi ya nhi
+    setStack((prev) => [...prev, input]);
+    // console.log("instant",stack)  //prev stack print kregi kyuki state set krte hi print kra rhe h toh vo ekdm update nhi  hote , useEffect m print kra rhe h toh shi ho rha h
+    setInput(""); // clear input after push
+  };
+
   return {
     resetfn,
     generateRandomArray,
     applyCustomArray,
-    clearCustomArray
+    clearCustomArray,
+    pushToStack
   };
 }

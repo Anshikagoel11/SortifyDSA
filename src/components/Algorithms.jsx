@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import AlgorithmsData from "../utils/algorithmsData";
+import AlgorithmsData from "../utils/data/algorithmsData";
 import { Link } from "react-router";
 
 const container = {

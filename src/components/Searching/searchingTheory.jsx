@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import searchingAlgorithms from "../../utils/searchingData";
-import searchingType from "../../utils/searchingType";
-
+import searchingAlgorithms from "../../utils/data/searchingData";
 
 export default function SearchingTheory() {
   const { type } = useParams();

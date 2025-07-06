@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import sortingAlgorithms from "../../utils/sortingData";
+import sortingAlgorithms from "../../utils/data/sortingData";
 
 export default function SortingTheory() {
   const { type } = useParams();

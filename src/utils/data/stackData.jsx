@@ -4,7 +4,7 @@ const stackData = {
     definition:
       "A linear data structure that follows the Last-In-First-Out (LIFO) principle. Elements are inserted and removed from only one end: the top of the stack.",
     detailTheory:
-      "A Stack is an abstract data type that stores items in a LIFO (Last In First Out) manner. It allows two primary operations:\n\n1. **Push**: Add an item to the top.\n2. **Pop**: Remove the top item.\n\nOther helpful operations include:\n- **Peek / Top**: Get the current top item without removing it.\n- **isEmpty**: Check whether the stack is empty.\n\nStacks are commonly implemented using arrays or linked lists. Internally, the top pointer indicates the current top element. Most programming languages offer built-in support for stack operations (like `push`, `pop`, and `peek`).",
+      "A Stack is an abstract data type that stores items in a LIFO (Last In First Out) manner. It allows two primary operations:\n\n1. Push: Add an item to the top.\n2. Pop: Remove the top item.\n\nOther helpful operations include:\n- Peek / Top: Get the current top item without removing it.\n- isEmpty: Check whether the stack is empty.\n\nStacks are commonly implemented using arrays or linked lists. Internally, the top pointer indicates the current top element. Most programming languages offer built-in support for stack operations (like `push`, `pop`, and `peek`).",
     
     operations: [
       {

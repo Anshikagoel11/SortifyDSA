@@ -4,7 +4,7 @@ const queueData = {
     definition:
       "A linear data structure that follows the First-In-First-Out (FIFO) principle. Elements are inserted at the rear and removed from the front.",
     detailTheory:
-      "A Queue is an abstract data type in which elements are added from one end (rear) and removed from the other (front), following the FIFO (First In First Out) principle.\n\nKey Operations:\n1. **Enqueue**: Add an element to the rear.\n2. **Dequeue**: Remove an element from the front.\n\nAdditional operations include:\n- **Front/Peek**: View the front element without removing it.\n- **isEmpty**: Check if the queue is empty.\n- **isFull**: Check if the queue is full (in fixed-size implementations).\n\nQueues are implemented using arrays, linked lists, or specialized data structures like circular queues or dequeues. Most languages offer queue utilities in libraries or modules.",
+      "A Queue is an abstract data type in which elements are added from one end (rear) and removed from the other (front), following the FIFO (First In First Out) principle.\n\nKey Operations:\n1. Enqueue: Add an element to the rear.\n2. Dequeue: Remove an element from the front.\n\nAdditional operations include:\n- Front/Pee: View the front element without removing it.\n- isEmpty: Check if the queue is empty.\n- isFull : Check if the queue is full (in fixed-size implementations).\n\nQueues are implemented using arrays, linked lists, or specialized data structures like circular queues or dequeues. Most languages offer queue utilities in libraries or modules.",
 
     operations: [
       {

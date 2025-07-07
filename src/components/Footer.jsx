@@ -10,6 +10,8 @@ export default function Footer() {
         animate={{ opacity: 0.7 }}
         transition={{ delay: 1 }}
       >
+        <p>Sortify DSA @2025</p>
+        <p>@all right reversed</p>
         <p>Built with passion, pixels, and coffee by <span className="text-blue-400">Anshika Goel</span>  ☕💻</p>
 
         <div className="flex justify-center space-x-6 mt-4 text-xl text-white/80">

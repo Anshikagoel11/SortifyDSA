@@ -11,6 +11,8 @@ import Searching from "./components/Searching/searching";
 import SearchingComp from "./components/Searching/SearchingComp";
 import StackComp from "./components/Stack/stackComp";
 import { StackProvider } from "./context/stackContext";
+import { QueueProvider } from "./context/queueContext";
+import QueueComp from "./components/queue/queueComp";
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
       <BrowserRouter>
         <AlgoControlProvider>
           <StackProvider>
+          <QueueProvider>
           <Routes>
             <Route element={<Navbar />}>
               <Route path="/" element={<Home />} />
@@ -28,8 +31,10 @@ function App() {
                 <Route path="/searching/:type" element={<SearchingComp />} />
               </Route>
               <Route path="/stack" element={<StackComp/>}></Route>
+              <Route path="/queue" element={<QueueComp/>}></Route>
             </Route>
           </Routes>
+          </QueueProvider>
           </StackProvider>
         </AlgoControlProvider>
       </BrowserRouter>

@@ -32,7 +32,6 @@ const algorithmIcons = {
 };
 
 function SortingNavBar({ sorting }) {
-  
   return (
     <div className="mb-4">
       <motion.div
@@ -259,14 +258,20 @@ function AlgorithmButton({ item, isActive, onClick }) {
 }
 
 export default function Sorting() {
-  const { sorting, setSorting ,setCompareInfo,setIsActive,stop
-    ,setArraySize,setIsPaused} = UseAlgoControl();
-const {generateRandomArray} = useSortingUtils();
+  const {
+    sorting,
+    setSorting,
+    setCompareInfo,
+    setIsActive,
+    stop,
+    setArraySize,
+    setIsPaused,
+    setHasReset,
+  } = UseAlgoControl();
+  const { generateRandomArray, clearCustomArray } = useSortingUtils();
 
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
-
-
 
   useEffect(() => {
     // Update active sorting based on route
@@ -278,15 +283,10 @@ const {generateRandomArray} = useSortingUtils();
     }
   }, [location]);
 
-
-
   const filteredAlgorithms = sortingAlgorithms.filter((alg) =>
     alg.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-
-  
-  
   return (
     <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row">
       {/* Sidebar */}
@@ -386,19 +386,23 @@ const {generateRandomArray} = useSortingUtils();
                   <Link
                     to={`/sorting/${item.toLowerCase().replaceAll(" ", "-")}`}
                   >
+                    {/* algo button */}
                     <AlgorithmButton
                       item={item}
                       isActive={sorting === item}
                       onClick={() => {
-                        if(item === sorting) return;
-                       setSorting(item);
-  setIsActive(false);
-  setCompareInfo({ smaller: null, larger: null });
-   setArraySize(8)
-   setIsPaused(false);
-  generateRandomArray();
-  stop.current = true; 
-                       
+                        if (item === sorting) return;
+                        setSorting(item);
+                        setIsActive(false);
+                        setCompareInfo({ smaller: null, larger: null });
+                        setArraySize(8);
+                        setIsPaused(false);
+                        generateRandomArray();
+                        setHasReset(true);
+                        setIsPaused(false);
+                        clearCustomArray();
+
+                        stop.current = true;
                       }}
                     />
                   </Link>

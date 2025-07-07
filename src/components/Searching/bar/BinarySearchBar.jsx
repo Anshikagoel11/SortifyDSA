@@ -8,7 +8,7 @@ export default function BinarySearchBar() {
     currentCompare,
     IsElementFound,
     IsSearchDone,
-    searchInput,
+    searchInput, 
     rangeRef,
   } = UseAlgoControl();
 

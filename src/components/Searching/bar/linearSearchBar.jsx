@@ -1,5 +1,4 @@
 
-import { div } from "framer-motion/client";
 import { UseAlgoControl } from "../../../context/algoControlContext";
 import { motion } from "framer-motion";
 

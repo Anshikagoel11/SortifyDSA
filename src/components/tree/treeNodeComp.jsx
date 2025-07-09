@@ -1,71 +1,72 @@
 import { motion } from "framer-motion";
 
-export default function TreeNode({ node, level = 0 }) {
+export default function TreeNodeComponent({ node, level = 0 }) {
   if (!node || node.val === null) {
-    return <div className="inline-block h-16 w-16" />;
+    return <div className="h-10 w-10" />;
   }
 
-  // This spacing formula actually works properly
-  const spacing = Math.max(200 / (level + 1), 60);
+  const spacing = Math.max(240 / (level + 1), 40); // spacing decreases as level increases
 
   return (
-    <div className="flex flex-col items-center">
-      {/* Node */}
+    <motion.div
+      className="flex flex-col items-center relative"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: level * 0.1 }}
+    >
+      {/* Node Circle */}
       <motion.div
-        className="rounded-full bg-blue-500 text-white h-12 w-12 flex items-center justify-center font-bold shadow-lg z-10"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.3, delay: level * 0.1 }}
+        className="rounded-full bg-gradient-to-br from-purple-400 to-blue-500 
+                   text-white h-12 w-12 flex items-center justify-center font-medium shadow-md"
+        whileHover={{ scale: 1.05 }}
       >
         {node.val}
       </motion.div>
 
       {/* Children */}
       {(node.left || node.right) && (
-        <div className="flex mt-4 relative">
-          {/* Left Child */}
-          <div className="relative" style={{ marginRight: `${spacing}px` }}>
+        <div className="flex mt-6 relative" style={{ gap: `${spacing}px` }}>
+          {/* Left Child + Connector */}
+          <div className="flex flex-col items-center relative">
             {node.left && (
               <>
                 <svg
-                  className="absolute top-[-16px] left-1/2 h-4 w-full"
-                  style={{ width: `${spacing/2}px` }}
+                  className="absolute top-[-30px] left-1/2 -translate-x-1/2 stroke-purple-300"
+                  width="40"
+                  height="30"
                 >
                   <path
-                    d={`M ${spacing/2} 0 Q ${spacing/4} 30 0 60`}
-                    stroke="purple"
-                    strokeWidth="2"
+                    d="M20 0 Q 0 15, 20 30"
                     fill="none"
+                    strokeWidth="2"
                   />
-                  <polygon points="0,60 5,50 -5,50" fill="purple" />
                 </svg>
-                <TreeNode node={node.left} level={level + 1} />
+                <TreeNodeComponent node={node.left} level={level + 1} />
               </>
             )}
           </div>
 
-          {/* Right Child */}
-          <div className="relative" style={{ marginLeft: `${spacing}px` }}>
+          {/* Right Child + Connector */}
+          <div className="flex flex-col items-center relative">
             {node.right && (
               <>
                 <svg
-                  className="absolute top-[-16px] right-1/2 h-4 w-full"
-                  style={{ width: `${spacing/2}px` }}
+                  className="absolute top-[-30px] left-1/2 -translate-x-1/2 stroke-purple-300"
+                  width="40"
+                  height="30"
                 >
                   <path
-                    d={`M 0 0 Q ${spacing/4} 30 ${spacing/2} 60`}
-                    stroke="purple"
-                    strokeWidth="2"
+                    d="M20 0 Q 40 15, 20 30"
                     fill="none"
+                    strokeWidth="2"
                   />
-                  <polygon points={`${spacing/2},60 ${spacing/2-5},50 ${spacing/2+5},50`} fill="purple" />
                 </svg>
-                <TreeNode node={node.right} level={level + 1} />
+                <TreeNodeComponent node={node.right} level={level + 1} />
               </>
             )}
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

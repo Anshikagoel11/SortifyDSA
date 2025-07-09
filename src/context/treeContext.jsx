@@ -8,7 +8,7 @@ export const useTreeContext =()=> useContext(TreeContext)
 export const TreeProvider = ({children})=>{
 
     const [input,setInput] = useState('');
-    const [nodes,setNodes] = useState([]);
+    const [nodes,setNodes] = useState([10,20,30,40,50,60,70]);
 
     return(
         <TreeContext.Provider

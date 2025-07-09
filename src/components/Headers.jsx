@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { Link } from 'react-router-dom';
 
 export default function Headers() {
   const nodes = useRef([]);
@@ -57,18 +58,20 @@ export default function Headers() {
   };
 
   const animateParticles = () => {
-    const particles = particlesRef.current.children;
-    gsap.fromTo(particles, 
-      { opacity: 0, y: 20 },
-      {
-        opacity: 0.6,
-        y: 0,
-        duration: 1.5,
-        stagger: 0.1,
-        delay: 0.5,
-        ease: "sine.out"
-      }
-    );
+    const particles = particlesRef.current?.children;
+    if (particles) {
+      gsap.fromTo(particles, 
+        { opacity: 0, y: 20 },
+        {
+          opacity: 0.6,
+          y: 0,
+          duration: 1.5,
+          stagger: 0.1,
+          delay: 0.5,
+          ease: "sine.out"
+        }
+      );
+    }
   };
 
   const animateLeftSide = () => {
@@ -90,13 +93,15 @@ export default function Headers() {
   };
 
   const animateButton = () => {
-    gsap.to(buttonRef.current, {
-      scale: 1.02,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+    if (buttonRef.current) {
+      gsap.to(buttonRef.current, {
+        scale: 1.02,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
 
     gsap.to(".button-glow", {
       opacity: 0.3,
@@ -108,9 +113,9 @@ export default function Headers() {
   };
 
   return (
-    <header className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-[#E2E8F0] flex items-center overflow-hidden relative">
+    <header className="bg-gradient-to-br from-[#0F172A] to-[#1E293B] text-[#E2E8F0] flex items-center overflow-hidden relative min-h-screen">
       {/* Floating particles */}
-      <div ref={particlesRef} className="absolute inset-0 overflow-hidden">
+      <div ref={particlesRef} className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div 
             key={i}
@@ -125,12 +130,12 @@ export default function Headers() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 py-16 lg:py-24 w-full ">
         {/* Left side - Text content */}
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8 order-2 lg:order-1">
           <h1 
             ref={el => leftElements.current[0] = el}
-            className="text-6xl md:text-7xl font-bold animated-heading leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold animated-heading leading-tight"
             style={{
               background: "linear-gradient(90deg, #E2E8F0, #7DD3FC, #A78BFA, #E2E8F0)",
               backgroundSize: "300% 100%",
@@ -145,81 +150,85 @@ export default function Headers() {
           
           <p 
             ref={el => leftElements.current[1] = el}
-            className="text-xl text-slate-300 max-w-lg"
+            className="text-lg sm:text-xl text-slate-300 max-w-lg"
           >
             Experience computer science concepts through interactive animations and step-by-step visualizations
           </p>
           
-        <p>Sorting Algorithm Visualization Tool</p>
-        <p className="mt-1">Click on different algorithms to see how they work</p>
+          <div className="space-y-2">
+            <p className="text-slate-400">Sorting Algorithm Visualization Tool</p>
+            <p className="text-slate-400">Click on different algorithms to see how they work</p>
+          </div>
           
-          <div className="relative inline-block">
-            <button
-              ref={buttonRef}
-              className="px-8 py-4 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
-            >
-              <span className="relative z-10 flex items-center">
-                Start Exploring
-                <svg 
-                  className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </span>
-              <div className="button-glow absolute inset-0 bg-white/10 opacity-0"></div>
-            </button>
+          <div className="relative inline-block pt-2">
+            <Link to={'/sorting/bubble-sort'}>
+              <button
+                ref={buttonRef}
+                className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+              >
+                <span className="relative z-10 flex items-center">
+                  Start visualizing
+                  <svg 
+                    className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </span>
+                <div className="button-glow absolute inset-0 bg-white/10 opacity-0"></div>
+              </button>
+            </Link>
           </div>
         </div>
 
         {/* Right side - Graph Visualization */}
-       <div className="relative w-full h-96">
-  <div className="absolute inset-0 bg-sky-900/10 rounded-2xl backdrop-blur-sm border border-sky-800/30"></div>
-  <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
-    {/* Edges */}
-    <line 
-      ref={el => edges.current[0] = el}
-      x1="80" y1="180" x2="200" y2="90" 
-      stroke="#7DD3FC" 
-      strokeWidth="3"
-      strokeDasharray="150"
-    />
-    <line 
-      ref={el => edges.current[1] = el}
-      x1="100" y1="160" x2="200" y2="250" 
-      stroke="#7DD3FC" 
-      strokeWidth="3"
-      strokeDasharray="150"
-    />
-    <line 
-      ref={el => edges.current[2] = el}
-      x1="200" y1="90" x2="300" y2="90" 
-      stroke="#A78BFA"
-      strokeWidth="3"
-      strokeDasharray="100"
-    />
-    
-    {/* Nodes */}
-    <g ref={el => nodes.current[0] = el}>
-      <circle cx="100" cy="160" r="27" fill="#0EA5E9" />
-      <text x="100" y="165" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Start</text>
-    </g>
-    <g ref={el => nodes.current[1] = el}>
-      <circle cx="200" cy="80" r="27" fill="#0EA5E9" />
-      <text x="200" y="85" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Node</text>
-    </g>
-    <g ref={el => nodes.current[2] = el}>
-      <circle cx="200" cy="250" r="27" fill="#0EA5E9" />
-      <text x="200" y="255" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Edge</text>
-    </g>
-    <g ref={el => nodes.current[3] = el}>
-      <circle cx="300" cy="80" r="27" fill="#0EA5E9" />
-      <text x="300" y="85" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">End</text>
-    </g>
-  </svg>
-</div>
+        <div className="relative w-full h-64 sm:h-80 md:h-96 order-1 lg:order-2 hidden sm:block">
+          <div className="absolute inset-0 bg-sky-900/10 rounded-2xl backdrop-blur-sm border border-sky-800/30"></div>
+          <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
+            {/* Edges */}
+            <line 
+              ref={el => edges.current[0] = el}
+              x1="80" y1="180" x2="200" y2="90" 
+              stroke="#7DD3FC" 
+              strokeWidth="3"
+              strokeDasharray="150"
+            />
+            <line 
+              ref={el => edges.current[1] = el}
+              x1="100" y1="160" x2="200" y2="250" 
+              stroke="#7DD3FC" 
+              strokeWidth="3"
+              strokeDasharray="150"
+            />
+            <line 
+              ref={el => edges.current[2] = el}
+              x1="200" y1="90" x2="300" y2="90" 
+              stroke="#A78BFA"
+              strokeWidth="3"
+              strokeDasharray="100"
+            />
+            
+            {/* Nodes */}
+            <g ref={el => nodes.current[0] = el}>
+              <circle cx="100" cy="160" r="27" fill="#0EA5E9" />
+              <text x="100" y="165" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Start</text>
+            </g>
+            <g ref={el => nodes.current[1] = el}>
+              <circle cx="200" cy="80" r="27" fill="#0EA5E9" />
+              <text x="200" y="85" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Node</text>
+            </g>
+            <g ref={el => nodes.current[2] = el}>
+              <circle cx="200" cy="250" r="27" fill="#0EA5E9" />
+              <text x="200" y="255" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">Edge</text>
+            </g>
+            <g ref={el => nodes.current[3] = el}>
+              <circle cx="300" cy="80" r="27" fill="#0EA5E9" />
+              <text x="300" y="85" textAnchor="middle" fill="white" className="font-mono text-sm" fontSize="12">End</text>
+            </g>
+          </svg>
+        </div>
       </div>
     </header>
   );

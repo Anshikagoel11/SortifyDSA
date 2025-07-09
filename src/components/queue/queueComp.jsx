@@ -41,7 +41,7 @@ export default function Queue() {
 
   return (
     <motion.div
-      className="backdrop-blur-sm border bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] p-4 sm:p-6 md:p-8  shadow-lg"
+      className="backdrop-blur-sm border bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] p-4 sm:p-6 md:p-8  shadow-lg pb-6"
       initial={{ opacity: 0, y:-10  }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}

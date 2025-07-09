@@ -14,8 +14,7 @@ const sortingAlgorithms = [
   "Heap Sort",
   "Radix Sort",
   "Shell Sort",
-  "Counting Sort",
-  "Bucket Sort",
+  "Counting Sort"
 ];
 
 const algorithmIcons = {
@@ -27,8 +26,7 @@ const algorithmIcons = {
   "Heap Sort": "📊",
   "Radix Sort": "🔢",
   "Shell Sort": "🐚",
-  "Counting Sort": "🧮",
-  "Bucket Sort": "🪣",
+  "Counting Sort": "🧮"
 };
 
 function SortingNavBar({ sorting }) {

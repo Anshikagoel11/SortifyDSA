@@ -168,7 +168,7 @@ export default function SortingComp() {
 
       <div className="flex flex-wrap gap-3 justify-center">
         <motion.button
-          onClick={generateRandomArray}
+          onClick={()=>{generateRandomArray(false)}}
           whileHover={{ scale: 1.05 }}
           disabled={isActive}
           whileTap={{ scale: 0.95 }}

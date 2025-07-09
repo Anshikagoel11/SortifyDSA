@@ -273,7 +273,7 @@ export default function Searching() {
   }, [location]);
 
   return (
-    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row">
+    <div className="bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] min-h-screen flex flex-col md:flex-row pb-15">
       {/* Sidebar */}
       <motion.div
         className="w-full md:w-[22%] min-w-[260px] bg-[#1E293B]/20 p-4 rounded-lg m-3 border border-gray-700/30 backdrop-blur-xl max-h-[calc(100vh-1.5rem)] overflow-y-auto"

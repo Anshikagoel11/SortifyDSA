@@ -9,10 +9,12 @@ import SortingComp from "./components/Sorting/SortingComp";
 import { AlgoControlProvider } from "./context/algoControlContext";
 import Searching from "./components/Searching/searching";
 import SearchingComp from "./components/Searching/SearchingComp";
-import StackComp from "./components/Stack/stackComp";
+import Stack from "./components/Stack/stackComp";
 import { StackProvider } from "./context/stackContext";
 import { QueueProvider } from "./context/queueContext";
-import QueueComp from "./components/queue/queueComp";
+import Queue from "./components/queue/queueComp";
+import Tree from "./components/tree/treeComp";
+import { TreeProvider } from "./context/treeContext";
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
         <AlgoControlProvider>
           <StackProvider>
           <QueueProvider>
+            <TreeProvider>
           <Routes>
             <Route element={<Navbar />}>
               <Route path="/" element={<Home />} />
@@ -30,10 +33,12 @@ function App() {
               <Route element={<Searching />}>
                 <Route path="/searching/:type" element={<SearchingComp />} />
               </Route>
-              <Route path="/stack" element={<StackComp/>}></Route>
-              <Route path="/queue" element={<QueueComp/>}></Route>
+              <Route path="/stack" element={<Stack/>}></Route>
+              <Route path="/queue" element={<Queue/>}></Route>
+              <Route path="/tree" element={<Tree/>}></Route>
             </Route>
           </Routes>
+          </TreeProvider>
           </QueueProvider>
           </StackProvider>
         </AlgoControlProvider>

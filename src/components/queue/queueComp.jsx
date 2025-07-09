@@ -6,7 +6,7 @@ import queueData from "../../utils/data/queueData";
 import { TbArrowRight, TbArrowLeft } from "react-icons/tb";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
-export default function QueueComp() {
+export default function Queue() {
   const { input, setInput, queue, pop, front } = useQueueContext();
   const { pushToQueue, popFromQueue, frontOfQueue, emptyQueue } =
     useQueueUtils();
@@ -42,14 +42,14 @@ export default function QueueComp() {
   return (
     <motion.div
       className="backdrop-blur-sm border bg-gradient-to-br from-[#0F172A] to-[#1E2A3B] p-4 sm:p-6 md:p-8  shadow-lg"
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y:-10  }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
     >
       <motion.h1
-        className="text-white text-xl sm:text-2xl mb-4 sm:mb-6 font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text"
+        className="text-white text-xl sm:text-3xl mb-4 sm:mb-6 font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 1 }} 
         transition={{ delay: 0.2 }}
       >
         {queueData.queue.sortingName} Visualization

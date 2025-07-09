@@ -30,7 +30,7 @@ export const AlgoControlProvider = ({ children }) => {
   const [IsElementFound ,setIsElementFound] = useState(false);
   const [IsSearchDone , setIsSearchDone] = useState(false);
   const rangeRef = useRef({start:-1,end:-1})
-const [rangeVersion , setRangeVersion] = useState(0);
+  const [rangeVersion , setRangeVersion] = useState(0);
 
 
   return (

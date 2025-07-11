@@ -131,7 +131,7 @@ export default function Headers() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 py-16 lg:py-24 w-full ">
-        {/* Left side - Text content */}
+        {/* Left side - Text  */}
         <div className="space-y-6 md:space-y-8 order-2 lg:order-1">
           <h1 
             ref={el => leftElements.current[0] = el}

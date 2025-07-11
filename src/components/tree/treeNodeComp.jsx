@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function TreeNodeComponent({ node, level = 0 }) {
+export default function TreeNode({ node, level = 0 }) {
   if (!node || node.val === null) {
     return <div className="h-10 w-10" />;
   }

@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { TiArrowBack } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { FaHome } from "react-icons/fa";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -57,11 +57,13 @@ export default function Navbar() {
     <>
       <nav className="bg-[#1E293B] text-[#E2E8F0] shadow-lg font-sans sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+         
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center">
+             <FaHome />
               <motion.span 
-                className="text-3xl sm:text-xl font-bold bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent tracking-tight"
+                className=" pl-6 md:pl-0 text-2xl sm:text-xl font-bold bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent tracking-tight"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >

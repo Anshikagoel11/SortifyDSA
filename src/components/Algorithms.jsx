@@ -3,6 +3,7 @@ import { useRef } from "react";
 import AlgorithmsData from "../utils/data/algorithmsData";
 import { Link } from "react-router-dom";
 
+
 const container = {
   hidden: { opacity: 0 },
   visible: {
@@ -67,11 +68,14 @@ export default function Algorithms() {
               whileHover={{ y: -8, scale: 1.02 }}
               viewport={{ once: true }}
             >
+              <div className="bg-gradient-to-br from-sky-900/20 to-indigo-900/20 text-right text-red-700 pr-3 pt-2 italic font-bold rou">{algo.note}</div>
               <div className="p-4 sm:p-5 relative overflow-hidden flex bg-gradient-to-br from-sky-900/20 to-indigo-900/20">
+              
                 <div className="p-2 sm:p-3 m-1 sm:m-2 flex items-center justify-center relative bg-sky-800/80 rounded-lg backdrop-blur-sm">
                   {algo.svg}
                 </div>
                 <div>
+                  
                   <h2 className="text-xl sm:text-2xl font-semibold text-[#E2E8F0] mb-2 sm:mb-3 group-hover:text-sky-400 transition-colors duration-300">
                     {algo.title}
                     <span className="block w-6 sm:w-8 h-0.5 bg-sky-400 mt-1 sm:mt-2 group-hover:w-10 sm:group-hover:w-16 transition-all duration-500"></span>

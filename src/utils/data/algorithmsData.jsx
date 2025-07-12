@@ -27,7 +27,9 @@ const AlgorithmsData = [
         <path d="M12 2l4 4h-3v4h-2V6H8l4-4zm-6 8v8H4v2h6v-2H8v-8H6zm10 0v8h-2v2h6v-2h-2v-8h-2z"/>
       </svg>
     ),
-    path:"/tree"
+    // path:"/tree",
+     path:"/comingSoon",
+    note:"Coming soon...."
   },
   {
     title: "Graph Algorithms",
@@ -37,7 +39,9 @@ const AlgorithmsData = [
         <path d="M4 4h4v4H4V4zm12 0h4v4h-4V4zM4 16h4v4H4v-4zm12 0h4v4h-4v-4zM7 8v8h2V8H7zm8 0v8h2V8h-2z"/>
       </svg>
     ),
-    path:"/graph"
+    // path:"/graph",
+     path:"/comingSoon",
+    note:"Coming soon...."
   },
   {
     title: "Stack Algorithms",
@@ -71,7 +75,9 @@ const AlgorithmsData = [
         <line x1="6" y1="12" x2="6" y2="18" stroke="white" strokeWidth="2" />
       </svg>
     ),
-    path:"/linkedlist"
+    // path:"/linkedlist",
+     path:"/comingSoon",
+    note:"Coming soon...."
   },
   {
     title: "Backtracking Algorithms",
@@ -81,7 +87,9 @@ const AlgorithmsData = [
         <path d="M10 6v4H4v4h6v4l6-6-6-6z"/>
       </svg>
     ),
-    path:"/backtrack"
+    // path:"/backtrack",
+    path:"/comingSoon",
+    note:"Coming soon...."
   },
 ];
 

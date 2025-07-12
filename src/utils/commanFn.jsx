@@ -1,7 +1,6 @@
 import { UseAlgoControl } from "../context/algoControlContext";
 import { useStackContext } from "../context/stackContext";
 
-
 export default function useSortingUtils() {
   const {
     setIsActive,
@@ -22,10 +21,10 @@ export default function useSortingUtils() {
     setIsElementFound,
     setIsSearchDone,
     SetIsElementFound,
-    rangeRef
+    rangeRef,
   } = UseAlgoControl();
 
-  const {input,stack,setStack,setInput} = useStackContext()
+  const { input, stack, setStack, setInput } = useStackContext();
 
   const resetfn = () => {
     if (hasReset) return;
@@ -33,51 +32,45 @@ export default function useSortingUtils() {
     stop.current = false;
     reset.current = true;
     setCompareInfo({ smaller: null, larger: null });
-    setResumeIndex({ idxI: 0, idxJ: 0 })
+    setResumeIndex({ idxI: 0, idxJ: 0 });
     setHasReset(true);
     setIsPaused(false);
-     setSearchIndex(-1);
-  setCurrentCompare(-1);
-  setIsElementFound(false);
-  setIsSearchDone(false);
-   rangeRef.current={start:0,end:arraySize-1}
+    setSearchIndex(-1);
+    setCurrentCompare(-1);
+    setIsElementFound(false);
+    setIsSearchDone(false);
+    rangeRef.current = { start: 0, end: arraySize - 1 };
   };
-
 
   const generateRandomArray = (isBinarySearch) => {
     const newArray = Array.from({ length: arraySize }, () =>
       Math.floor(Math.random() * 90 + 5)
     );
-    if(isBinarySearch){  //uses searchingType from button name not from state because state not updated instant and creating issue on first click since it is not updating
-      newArray.sort((a,b)=>a-b);
-      setBars(newArray)
-      rangeRef.current = {start:0,end:arraySize-1}  
-    }
-    else setBars(newArray);
-
+    if (isBinarySearch) {
+      //uses searchingType from button name not from state because state not updated instant and creating issue on first click since it is not updating
+      newArray.sort((a, b) => a - b);
+      setBars(newArray);
+      rangeRef.current = { start: 0, end: arraySize - 1 };
+    } else setBars(newArray);
 
     setIsSearchDone(false);
-    setIsElementFound(false)
-     setSearchIndex(-1);
-  setCurrentCompare(-1);
+    setIsElementFound(false);
+    setSearchIndex(-1);
+    setCurrentCompare(-1);
   };
 
- 
-  
   const applyCustomArray = (isBinarySearch) => {
     const numbers = customArray.split(",").map((num) => parseInt(num.trim()));
     if (numbers.every((num) => !isNaN(num))) {
-      if(isBinarySearch){
-       numbers.sort((a,b)=>a-b)
-       rangeRef.current={start:0,end:arraySize-1}
-      } 
+      if (isBinarySearch) {
+        numbers.sort((a, b) => a - b);
+        rangeRef.current = { start: 0, end: arraySize - 1 };
+      }
       setBars(numbers);
       setArraySize(numbers.length);
-      
     }
     setIsSearchDone(false);
   };
-
 
   const clearCustomArray = () => setCustomArray("");
 
@@ -89,11 +82,24 @@ export default function useSortingUtils() {
     setInput(""); // clear input after push
   };
 
+  //uses sames state for two algorthim so need to update them all
+  const resetStates = () => {
+    setIsActive(false);
+    setCompareInfo({ smaller: null, larger: null });
+    setArraySize(window.innerWidth < 768 ? 10 : 15);
+    setIsPaused(false);
+    generateRandomArray();
+    setHasReset(true);
+    clearCustomArray();
+    stop.current = true;
+  };
+
   return {
     resetfn,
     generateRandomArray,
     applyCustomArray,
     clearCustomArray,
-    pushToStack
+    pushToStack,
+    resetStates,
   };
 }

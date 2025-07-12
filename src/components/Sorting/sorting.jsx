@@ -42,7 +42,7 @@ export default function Sorting() {
     setIsPaused,
     setHasReset,
   } = UseAlgoControl();
-  const { generateRandomArray, clearCustomArray } = useSortingUtils();
+  const { generateRandomArray, clearCustomArray,resetStates } = useSortingUtils();
 
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState("");
@@ -142,15 +142,7 @@ export default function Sorting() {
                       isActive={sorting === item}
                       onClick={() => {
                         if (item === sorting) return;
-                        setSorting(item);
-                        setIsActive(false);
-                        setCompareInfo({ smaller: null, larger: null });
-                        setArraySize(window.innerWidth < 768 ? 10 : 15);
-                        setIsPaused(false);
-                        generateRandomArray();
-                        setHasReset(true);
-                        clearCustomArray();
-                        stop.current = true;
+                       resetStates();
                       }}
                     />
                   </Link>

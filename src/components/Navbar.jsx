@@ -5,19 +5,22 @@ import { TiArrowBack } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaHome } from "react-icons/fa";
+import useSortingUtils from "../utils/commanFn";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+ const  {resetStates}= useSortingUtils()
 
   const menuItems = [
     { label: "Home", path: "/" },
     { label: "Sorting", path: "/sorting/bubble-sort" },
     { label: "Searching", path: "/searching/linear-search" },
-    { label: "Tree", path: "/tree" },
-    { label: "Graph", path: "/graph" },
     { label: "Stack", path: "/stack" },
     { label: "Queue", path: "/queue" },
-    { label: "DP", path: "/dp" },
-    { label: "Linked List", path: "/linked-list" },
+    //  { label: "Tree", path: "/tree" },
+    // { label: "Graph", path: "/graph" },
+    // { label: "DP", path: "/dp" },
+    // { label: "Linked List", path: "/linked-list" },
   ];
 
   const mobileMenuVariants = {
@@ -61,7 +64,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-             <FaHome />
+             <FaHome className="mr-2"/>
               <motion.span 
                 className=" pl-6 md:pl-0 text-2xl sm:text-xl font-bold bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent tracking-tight"
                 whileHover={{ scale: 1.05 }}
@@ -89,6 +92,7 @@ export default function Navbar() {
                           : "text-slate-300 hover:text-sky-300 hover:bg-[#334155]/30"
                       }`
                     }
+                    onClick={resetStates}
                   >
                     {item.label}
                   </NavLink>

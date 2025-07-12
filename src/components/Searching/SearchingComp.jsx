@@ -47,8 +47,6 @@ export default function SearchingComp() {
   const isBinarySearch = searchingName === 'Binary Search';
   const [showTooltip, setShowTooltip] = useState(false);
 
-  
-
   const handleStartVisualization = () => {
     if (searchInput === '') {
       setShowTooltip(true);
@@ -113,43 +111,35 @@ export default function SearchingComp() {
 
   return (
     <motion.div
-      className="backdrop-blur-sm border border-gray-700/30 rounded-xl p-2 mb-2"
+      className="backdrop-blur-sm border border-gray-700/30 rounded-xl p-3 md:p-4 mb-4"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-     
-
-     
       <div className="relative">
-        <div className={`h-60 mb-2 bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg flex items-center justify-center space-x-1 p-2 border border-gray-700/50`}>
           {searchingType[type].barComponent}
-        </div>
-        
       </div>
 
-      {/* Controls Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-       
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3 md:mb-4">
         <motion.div
-          className="bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg p-4 border border-gray-700/50"
+          className="bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg p-3 border border-gray-700/50"
           whileHover={{ y: -2 }}
         >
-          <div className="grid grid-cols-2 gap-4 mb-3">
+          <div className="grid grid-cols-2 gap-3 mb-2">
             <div>
-              <label className="block text-sm text-white/80 mb-1">Array Size</label>
+              <label className="block text-xs md:text-sm text-white/80 mb-1">Array Size</label>
               <input
                 type="range"
                 min="5"
-                max="40"
+                max={window.innerWidth < 768 ? 20 : 40}
                 value={arraySize}
                 disabled={isActive}
                 onChange={(e) => setArraySize(parseInt(e.target.value))}
                 className="w-full accent-blue-500 mb-1"
               />
-              <div className="text-center text-white/70 text-sm">{arraySize} elements</div>
+              <div className="text-center text-white/70 text-xs md:text-sm">{arraySize} elements</div>
             </div>
             <div>
-              <label className="block text-sm text-white/80 mb-1">Speed</label>
+              <label className="block text-xs md:text-sm text-white/80 mb-1">Speed</label>
               <input
                 type="range"
                 min="1"
@@ -159,12 +149,12 @@ export default function SearchingComp() {
                 onChange={(e) => setSpeed(Number(e.target.value))}
                 className="w-full accent-blue-500 mb-1"
               />
-              <div className="text-center text-white/70 text-sm">{21 - speed}x</div>
+              <div className="text-center text-white/70 text-xs md:text-sm">{21 - speed}x</div>
             </div>
           </div>
 
           <div className="relative">
-            <label className="block text-sm text-white/80 mb-1">Search Element</label>
+            <label className="block text-xs md:text-sm text-white/80 mb-1">Search Element</label>
             <input
               value={searchInput}
               type="number"
@@ -173,7 +163,7 @@ export default function SearchingComp() {
                 const val = e.target.value;
                 setSearchInput(val === "" ? "" : parseInt(val));
               }}
-              className="w-full bg-gray-800/50 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="w-full bg-gray-800/50 text-white px-2 py-1.5 md:px-3 md:py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs md:text-sm"
               placeholder="Enter element to search"
             />
             {showTooltip && (
@@ -188,20 +178,19 @@ export default function SearchingComp() {
           </div>
         </motion.div>
 
-        {/* Custom Array Controls */}
         <motion.div
-          className="bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg p-4 border border-gray-700/50"
+          className="bg-gradient-to-b from-[#1E293B] to-[#0F172A] rounded-lg p-3 border border-gray-700/50"
           whileHover={{ y: -2 }}
         >
-          <div className="mb-3">
-            <label className="block text-sm text-white/80 mb-1">Custom Array</label>
+          <div className="mb-2">
+            <label className="block text-xs md:text-sm text-white/80 mb-1">Custom Array</label>
             <input
               type="text"
               placeholder="e.g. 10,20,30,40,50"
               value={customArray}
               disabled={isActive}
               onChange={(e) => setCustomArray(e.target.value)}
-              className="w-full bg-gray-800/50 text-white px-3 py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="w-full bg-gray-800/50 text-white px-2 py-1.5 md:px-3 md:py-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-xs md:text-sm"
             />
           </div>
           <div className="flex space-x-2">
@@ -209,7 +198,7 @@ export default function SearchingComp() {
               onClick={() => applyCustomArray(isBinarySearch)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`flex-1 px-3 py-2 bg-blue-600/80 text-white rounded hover:bg-blue-600 transition-colors flex items-center justify-center space-x-2 ${
+              className={`flex-1 px-2 py-1.5 md:px-3 md:py-2 bg-blue-600/80 text-white rounded hover:bg-blue-600 transition-colors flex items-center justify-center space-x-1 text-xs md:text-sm ${
                 isActive ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={isActive}
@@ -220,7 +209,7 @@ export default function SearchingComp() {
               onClick={clearCustomArray}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-3 py-2 bg-blue-500/80 text-white rounded hover:bg-blue-500 transition-colors flex items-center justify-center ${
+              className={`px-2 py-1.5 md:px-3 md:py-2 bg-blue-500/80 text-white rounded hover:bg-blue-500 transition-colors flex items-center justify-center text-xs md:text-sm ${
                 isActive ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={isActive}
@@ -231,18 +220,17 @@ export default function SearchingComp() {
         </motion.div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-wrap gap-2 justify-center">
         <motion.button
           onClick={() => generateRandomArray(isBinarySearch)}
           whileHover={{ scale: 1.05 }}
           disabled={isActive}
           whileTap={{ scale: 0.95 }}
-          className={`px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg flex items-center space-x-2 ${
+          className={`px-3 py-1.5 text-xs md:text-sm bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg flex items-center space-x-1 ${
             isActive ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
-          <FaRandom />
+          <FaRandom className="text-xs md:text-sm" />
           <span>Randomize</span>
         </motion.button>
 
@@ -250,12 +238,12 @@ export default function SearchingComp() {
           onClick={handleStartVisualization}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center space-x-2 ${
+          className={`px-3 py-1.5 text-xs md:text-sm bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg flex items-center space-x-1 ${
             isActive ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={isActive}
         >
-          <FaPlay />
+          <FaPlay className="text-xs md:text-sm" />
           <span>Start</span>
         </motion.button>
 
@@ -263,42 +251,39 @@ export default function SearchingComp() {
           onClick={handleTogglePause}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`px-4 py-2 text-white rounded-lg flex items-center space-x-2 ${
+          className={`px-3 py-1.5 text-xs md:text-sm text-white rounded-lg flex items-center space-x-1 ${
             isPaused ? "bg-green-400" : "bg-red-500"
           } ${!isActive ? "opacity-50 cursor-not-allowed" : ""}`}
           disabled={!isActive}
         >
-          {isPaused ? <FaPlay /> : <FaPause />}
+          {isPaused ? <FaPlay className="text-xs md:text-sm" /> : <FaPause className="text-xs md:text-sm" />}
           <span>{isPaused ? "Resume" : "Pause"}</span>
         </motion.button>
 
         <motion.button
-          onClick={() => {
-            resetfn();
-          }}
+          onClick={() => resetfn()}
           whileHover={hasReset ? { scale: 1.05 } : {}}
           whileTap={hasReset ? { scale: 0.95 } : {}}
-          className={`px-4 py-2 rounded-lg flex items-center space-x-2 ${
+          className={`px-3 py-1.5 text-xs md:text-sm rounded-lg flex items-center space-x-1 ${
             hasReset
               ? "bg-purple-300 cursor-not-allowed opacity-40"
               : "bg-purple-400 text-white"
           }`}
         >
-          <FaRedo />
+          <FaRedo className="text-xs md:text-sm" />
           <span>Reset</span>
         </motion.button>
       </div>
 
-      {/* Algorithm Information */}
       <motion.div 
-        className="mt-6 bg-gradient-to-b from-[#1E293B]/80 to-[#0F172A]/80 rounded-lg p-4 border border-gray-700/50"
+        className="mt-6 md:mt-6 bg-gradient-to-b from-[#1E293B]/80 to-[#0F172A]/80 rounded-lg p-3 md:p-4 border border-gray-700/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
         <div className="flex items-center text-blue-300 mb-2">
-          <FaInfoCircle className="mr-2" />
-          <h3 className="font-medium">About {searchingName}</h3>
+          <FaInfoCircle className="mr-2 text-xs md:text-sm" />
+          <h3 className="font-medium text-sm md:text-base">About {searchingName}</h3>
         </div>
         <SearchingTheory />
       </motion.div>

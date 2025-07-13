@@ -5,7 +5,7 @@ import SortingComp from "./SortingComp";
 import { UseAlgoControl } from "../../context/algoControlContext";
 import useSortingUtils from "../../utils/commanFn";
 import AlgorithmButton from "./algoButton";
-import Sorting_navBar from "./Sorting_navBar";
+import Sorting_navBar from "./sorting_navbar";
 
 const sortingAlgorithms = [
   "Bubble Sort",

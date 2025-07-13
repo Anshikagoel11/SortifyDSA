@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import SortingComp from "./SortingComp";
 import { UseAlgoControl } from "../../context/algoControlContext";
 import useSortingUtils from "../../utils/commanFn";
-import SortingNavBar from "./Sorting_navBar";
 import AlgorithmButton from "./algoButton";
+import Sorting_navBar from "./Sorting_navBar";
 
 const sortingAlgorithms = [
   "Bubble Sort",
@@ -293,7 +293,7 @@ export default function Sorting() {
 
       {/* Main content */}
       <div className="w-full md:w-[78%] px-3 md:px-6 py-4 md:py-6 overflow-y-auto h-screen">
-        <SortingNavBar sorting={sorting} />
+        <Sorting_navBar sorting={sorting} />
         <SortingComp />
       </div>
     </div>

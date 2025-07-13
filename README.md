@@ -4,7 +4,6 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-teal?logo=tailwind-css)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-6.x-purple?logo=framer)](https://www.framer.com/motion/)
 [![Vercel](https://img.shields.io/badge/Deployed-Vercel-black?logo=vercel)](https://vercel.com/)
-[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
@@ -46,7 +45,7 @@ _(Replace this with your actual Vercel deployed URL)_
 Make sure you have **Node.js** and **npm** installed.
 
 ```bash
-git clone https://github.com/<your-username>/SortifyDSA.git
+git clone https://github.com/Anshikagoel11/SortifyDSA.git
 cd SortifyDSA
 npm install
 npm run

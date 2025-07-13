@@ -65,40 +65,6 @@ export default function ComingSoon() {
 
         
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <motion.div 
-            className="bg-[#1E293B]/50 p-6 rounded-xl border border-gray-700/30 hover:border-blue-500/30 transition-all"
-            whileHover={{ y: -5 }}
-          >
-            <div className="flex items-center mb-4">
-              <div className="p-3 rounded-full bg-blue-500/20 mr-4">
-                <FaCode className="text-blue-400 text-xl" />
-              </div>
-              <h3 className="text-lg font-semibold text-white">Interactive Code</h3>
-            </div>
-            <p className="text-gray-400">
-              Step-by-step visualization of the algorithm with interactive code execution.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="bg-[#1E293B]/50 p-6 rounded-xl border border-gray-700/30 hover:border-blue-500/30 transition-all"
-            whileHover={{ y: -5 }}
-          >
-            <div className="flex items-center mb-4">
-              <div className="p-3 rounded-full bg-purple-500/20 mr-4">
-                <FaTools className="text-purple-400 text-xl" />
-              </div>
-              <h3 className="text-lg font-semibold text-white">Customizable Inputs</h3>
-            </div>
-            <p className="text-gray-400">
-              Adjust array size, speed, and other parameters to see how the algorithm behaves.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Countdown/Subscribe */}
         
       </div>
 

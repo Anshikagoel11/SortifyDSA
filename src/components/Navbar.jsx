@@ -127,7 +127,10 @@ export default function Navbar() {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                    d={isOpen ?
+                       "M6 18L18 6M6 6l12 12" :  //cross icon
+                       "M4 6h16M4 12h16M4 18h16"   //hamburger icon (three horizontal lines)
+                      }
                   />
                 </motion.svg>
               </button>
@@ -135,7 +138,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Dropdown with AnimatePresence */}
+        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div

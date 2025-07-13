@@ -10,6 +10,7 @@ export default function BarFunction() {
       {bars.map((val, i) => {
         const isSmaller = compareInfo.smaller === i;
         const isLarger = compareInfo.larger === i;
+        // so that height of bar maintains every value of array
         const normalizedHeight = (val / maxVal) * 100;
 
         let barColor = "bg-blue-500";

@@ -57,7 +57,7 @@ export default function Footer() {
               >
                 <FaLinkedin />
               </motion.a>
-              <motion.a
+              {/* <motion.a
                 href="https://x.com/Anshiiiiii11"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -65,7 +65,7 @@ export default function Footer() {
                 className="text-white hover:text-sky-400 transition"
               >
                 <FaTwitter />
-              </motion.a>
+              </motion.a> */}
               <motion.a
                 href="https://github.com/Anshikagoel11"
                 target="_blank"

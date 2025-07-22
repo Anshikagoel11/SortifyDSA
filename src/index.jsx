@@ -16,6 +16,8 @@ import Tree from "./components/tree/treeComp";
 import { TreeProvider } from "./context/treeContext";
 import ComingSoon from "./components/comingSoon";
 import ScrollToTop from "./components/scrollToTop";
+import ChatBot from "./components/chatbot/chatbotComponent";
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
                 <Routes>
                   <Route element={<Navbar />}>
                     <Route path="/" element={<Home />} />
+                    <Route path="/chatbot" element={<ChatBot/>}></Route>
                     <Route element={<Sorting />}>
                       <Route path="/sorting/:type" element={<SortingComp />} />
                     </Route>

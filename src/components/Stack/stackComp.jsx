@@ -12,6 +12,7 @@ export default function Stack() {
   const [activeLang, setActiveLang] = useState("JavaScript");
   const [operationHistory, setOperationHistory] = useState([]);
 
+  
   const handlePush = () => {
     if (input.trim() === "") return;
     pushToStack();

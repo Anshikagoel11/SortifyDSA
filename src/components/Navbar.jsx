@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Footer from "./Footer";
 import { TiArrowBack } from "react-icons/ti";
@@ -8,6 +8,10 @@ import { FaHome } from "react-icons/fa";
 import useSortingUtils from "../utils/commanFn";
 
 export default function Navbar() {
+ 
+  const location =  useLocation();
+  const path = location.pathname;
+  
   const [isOpen, setIsOpen] = useState(false);
  const  {resetStates}= useSortingUtils()
 
@@ -20,8 +24,8 @@ export default function Navbar() {
     { label: "Queue", path: "/queue" },
     //  { label: "Tree", path: "/tree" },
     // { label: "Graph", path: "/graph" },
-    // { label: "DP", path: "/dp" },
-    // { label: "Linked List", path: "/linked-list" },
+    // { label: "Linked List", path: "/linkedlist" },
+    // { label: "Backtracking", path: "/backtracking" }
   ];
 
   const mobileMenuVariants = {
@@ -181,7 +185,10 @@ export default function Navbar() {
 
       <Outlet />
 
-      <Footer />
+     {
+      path !== '/chatbot' &&   <Footer />
+     }
+    
     </>
   );
 }

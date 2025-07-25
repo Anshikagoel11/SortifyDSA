@@ -133,7 +133,7 @@ export default function SearchingTheory() {
           </div>
 
           <div className={`bg-slate-900 overflow-x-auto rounded-lg border border-slate-700 overflow-hidden transition-all ${isCodeExpanded ? '' : 'max-h-96 overflow-y-auto'}}`}>
-            <pre className={`text-xs md:text-sm text-slate-200 p-3 md:p-5 ${isCodeExpanded ? '' : ''}`}>
+            <pre className={`text-xs md:text-sm text-slate-200 p-3 md:p-5`}>
               <code>{currentCode?.code.trim()}</code>
             </pre>
             {!isCodeExpanded && (

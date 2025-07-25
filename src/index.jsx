@@ -17,8 +17,8 @@ import { TreeProvider } from "./context/treeContext";
 import ComingSoon from "./components/comingSoon";
 import ScrollToTop from "./components/scrollToTop";
 import ChatBot from "./components/chatbot/chatbotComponent";
-
-
+import LinkedList from "./components/linkedLists/linkedlistComp";
+import Backtracking from "./components/backtrack/backtracking";
 function App() {
   return (
     <>
@@ -41,10 +41,12 @@ function App() {
                         element={<SearchingComp />}
                       />
                     </Route>
-                    <Route path="/stack" element={<Stack />}></Route>
-                    <Route path="/queue" element={<Queue />}></Route>
+                    <Route path="/stack" element={<Stack/>}></Route>
+                    <Route path="/queue" element={<Queue/>}></Route>
                     <Route path="/tree" element={<Tree />}></Route>
                     <Route path="/comingSoon" element={<ComingSoon />}></Route>
+                    <Route path="/linkedlist" element={<LinkedList/>}></Route>
+                    <Route path="/backtracking" element={<Backtracking/>}></Route>
                   </Route>
                 </Routes>
               </TreeProvider>

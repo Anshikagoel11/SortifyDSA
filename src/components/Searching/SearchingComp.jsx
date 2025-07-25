@@ -4,7 +4,7 @@ import { UseAlgoControl } from "../../context/algoControlContext";
 import searchingType from "../../utils/searchingType";
 import SearchingTheory from "./searchingTheory";
 import useSortingUtils from "../../utils/commanFn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaPlay, FaPause, FaRedo, FaRandom, FaInfoCircle } from "react-icons/fa";
 
 export default function SearchingComp() {

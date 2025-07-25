@@ -87,7 +87,7 @@ const AlgorithmsData = [
         <path d="M10 6v4H4v4h6v4l6-6-6-6z"/>
       </svg>
     ),
-    // path:"/backtrack",
+    // path:"/backtracking",
     path:"/comingSoon",
     note:"Coming soon...."
   },

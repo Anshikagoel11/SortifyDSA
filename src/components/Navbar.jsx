@@ -92,7 +92,7 @@ export default function Navbar() {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `px-3 py-2 rounded-md text-sm font-medium tracking-wide transition-all duration-200 ${item.label==='ChatBot'? 'bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent border-2 border-blue-300 font-bold text-5xl' :
+                      `px-3 py-2 rounded-md text-sm font-medium tracking-wide transition-all duration-200 ${item.label==='ChatBot'? 'bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent border-2 border-blue-300 font-bold text-5xl mr-2' :
                         isActive
                           ? "text-sky-300 bg-[#334155]/50 shadow-inner"
                           : "text-slate-300 hover:text-sky-300 hover:bg-[#334155]/30"

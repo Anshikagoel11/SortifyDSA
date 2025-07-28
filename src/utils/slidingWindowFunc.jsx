@@ -1,5 +1,5 @@
 import { UseAlgoControl } from "../context/algoControlContext";
-import { useRef, useEffect } from "react";
+import { useRef} from "react";
 
 export default function useSlidingWindowUtils() {
   const {
@@ -21,22 +21,16 @@ export default function useSlidingWindowUtils() {
     isReset,
   } = UseAlgoControl();
 
+
   // Track animation state
-  const animationRef = useRef(null);
   const currentIndex = useRef(0);
   const currentMaxSum = useRef(-Infinity);
   const currentMaxRange = useRef([-1, -1]);
 
+
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-  // Clean up on unmount
-  useEffect(() => {
-    return () => {
-      if (animationRef.current) {
-        clearTimeout(animationRef.current);
-      }
-    };
-  }, []);
+
 
   const ApplyArray = () => {
     // Reset all states
@@ -70,6 +64,7 @@ export default function useSlidingWindowUtils() {
     }
   };
 
+
   const handleStart = async () => {
     if (array.length === 0 || windowSize <= 0) return;
     
@@ -90,6 +85,7 @@ export default function useSlidingWindowUtils() {
     await animateSlidingWindow();
   };
 
+
   const handlePauseResume = () => {
     if (stopSlidingWindow.current) {
       // Resume
@@ -100,9 +96,7 @@ export default function useSlidingWindowUtils() {
       // Pause
       stopSlidingWindow.current = true;
       setPause(true);
-      if (animationRef.current) {
-        clearTimeout(animationRef.current);
-      }
+      
     }
   };
 
@@ -110,9 +104,7 @@ export default function useSlidingWindowUtils() {
     // Stop any ongoing animation
     stopSlidingWindow.current = true;
     isReset.current = true;
-    if (animationRef.current) {
-      clearTimeout(animationRef.current);
-    }
+  
     
     // Reset all states
     setPause(false);
@@ -163,6 +155,7 @@ export default function useSlidingWindowUtils() {
       setCurrentWindow({ start, end });
       setCurrentSum(windowSum);
 
+      // if got more sum than previous 
       if (windowSum > currentMaxSum.current) {
         currentMaxSum.current = windowSum;
         currentMaxRange.current = [start, end];

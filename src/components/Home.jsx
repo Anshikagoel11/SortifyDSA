@@ -8,7 +8,7 @@ export default function Home(){
         <>
           <Headers/>
         <FeaturesBox/> 
-        {/* <ChatbotPromo/>  */}
+        <ChatbotPromo/> 
           <Algorithms/>
         </>
       

@@ -16,7 +16,7 @@ app.listen(PORT, () => {
 });
 
 // Initialize the Gemini AI model
-const genAI = new GoogleGenerativeAI('AIzaSyDueABzFn9axMYT5NxzN8eyflO7CntgziQ');
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 // Define the prompt for DSA mentor
 const prompt = `

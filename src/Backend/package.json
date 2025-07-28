@@ -2,6 +2,7 @@
   "name": "chatbot-backend",
   "version": "1.0.0",
   "main": "model.js",
+  "type":"module",
   "scripts": {
     "start": "node model.js",
     "build": "echo 'No build step needed for backend'"

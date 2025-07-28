@@ -61,18 +61,18 @@ export const AlgoControlProvider = ({ children }) => {
   const [maxSumRange, setMaxSumRange] = useState([-1,-1]);
   const [showLine,setShowLine] = useState(false);
   const [pause,setPause] = useState(false);
-  const [startIndex,setStartIndex] = useState(0);
 const stopSlidingWindow = useRef(false);
 const [active , setActive] = useState(false);
 const isReset= useRef(false);
-const resumeIndexRef = useRef(0);
-
+ const currentIndexRef = useRef(0);
+  const currentMaxSum = useRef(-Infinity);
+  const currentMaxRange = useRef([-1, -1]);
 
   return (
     <AlgoControlContext.Provider
       value={{
-        maxSumRange, setMaxSumRange,showLine,setShowLine,startIndex,setStartIndex,pause,setPause,stopSlidingWindow,
-        valueDelete,isReset,resumeIndexRef,
+        maxSumRange, setMaxSumRange,showLine,setShowLine,pause,setPause,stopSlidingWindow,currentIndexRef,currentMaxSum,currentMaxRange,
+        valueDelete,isReset,
         active,setActive,
         inputArray,
         setInputArray,

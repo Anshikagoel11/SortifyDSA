@@ -18,14 +18,10 @@ export default function useSlidingWindowUtils() {
     setActive,
     setPause,
     stopSlidingWindow,
-    isReset,
+    isReset,currentIndexRef,currentMaxSum,currentMaxRange
   } = UseAlgoControl();
 
-
-  // Track animation state
-  const currentIndex = useRef(0);
-  const currentMaxSum = useRef(-Infinity);
-  const currentMaxRange = useRef([-1, -1]);
+ 
 
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -41,7 +37,7 @@ export default function useSlidingWindowUtils() {
     setMaxSum(-Infinity);
     setPause(false);
     setActive(false);
-    currentIndex.current = 0;
+    currentIndexRef.current = 0;
     currentMaxSum.current = -Infinity;
     currentMaxRange.current = [-1, -1];
 
@@ -76,7 +72,7 @@ export default function useSlidingWindowUtils() {
     setMaxSumRange([-1, -1]);
     isReset.current = false;
     stopSlidingWindow.current = false;
-    currentIndex.current = 0;
+    currentIndexRef.current = 0;
     currentMaxSum.current = -Infinity;
     currentMaxRange.current = [-1, -1];
     
@@ -94,7 +90,8 @@ export default function useSlidingWindowUtils() {
       animateSlidingWindow();
     } else {
       // Pause
-      stopSlidingWindow.current = true;
+
+      stopSlidingWindow.current = true;  // apply if pause then do this ref true and in loop we apply in start that if this state is true then return 
       setPause(true);
       
     }
@@ -114,20 +111,20 @@ export default function useSlidingWindowUtils() {
     setMaxSumRange([-1, -1]);
     setShowLine(false);
     setActive(false);
-    currentIndex.current = 0;
+    currentIndexRef.current = 0;
     currentMaxSum.current = -Infinity;
     currentMaxRange.current = [-1, -1];
   };
 
   const animateSlidingWindow = async () => {
-    if (isReset.current || stopSlidingWindow.current) return;
+    if (isReset.current || stopSlidingWindow.current) return; 
     
     const arr = [...array];
     const k = Number(windowSize);
     const speed = (21 - animateSpeed) * 50;
     
     // Calculate first window if starting fresh
-    if (currentIndex.current === 0) {
+    if (currentIndexRef.current === 0) {
       let windowSum = 0;
       for (let i = 0; i < k; i++) {
         windowSum += arr[i];
@@ -140,13 +137,13 @@ export default function useSlidingWindowUtils() {
       setCurrentSum(windowSum);
       setMaxSum(windowSum);
       
-      currentIndex.current = k;
+      currentIndexRef.current = k;
       await delay(speed);
     }
 
     // Slide the window
-    for (let i = currentIndex.current; i < arr.length; i++) {
-      if (isReset.current || stopSlidingWindow.current) return;
+    for (let i = currentIndexRef.current; i < arr.length; i++) {
+      if (isReset.current || stopSlidingWindow.current) return; //hr iteration p yeh line check hogi
 
       const windowSum = calculateWindowSum(arr, i, k);
       const start = i - k + 1;
@@ -162,7 +159,7 @@ export default function useSlidingWindowUtils() {
         setMaxSum(windowSum);
       }
 
-      currentIndex.current = i + 1;
+      currentIndexRef.current = i + 1;
       await delay(speed);
     }
 

@@ -42,7 +42,7 @@ export default function ChatBot() {
       let currentModelResponse = { role: "model", parts: [{ text: "" }] };
       setHistory((prevHistory) => [...prevHistory, currentModelResponse]);
 
-      const response = await fetch("http://localhost:2000/gemini/askDoubt", {
+      const response = await fetch(`https://sortifychatbot-server-f5ih.onrender.com/gemini/askDoubt`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -16,7 +16,7 @@ export default function Navbar() {
  const  {resetStates}= useSortingUtils()
 
   const menuItems = [
-    // {label: "ChatBot" , path:'/chatbot'}, 
+    {label: "ChatBot" , path:'/chatbot'}, 
     { label: "Home", path: "/" },
     { label: "Sorting", path: "/sorting/bubble-sort" },
     { label: "Searching", path: "/searching/linear-search" },

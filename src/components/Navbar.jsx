@@ -24,8 +24,9 @@ export default function Navbar() {
     { label: "Queue", path: "/queue" },
     //  { label: "Tree", path: "/tree" },
     // { label: "Graph", path: "/graph" },
-    // { label: "Linked List", path: "/linkedlist" },
-    // { label: "Backtracking", path: "/backtracking" }
+    { label: "Linked List", path: "/linkedlist" },
+    // { label: "Backtracking", path: "/backtracking" },
+    // { label: "SlidingWindow", path: "/slidingwindow" }
   ];
 
   const mobileMenuVariants = {

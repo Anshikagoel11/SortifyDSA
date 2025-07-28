@@ -19,6 +19,8 @@ import ScrollToTop from "./components/scrollToTop";
 import ChatBot from "./components/chatbot/chatbotComponent";
 import LinkedList from "./components/linkedLists/linkedlistComp";
 import Backtracking from "./components/backtrack/backtracking";
+import SlidingWindow from "./components/slidingWindow/slidingWindow";
+
 function App() {
   return (
     <>
@@ -31,7 +33,7 @@ function App() {
                 <Routes>
                   <Route element={<Navbar />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/chatbot" element={<ChatBot/>}></Route>
+                    <Route path="/chatbot" element={<ChatBot />}></Route>
                     <Route element={<Sorting />}>
                       <Route path="/sorting/:type" element={<SortingComp />} />
                     </Route>
@@ -41,12 +43,19 @@ function App() {
                         element={<SearchingComp />}
                       />
                     </Route>
-                    <Route path="/stack" element={<Stack/>}></Route>
-                    <Route path="/queue" element={<Queue/>}></Route>
+                    <Route path="/stack" element={<Stack />}></Route>
+                    <Route path="/queue" element={<Queue />}></Route>
                     <Route path="/tree" element={<Tree />}></Route>
                     <Route path="/comingSoon" element={<ComingSoon />}></Route>
-                    <Route path="/linkedlist" element={<LinkedList/>}></Route>
-                    <Route path="/backtracking" element={<Backtracking/>}></Route>
+                    <Route path="/linkedlist" element={<LinkedList />}></Route>
+                    <Route
+                      path="/backtracking"
+                      element={<Backtracking />}
+                    ></Route>
+                    <Route
+                      path="/slidingwindow"
+                      element={<SlidingWindow />}
+                    ></Route>
                   </Route>
                 </Routes>
               </TreeProvider>

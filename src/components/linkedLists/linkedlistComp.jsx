@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa";
 import { UseAlgoControl } from "../../context/algoControlContext";
 import useLinkedListUtils from "../../utils/linkedListFunctions";
-import { useEffect, useState } from "react";
 import LinkedListTheory from "./linkedListTheory";
 
 export default function LinkedList() {

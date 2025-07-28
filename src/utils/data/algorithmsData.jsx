@@ -75,9 +75,7 @@ const AlgorithmsData = [
         <line x1="6" y1="12" x2="6" y2="18" stroke="white" strokeWidth="2" />
       </svg>
     ),
-    // path:"/linkedlist",
-     path:"/comingSoon",
-    note:"Coming soon...."
+    path:"/linkedlist",
   },
   {
     title: "Backtracking Algorithms",
@@ -88,6 +86,26 @@ const AlgorithmsData = [
       </svg>
     ),
     // path:"/backtracking",
+    path:"/comingSoon",
+    note:"Coming soon...."
+  },
+   {
+    title: "Sliding window Algorithms",
+    description: "Efficiently solve subarray problems by maintaining a window of elements & sliding it.",
+   svg: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <rect x="2" y="6" width="20" height="12" rx="1" strokeWidth="2" />
+      <rect 
+        x="4" y="8" 
+        width="8" height="8" 
+        rx="1" 
+        fill="currentColor"
+        className="text-blue-500 animate-pulse"
+        strokeWidth="1"
+      />
+    </svg>
+  ),
+    // path:"/slidingwindow",
     path:"/comingSoon",
     note:"Coming soon...."
   },

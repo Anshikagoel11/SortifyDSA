@@ -151,11 +151,12 @@ export default function useLinkedListUtils() {
     clearInterval(animationRef.current);
     animationRef.current = null;
 
-    const target = Number(searchValue); 
+    const target = Number(searchValue);
+    //initilize states
     setIsAnimating(true);
     setHighlightColor("bg-yellow-400");
     setFoundStatus("idle");
-    setCurrentIndex(0); 
+    setCurrentIndex(0);
     setHighlightNode(0);
 
     let idx = 0;
@@ -183,7 +184,7 @@ export default function useLinkedListUtils() {
         setFoundStatus("found");
         setHighlightColor("bg-green-500");
 
-        animationRef.timeout1 = setTimeout(() => setHighlightNode(-1), 1000);
+        animationRef.timeout1 = setTimeout(() => setHighlightNode(-1), 2000);
         animationRef.timeout2 = setTimeout(() => {
           setFoundStatus("idle");
           setIsAnimating(false);
@@ -201,17 +202,16 @@ export default function useLinkedListUtils() {
   };
 
   const handelTraverse = () => {
-
     // stop any running animation and its clean-up timers
     clearInterval(animationRef.current);
     animationRef.current = null;
 
-
     setIsAnimating(true);
-    setHighlightColor("blue");
+    setHighlightColor("blue"); 
     let currentIndex = 0;
 
     const traverseInterval = setInterval(() => {
+
       if (currentIndex >= list.length) {
         clearInterval(traverseInterval);
         setTimeout(() => {
@@ -220,6 +220,8 @@ export default function useLinkedListUtils() {
         }, 500);
         return;
       }
+
+      
       setHighlightNode(currentIndex);
       setHighlightColor("bg-yellow-500");
       currentIndex++;

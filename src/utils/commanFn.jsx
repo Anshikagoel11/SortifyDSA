@@ -24,7 +24,7 @@ export default function useSortingUtils() {
     rangeRef,
   } = UseAlgoControl();
 
-  const { input, stack, setStack, setInput } = useStackContext();
+  const { input, setStack, setInput } = useStackContext();
 
   const resetfn = () => {
     if (hasReset) return;

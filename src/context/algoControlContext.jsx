@@ -44,16 +44,53 @@ export const AlgoControlProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState("");
   const [foundStatus, setFoundStatus] = useState("idle");
   const [isAnimating, setIsAnimating] = useState(false);
-  const animationRef = useRef(null);
+  const animationRef = useRef(null); //for storing ref of running animation so that we can stop it later
   const [inValidIndex, setInValidIndex] = useState(false);
   const [valueDelete, setValueDelete] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(-1);
 
+  //sliding window
+  const [inputArray, setInputArray] = useState("");
+  const [windowSize, setWindowSize] = useState(3);
+  const [array, setArray] = useState([10, 20, 31, 29, 1, 20, 42, 12, 20,18,29]);
+  const [tip, setTip] = useState(false);
+  const [animateSpeed, setAnimateSpeed] = useState(3);
+  const [currentWindow, setCurrentWindow] = useState({start:-1,end:-1});
+  const [currentSum, setCurrentSum] = useState(0);
+  const [maxSum, setMaxSum] = useState(-Infinity);
+  const [maxSumRange, setMaxSumRange] = useState([-1,-1]);
+  const [showLine,setShowLine] = useState(false);
+  const [pause,setPause] = useState(false);
+  const [startIndex,setStartIndex] = useState(0);
+const stopSlidingWindow = useRef(false);
+const [active , setActive] = useState(false);
+const isReset= useRef(false);
+const resumeIndexRef = useRef(0);
+
+
   return (
     <AlgoControlContext.Provider
       value={{
-        valueDelete,
+        maxSumRange, setMaxSumRange,showLine,setShowLine,startIndex,setStartIndex,pause,setPause,stopSlidingWindow,
+        valueDelete,isReset,resumeIndexRef,
+        active,setActive,
+        inputArray,
+        setInputArray,
+        windowSize,
+        setWindowSize,
+        array,
+        setArray,
         currentIndex,
+        tip,
+        setTip,
+        animateSpeed,
+        setAnimateSpeed,
+        currentWindow,
+        setCurrentWindow,
+        currentSum,
+        setCurrentSum,
+        maxSum,
+        setMaxSum,
         setCurrentIndex,
         setValueDelete,
         foundStatus,
@@ -64,7 +101,7 @@ export const AlgoControlProvider = ({ children }) => {
         setHighlightColor,
         highlightNode,
         setHighlightNode,
-        
+
         searchValue,
         setSearchValue,
         isAnimating,

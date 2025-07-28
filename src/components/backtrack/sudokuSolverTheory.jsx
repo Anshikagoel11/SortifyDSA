@@ -7,10 +7,11 @@ import {
   FaLightbulb,
   FaQuestion,
 } from "react-icons/fa";
-import nQueensData from "../../utils/data/backtrackData";
+import sudokuData from "../../utils/data/sudokusolverData";
 import { useState } from "react";
 
-export default function NQueensTheory() {
+
+export default function SudokuSolverTheory() {
   const [selectedLanguage, setSelectedLanguage] = useState("C");
   const [isCodeExpanded, setIsCodeExpanded] = useState(false);
   const {
@@ -25,7 +26,7 @@ export default function NQueensTheory() {
     commonInterviewQuestions,
     variations,
     extra,
-  } = nQueensData.nQueens;
+  } = sudokuData.sudoku;
 
   const currentCode = code.find((c) => c.language === selectedLanguage);
 

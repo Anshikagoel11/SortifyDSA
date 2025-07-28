@@ -6,6 +6,5 @@ export default function cleanChunk(chunk) {
     .replace(/\*\*(.*?)\*\*/g, '$1')        // Remove **bold**
     .replace(/\*(.*?)\*/g, '$1')            // Remove *italic* or bullet
     .replace(/^\s*[-*+] /gm, '')            // Remove list markers like - or *
-    .replace(/\s{2,}/g, ' ')                // Collapse extra spaces
     .trim();
 }

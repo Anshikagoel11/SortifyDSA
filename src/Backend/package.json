@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "model.js",
   "scripts": {
-    "start": "node model.js"
+    "start": "node model.js",
+    "build": "echo 'No build step needed for backend'"
   },
   "author": "Anshika Goel",
   "license": "ISC",

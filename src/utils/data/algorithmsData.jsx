@@ -105,9 +105,7 @@ const AlgorithmsData = [
       />
     </svg>
   ),
-    // path:"/slidingwindow",
-    path:"/comingSoon",
-    note:"Coming soon...."
+    path:"/slidingwindow",
   },
 ];
 

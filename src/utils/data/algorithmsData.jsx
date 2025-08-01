@@ -19,18 +19,18 @@ const AlgorithmsData = [
     ),
     path:"/sorting/bubble-sort"
   },
-  {
-    title: "Tree Algorithms",
-    description: "Used to traverse, search, and manipulate hierarchical tree structures.",
-    svg: (
-      <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-        <path d="M12 2l4 4h-3v4h-2V6H8l4-4zm-6 8v8H4v2h6v-2H8v-8H6zm10 0v8h-2v2h6v-2h-2v-8h-2z"/>
-      </svg>
-    ),
-    // path:"/tree",
-     path:"/comingSoon",
-    note:"Coming soon...."
-  },
+  // {
+  //   title: "Tree Algorithms",
+  //   description: "Used to traverse, search, and manipulate hierarchical tree structures.",
+  //   svg: (
+  //     <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+  //       <path d="M12 2l4 4h-3v4h-2V6H8l4-4zm-6 8v8H4v2h6v-2H8v-8H6zm10 0v8h-2v2h6v-2h-2v-8h-2z"/>
+  //     </svg>
+  //   ),
+  //   // path:"/tree",
+  //    path:"/comingSoon",
+  //   note:"Coming soon...."
+  // },
 
   {
     title: "Stack Algorithms",

@@ -175,16 +175,7 @@ export function SudokuSolver() {
     return () => clearInterval(timer);
   }, [isSolving, isPaused, currentStep, steps, speed]);
 
-  // Handle next step manually (same as before)
-  function handleNextStep() {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(prev => prev + 1);
-      setBoard(steps[currentStep + 1].board);
-      setMessage(steps[currentStep + 1].message);
-    } else {
-      setIsSolving(false);
-    }
-  }
+ 
 
   // Reset board (same as before)
   function resetBoard() {
@@ -279,9 +270,7 @@ export function SudokuSolver() {
   return (
     <div className="bg-gray-900 text-white p-3 sm:p-4 md:p-6 min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-4 sm:mb-6 bg-gradient-to-r from-blue-400 to-green-500 bg-clip-text text-transparent">
-          Sudoku Solver Visualizer
-        </h1>
+       
 
         {/* Controls Section */}
         <div className="bg-gray-800 rounded-lg sm:rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-lg">
@@ -337,22 +326,7 @@ export function SudokuSolver() {
                 <span>{isPaused ? 'Resume' : 'Pause'}</span>
               </button>
 
-              <button
-                onClick={handleNextStep}
-                disabled={!isSolving || isPaused || currentStep >= steps.length - 1}
-                className={`
-                  px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm
-                  rounded-md sm:rounded-lg flex items-center gap-1 sm:gap-2 transition-all
-                  ${
-                    !isSolving || isPaused || currentStep >= steps.length - 1
-                      ? 'bg-gray-600'
-                      : 'bg-green-600 hover:bg-green-700'
-                  }
-                `}
-              >
-                <FaStepForward className="text-xs sm:text-sm" />
-                <span>Next</span>
-              </button>
+          
 
               <button
                 onClick={resetBoard}

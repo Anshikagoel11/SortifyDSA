@@ -31,18 +31,7 @@ const AlgorithmsData = [
      path:"/comingSoon",
     note:"Coming soon...."
   },
-  {
-    title: "Graph Algorithms",
-    description: "Explore connections and paths in complex networks of nodes and edges.",
-    svg: (
-      <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-        <path d="M4 4h4v4H4V4zm12 0h4v4h-4V4zM4 16h4v4H4v-4zm12 0h4v4h-4v-4zM7 8v8h2V8H7zm8 0v8h2V8h-2z"/>
-      </svg>
-    ),
-    // path:"/graph",
-     path:"/comingSoon",
-    note:"Coming soon...."
-  },
+
   {
     title: "Stack Algorithms",
     description: "Based on LIFO structure, useful for parsing, recursion, and expression evaluation.",
@@ -85,9 +74,7 @@ const AlgorithmsData = [
         <path d="M10 6v4H4v4h6v4l6-6-6-6z"/>
       </svg>
     ),
-    // path:"/backtracking",
-    path:"/comingSoon",
-    note:"Coming soon...."
+    path:"/backtracking",
   },
    {
     title: "Sliding window Algorithms",

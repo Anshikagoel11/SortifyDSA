@@ -8,7 +8,7 @@ export default function Backtracking() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
+      <div>
         <h1 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
           Backtracking Visualizer
         </h1>
@@ -33,7 +33,7 @@ export default function Backtracking() {
           </button>
         </div>
 
-        {/* Render the active component */}
+        
         {activeAlgorithm === 'nqueens' ? <NQueensSolver /> : <SudokuSolver />}
       </div>
     </div>

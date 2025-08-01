@@ -44,7 +44,7 @@ export default function SudokuSolverTheory() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          {name} Theory
+          About {name} 
         </motion.h1>
         <p className="text-gray-300 text-sm md:text-base max-w-2xl mx-auto">
           {definition}

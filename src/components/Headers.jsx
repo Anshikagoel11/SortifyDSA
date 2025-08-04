@@ -2,12 +2,16 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'react-router-dom';
 
-export default function Headers() {
+export default function Headers({scrollToRef}) {
   const nodes = useRef([]);
   const edges = useRef([]);
   const leftElements = useRef([]);
   const buttonRef = useRef(null);
   const particlesRef = useRef(null);
+
+ const handleClick=()=>{
+ scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   useEffect(() => {
     // Graph animation (right side)
@@ -161,9 +165,10 @@ export default function Headers() {
           </div>
           
           <div className="relative inline-block pt-2">
-            <Link to={'/sorting/bubble-sort'}>
+            
               <button
                 ref={buttonRef}
+                onClick={handleClick}
                 className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-xl font-medium text-white shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
               >
                 <span className="relative z-10 flex items-center">
@@ -179,7 +184,7 @@ export default function Headers() {
                 </span>
                 <div className="button-glow absolute inset-0 bg-white/10 opacity-0"></div>
               </button>
-            </Link>
+          
           </div>
         </div>
 

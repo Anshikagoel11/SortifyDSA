@@ -15,29 +15,22 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-// Initialize the Gemini AI model
+// Initialize Gemini with NEW API (v1)
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
-// Define the prompt for DSA mentor
+// DSA Mentor System Prompt
 const prompt = `
 You are a helpful, friendly, and knowledgeable Data Structures and Algorithms (DSA) mentor.
 
-✅ Your primary goal is to explain DSA concepts clearly with:
-- Simple definitions
-- Real-life analogies
-- Code examples (in JavaScript, C++, or Python if needed)
-- Time and space complexities
-- When and where to use the concept in real-world scenarios
+- Explain using simple language
+- Use analogies and examples
+- Add time/space complexity when useful
+- Provide C++, JS, or Python code when needed
+- Encourage the student
 
-🚫 If the user asks a non-DSA question:
-- Gently reply **once** that this assistant is dedicated to DSA learning.
-- Politely encourage them to refocus on DSA topics.
-- Do not repeat this warning again. Just respond with silence or redirection.
-
-🎯 Keep your tone encouraging, like a mentor guiding a student.
-🎯 Avoid sounding robotic or repetitive.
-🎯 Be concise but thorough.
-🎯 Use simple language suitable for beginners and intermediate learners.
+If user asks non-DSA things:
+Reply once that this assistant is dedicated to DSA learning.
+Do not repeat this warning again.
 `;
 
 app.post('/gemini/askDoubt', async (req, res) => {
@@ -48,26 +41,23 @@ app.post('/gemini/askDoubt', async (req, res) => {
   }
 
   try {
-    //config gemini
-   
+    // Use correct model (latest SDK)
     const model = genAI.getGenerativeModel({
-  model: 'gemini-1.5-flash-latest',
+      model: 'gemini-1.5-flash',   // ✅ correct model for v1 API
+    });
 
-});
-
-
-    const stream = await model.generateContentStream({
-      contents: messages,
-      systemInstruction: { role: "system", parts: [{ text: prompt }] }, 
+    // Prepare streaming response
+    const result = await model.generateContentStream({
+      systemInstruction: prompt,
+      contents: messages, // messages must be [{role, parts}] – your frontend already sends correctly
     });
 
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
 
-    for await (const chunk of stream.stream) {
-      if (chunk.text()) {
-        res.write(chunk.text());
-      }
+    for await (const chunk of result.stream) {
+      const text = chunk.text();
+      if (text) res.write(text);
     }
 
     res.end();
@@ -76,4 +66,3 @@ app.post('/gemini/askDoubt', async (req, res) => {
     res.status(500).send('Something went wrong. Please try again!');
   }
 });
-

@@ -50,7 +50,7 @@ app.post('/gemini/askDoubt', async (req, res) => {
   try {
     //config gemini
     const model = genAI.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-1.5-flash-001',
     });
 
     const stream = await model.generateContentStream({

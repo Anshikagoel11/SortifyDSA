@@ -25,7 +25,7 @@ export default function Navbar() {
     //  { label: "Tree", path: "/tree" },
     // { label: "Graph", path: "/graph" },
     { label: "Linked List", path: "/linkedlist" },
-    { label: "Backtracking", path: "/backtracking" },
+    // { label: "Backtracking", path: "/backtracking" },
     { label: "SlidingWindow", path: "/slidingwindow" }
   ];
 

@@ -66,16 +66,16 @@ const AlgorithmsData = [
     ),
     path:"/linkedlist",
   },
-  {
-    title: "Backtracking Algorithms",
-    description: "Solve problems by exploring all possibilities and reverting incorrect paths.",
-    svg: (
-      <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-        <path d="M10 6v4H4v4h6v4l6-6-6-6z"/>
-      </svg>
-    ),
-    path:"/backtracking",
-  },
+  // {
+  //   title: "Backtracking Algorithms",
+  //   description: "Solve problems by exploring all possibilities and reverting incorrect paths.",
+  //   svg: (
+  //     <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
+  //       <path d="M10 6v4H4v4h6v4l6-6-6-6z"/>
+  //     </svg>
+  //   ),
+  //   path:"/backtracking",
+  // },
    {
     title: "Sliding window Algorithm",
     description: "Efficiently solve subarray problems by maintaining a window of elements & sliding it.",

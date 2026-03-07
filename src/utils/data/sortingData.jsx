@@ -576,726 +576,726 @@ void quickSort(int arr[], int low, int high) {
     extra: "Very fast on average. Not stable."
   },
 
-  "heap-sort": {
-    sortingName: "Heap Sort",
-    definition: "A comparison-based sorting algorithm using a binary heap to build a max-heap and sort the elements.",
-    detailTheory: "Heap Sort builds a max-heap from the array, then extracts the maximum and places it at the end, shrinking the heap and repeating.",
-    code: [
-      {
-        language: "C",
-        code: `void heapify(int arr[], int n, int i) {
-  int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
+//   "heap-sort": {
+//     sortingName: "Heap Sort",
+//     definition: "A comparison-based sorting algorithm using a binary heap to build a max-heap and sort the elements.",
+//     detailTheory: "Heap Sort builds a max-heap from the array, then extracts the maximum and places it at the end, shrinking the heap and repeating.",
+//     code: [
+//       {
+//         language: "C",
+//         code: `void heapify(int arr[], int n, int i) {
+//   int largest = i;
+//   int l = 2 * i + 1;
+//   int r = 2 * i + 2;
   
-  if (l < n && arr[l] > arr[largest])
-    largest = l;
+//   if (l < n && arr[l] > arr[largest])
+//     largest = l;
   
-  if (r < n && arr[r] > arr[largest])
-    largest = r;
+//   if (r < n && arr[r] > arr[largest])
+//     largest = r;
   
-  if (largest != i) {
-    int temp = arr[i];
-    arr[i] = arr[largest];
-    arr[largest] = temp;
-    heapify(arr, n, largest);
-  }
-}
+//   if (largest != i) {
+//     int temp = arr[i];
+//     arr[i] = arr[largest];
+//     arr[largest] = temp;
+//     heapify(arr, n, largest);
+//   }
+// }
 
-void heapSort(int arr[], int n) {
-  for (int i = n / 2 - 1; i >= 0; i--)
-    heapify(arr, n, i);
+// void heapSort(int arr[], int n) {
+//   for (int i = n / 2 - 1; i >= 0; i--)
+//     heapify(arr, n, i);
   
-  for (int i = n - 1; i > 0; i--) {
-    int temp = arr[0];
-    arr[0] = arr[i];
-    arr[i] = temp;
-    heapify(arr, i, 0);
-  }
-}`
-      },
-      {
-        language: "C++",
-        code: `void heapify(vector<int>& arr, int n, int i) {
-  int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
+//   for (int i = n - 1; i > 0; i--) {
+//     int temp = arr[0];
+//     arr[0] = arr[i];
+//     arr[i] = temp;
+//     heapify(arr, i, 0);
+//   }
+// }`
+//       },
+//       {
+//         language: "C++",
+//         code: `void heapify(vector<int>& arr, int n, int i) {
+//   int largest = i;
+//   int l = 2 * i + 1;
+//   int r = 2 * i + 2;
   
-  if (l < n && arr[l] > arr[largest])
-    largest = l;
+//   if (l < n && arr[l] > arr[largest])
+//     largest = l;
   
-  if (r < n && arr[r] > arr[largest])
-    largest = r;
+//   if (r < n && arr[r] > arr[largest])
+//     largest = r;
   
-  if (largest != i) {
-    swap(arr[i], arr[largest]);
-    heapify(arr, n, largest);
-  }
-}
+//   if (largest != i) {
+//     swap(arr[i], arr[largest]);
+//     heapify(arr, n, largest);
+//   }
+// }
 
-void heapSort(vector<int>& arr) {
-  int n = arr.size();
+// void heapSort(vector<int>& arr) {
+//   int n = arr.size();
   
-  for (int i = n / 2 - 1; i >= 0; i--)
-    heapify(arr, n, i);
+//   for (int i = n / 2 - 1; i >= 0; i--)
+//     heapify(arr, n, i);
   
-  for (int i = n - 1; i > 0; i--) {
-    swap(arr[0], arr[i]);
-    heapify(arr, i, 0);
-  }
-}`
-      },
-      {
-        language: "Python",
-        code: `def heapify(arr, n, i):
-  largest = i
-  l = 2 * i + 1
-  r = 2 * i + 2
+//   for (int i = n - 1; i > 0; i--) {
+//     swap(arr[0], arr[i]);
+//     heapify(arr, i, 0);
+//   }
+// }`
+//       },
+//       {
+//         language: "Python",
+//         code: `def heapify(arr, n, i):
+//   largest = i
+//   l = 2 * i + 1
+//   r = 2 * i + 2
   
-  if l < n and arr[i] < arr[l]:
-    largest = l
+//   if l < n and arr[i] < arr[l]:
+//     largest = l
   
-  if r < n and arr[largest] < arr[r]:
-    largest = r
+//   if r < n and arr[largest] < arr[r]:
+//     largest = r
   
-  if largest != i:
-    arr[i], arr[largest] = arr[largest], arr[i]
-    heapify(arr, n, largest)
+//   if largest != i:
+//     arr[i], arr[largest] = arr[largest], arr[i]
+//     heapify(arr, n, largest)
 
-def heap_sort(arr):
-  n = len(arr)
+// def heap_sort(arr):
+//   n = len(arr)
   
-  for i in range(n // 2 - 1, -1, -1):
-    heapify(arr, n, i)
+//   for i in range(n // 2 - 1, -1, -1):
+//     heapify(arr, n, i)
   
-  for i in range(n - 1, 0, -1):
-    arr[i], arr[0] = arr[0], arr[i]
-    heapify(arr, i, 0)
-  return arr`
-      },
-      {
-        language: "JavaScript",
-        code: `function heapify(arr, n, i) {
-  let largest = i;
-  let left = 2 * i + 1;
-  let right = 2 * i + 2;
+//   for i in range(n - 1, 0, -1):
+//     arr[i], arr[0] = arr[0], arr[i]
+//     heapify(arr, i, 0)
+//   return arr`
+//       },
+//       {
+//         language: "JavaScript",
+//         code: `function heapify(arr, n, i) {
+//   let largest = i;
+//   let left = 2 * i + 1;
+//   let right = 2 * i + 2;
   
-  if (left < n && arr[left] > arr[largest])
-    largest = left;
+//   if (left < n && arr[left] > arr[largest])
+//     largest = left;
   
-  if (right < n && arr[right] > arr[largest])
-    largest = right;
+//   if (right < n && arr[right] > arr[largest])
+//     largest = right;
   
-  if (largest !== i) {
-    [arr[i], arr[largest]] = [arr[largest], arr[i]];
-    heapify(arr, n, largest);
-  }
-}
+//   if (largest !== i) {
+//     [arr[i], arr[largest]] = [arr[largest], arr[i]];
+//     heapify(arr, n, largest);
+//   }
+// }
 
-function heapSort(arr) {
-  const n = arr.length;
+// function heapSort(arr) {
+//   const n = arr.length;
   
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
-    heapify(arr, n, i);
+//   for (let i = Math.floor(n / 2) - 1; i >= 0; i--)
+//     heapify(arr, n, i);
   
-  for (let i = n - 1; i > 0; i--) {
-    [arr[0], arr[i]] = [arr[i], arr[0]];
-    heapify(arr, i, 0);
-  }
-  return arr;
-}`
-      },
-      {
-        language: "Java",
-        code: `void heapify(int arr[], int n, int i) {
-  int largest = i;
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
+//   for (let i = n - 1; i > 0; i--) {
+//     [arr[0], arr[i]] = [arr[i], arr[0]];
+//     heapify(arr, i, 0);
+//   }
+//   return arr;
+// }`
+//       },
+//       {
+//         language: "Java",
+//         code: `void heapify(int arr[], int n, int i) {
+//   int largest = i;
+//   int l = 2 * i + 1;
+//   int r = 2 * i + 2;
   
-  if (l < n && arr[l] > arr[largest])
-    largest = l;
+//   if (l < n && arr[l] > arr[largest])
+//     largest = l;
   
-  if (r < n && arr[r] > arr[largest])
-    largest = r;
+//   if (r < n && arr[r] > arr[largest])
+//     largest = r;
   
-  if (largest != i) {
-    int swap = arr[i];
-    arr[i] = arr[largest];
-    arr[largest] = swap;
-    heapify(arr, n, largest);
-  }
-}
+//   if (largest != i) {
+//     int swap = arr[i];
+//     arr[i] = arr[largest];
+//     arr[largest] = swap;
+//     heapify(arr, n, largest);
+//   }
+// }
 
-void heapSort(int arr[]) {
-  int n = arr.length;
+// void heapSort(int arr[]) {
+//   int n = arr.length;
   
-  for (int i = n / 2 - 1; i >= 0; i--)
-    heapify(arr, n, i);
+//   for (int i = n / 2 - 1; i >= 0; i--)
+//     heapify(arr, n, i);
   
-  for (int i = n - 1; i > 0; i--) {
-    int temp = arr[0];
-    arr[0] = arr[i];
-    arr[i] = temp;
-    heapify(arr, i, 0);
-  }
-}`
-      }
-    ],
-    timeComplexity: {
-      best: "O(n log n)",
-      average: "O(n log n)",
-      worst: "O(n log n)"
-    },
-    spaceComplexity: "O(1)",
-    extra: "Efficient and in-place, but not stable."
-  },
+//   for (int i = n - 1; i > 0; i--) {
+//     int temp = arr[0];
+//     arr[0] = arr[i];
+//     arr[i] = temp;
+//     heapify(arr, i, 0);
+//   }
+// }`
+//       }
+//     ],
+//     timeComplexity: {
+//       best: "O(n log n)",
+//       average: "O(n log n)",
+//       worst: "O(n log n)"
+//     },
+//     spaceComplexity: "O(1)",
+//     extra: "Efficient and in-place, but not stable."
+//   },
 
-  "radix-sort": {
-    sortingName: "Radix Sort",
-    definition: "A non-comparison sorting algorithm that sorts numbers by processing individual digits.",
-    detailTheory: "Radix Sort processes numbers digit by digit, from least significant to most significant, using counting sort as a subroutine. It can be implemented to process digits from left to right (MSD) or right to left (LSD).",
-    code: [
-      {
-        language: "C",
-        code: `int getMax(int arr[], int n) {
-  int max = arr[0];
-  for (int i = 1; i < n; i++)
-    if (arr[i] > max)
-      max = arr[i];
-  return max;
-}
+//   "radix-sort": {
+//     sortingName: "Radix Sort",
+//     definition: "A non-comparison sorting algorithm that sorts numbers by processing individual digits.",
+//     detailTheory: "Radix Sort processes numbers digit by digit, from least significant to most significant, using counting sort as a subroutine. It can be implemented to process digits from left to right (MSD) or right to left (LSD).",
+//     code: [
+//       {
+//         language: "C",
+//         code: `int getMax(int arr[], int n) {
+//   int max = arr[0];
+//   for (int i = 1; i < n; i++)
+//     if (arr[i] > max)
+//       max = arr[i];
+//   return max;
+// }
 
-void countSort(int arr[], int n, int exp) {
-  int output[n];
-  int count[10] = {0};
+// void countSort(int arr[], int n, int exp) {
+//   int output[n];
+//   int count[10] = {0};
   
-  for (int i = 0; i < n; i++)
-    count[(arr[i] / exp) % 10]++;
+//   for (int i = 0; i < n; i++)
+//     count[(arr[i] / exp) % 10]++;
   
-  for (int i = 1; i < 10; i++)
-    count[i] += count[i - 1];
+//   for (int i = 1; i < 10; i++)
+//     count[i] += count[i - 1];
   
-  for (int i = n - 1; i >= 0; i--) {
-    output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-    count[(arr[i] / exp) % 10]--;
-  }
+//   for (int i = n - 1; i >= 0; i--) {
+//     output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+//     count[(arr[i] / exp) % 10]--;
+//   }
   
-  for (int i = 0; i < n; i++)
-    arr[i] = output[i];
-}
+//   for (int i = 0; i < n; i++)
+//     arr[i] = output[i];
+// }
 
-void radixSort(int arr[], int n) {
-  int m = getMax(arr, n);
+// void radixSort(int arr[], int n) {
+//   int m = getMax(arr, n);
   
-  for (int exp = 1; m / exp > 0; exp *= 10)
-    countSort(arr, n, exp);
-}`
-      },
-      {
-        language: "C++",
-        code: `int getMax(vector<int>& arr) {
-  return *max_element(arr.begin(), arr.end());
-}
+//   for (int exp = 1; m / exp > 0; exp *= 10)
+//     countSort(arr, n, exp);
+// }`
+//       },
+//       {
+//         language: "C++",
+//         code: `int getMax(vector<int>& arr) {
+//   return *max_element(arr.begin(), arr.end());
+// }
 
-void countSort(vector<int>& arr, int exp) {
-  vector<int> output(arr.size());
-  vector<int> count(10, 0);
+// void countSort(vector<int>& arr, int exp) {
+//   vector<int> output(arr.size());
+//   vector<int> count(10, 0);
   
-  for (int i = 0; i < arr.size(); i++)
-    count[(arr[i] / exp) % 10]++;
+//   for (int i = 0; i < arr.size(); i++)
+//     count[(arr[i] / exp) % 10]++;
   
-  for (int i = 1; i < 10; i++)
-    count[i] += count[i - 1];
+//   for (int i = 1; i < 10; i++)
+//     count[i] += count[i - 1];
   
-  for (int i = arr.size() - 1; i >= 0; i--) {
-    output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-    count[(arr[i] / exp) % 10]--;
-  }
+//   for (int i = arr.size() - 1; i >= 0; i--) {
+//     output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+//     count[(arr[i] / exp) % 10]--;
+//   }
   
-  arr = output;
-}
+//   arr = output;
+// }
 
-void radixSort(vector<int>& arr) {
-  int m = getMax(arr);
+// void radixSort(vector<int>& arr) {
+//   int m = getMax(arr);
   
-  for (int exp = 1; m / exp > 0; exp *= 10)
-    countSort(arr, exp);
-}`
-      },
-      {
-        language: "Python",
-        code: `def counting_sort(arr, exp):
-  n = len(arr)
-  output = [0] * n
-  count = [0] * 10
+//   for (int exp = 1; m / exp > 0; exp *= 10)
+//     countSort(arr, exp);
+// }`
+//       },
+//       {
+//         language: "Python",
+//         code: `def counting_sort(arr, exp):
+//   n = len(arr)
+//   output = [0] * n
+//   count = [0] * 10
   
-  for i in range(n):
-    index = arr[i] // exp
-    count[index % 10] += 1
+//   for i in range(n):
+//     index = arr[i] // exp
+//     count[index % 10] += 1
   
-  for i in range(1, 10):
-    count[i] += count[i - 1]
+//   for i in range(1, 10):
+//     count[i] += count[i - 1]
   
-  i = n - 1
-  while i >= 0:
-    index = arr[i] // exp
-    output[count[index % 10] - 1] = arr[i]
-    count[index % 10] -= 1
-    i -= 1
+//   i = n - 1
+//   while i >= 0:
+//     index = arr[i] // exp
+//     output[count[index % 10] - 1] = arr[i]
+//     count[index % 10] -= 1
+//     i -= 1
   
-  for i in range(n):
-    arr[i] = output[i]
+//   for i in range(n):
+//     arr[i] = output[i]
 
-def radix_sort(arr):
-  max_num = max(arr)
-  exp = 1
-  while max_num // exp > 0:
-    counting_sort(arr, exp)
-    exp *= 10
-  return arr`
-      },
-      {
-        language: "JavaScript",
-        code: `function countingSort(arr, exp) {
-  const n = arr.length;
-  const output = new Array(n).fill(0);
-  const count = new Array(10).fill(0);
+// def radix_sort(arr):
+//   max_num = max(arr)
+//   exp = 1
+//   while max_num // exp > 0:
+//     counting_sort(arr, exp)
+//     exp *= 10
+//   return arr`
+//       },
+//       {
+//         language: "JavaScript",
+//         code: `function countingSort(arr, exp) {
+//   const n = arr.length;
+//   const output = new Array(n).fill(0);
+//   const count = new Array(10).fill(0);
   
-  for (let i = 0; i < n; i++) {
-    const index = Math.floor(arr[i] / exp) % 10;
-    count[index]++;
-  }
+//   for (let i = 0; i < n; i++) {
+//     const index = Math.floor(arr[i] / exp) % 10;
+//     count[index]++;
+//   }
   
-  for (let i = 1; i < 10; i++) {
-    count[i] += count[i - 1];
-  }
+//   for (let i = 1; i < 10; i++) {
+//     count[i] += count[i - 1];
+//   }
   
-  for (let i = n - 1; i >= 0; i--) {
-    const index = Math.floor(arr[i] / exp) % 10;
-    output[count[index] - 1] = arr[i];
-    count[index]--;
-  }
+//   for (let i = n - 1; i >= 0; i--) {
+//     const index = Math.floor(arr[i] / exp) % 10;
+//     output[count[index] - 1] = arr[i];
+//     count[index]--;
+//   }
   
-  for (let i = 0; i < n; i++) {
-    arr[i] = output[i];
-  }
-}
+//   for (let i = 0; i < n; i++) {
+//     arr[i] = output[i];
+//   }
+// }
 
-function radixSort(arr) {
-  const max = Math.max(...arr);
+// function radixSort(arr) {
+//   const max = Math.max(...arr);
   
-  for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
-    countingSort(arr, exp);
-  }
-  return arr;
-}`
-      },
-      {
-        language: "Java",
-        code: `int getMax(int arr[]) {
-  int max = arr[0];
-  for (int i = 1; i < arr.length; i++)
-    if (arr[i] > max)
-      max = arr[i];
-  return max;
-}
+//   for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
+//     countingSort(arr, exp);
+//   }
+//   return arr;
+// }`
+//       },
+//       {
+//         language: "Java",
+//         code: `int getMax(int arr[]) {
+//   int max = arr[0];
+//   for (int i = 1; i < arr.length; i++)
+//     if (arr[i] > max)
+//       max = arr[i];
+//   return max;
+// }
 
-void countSort(int arr[], int exp) {
-  int[] output = new int[arr.length];
-  int[] count = new int[10];
+// void countSort(int arr[], int exp) {
+//   int[] output = new int[arr.length];
+//   int[] count = new int[10];
   
-  for (int i = 0; i < arr.length; i++)
-    count[(arr[i] / exp) % 10]++;
+//   for (int i = 0; i < arr.length; i++)
+//     count[(arr[i] / exp) % 10]++;
   
-  for (int i = 1; i < 10; i++)
-    count[i] += count[i - 1];
+//   for (int i = 1; i < 10; i++)
+//     count[i] += count[i - 1];
   
-  for (int i = arr.length - 1; i >= 0; i--) {
-    output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-    count[(arr[i] / exp) % 10]--;
-  }
+//   for (int i = arr.length - 1; i >= 0; i--) {
+//     output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+//     count[(arr[i] / exp) % 10]--;
+//   }
   
-  for (int i = 0; i < arr.length; i++)
-    arr[i] = output[i];
-}
+//   for (int i = 0; i < arr.length; i++)
+//     arr[i] = output[i];
+// }
 
-void radixSort(int arr[]) {
-  int m = getMax(arr);
+// void radixSort(int arr[]) {
+//   int m = getMax(arr);
   
-  for (int exp = 1; m / exp > 0; exp *= 10)
-    countSort(arr, exp);
-}`
-      }
-    ],
-    timeComplexity: {
-      best: "O(nk)",
-      average: "O(nk)",
-      worst: "O(nk)"
-    },
-    spaceComplexity: "O(n + k)",
-    extra: "Efficient for numbers with small digit counts. Works only with integers."
-  },
+//   for (int exp = 1; m / exp > 0; exp *= 10)
+//     countSort(arr, exp);
+// }`
+//       }
+//     ],
+//     timeComplexity: {
+//       best: "O(nk)",
+//       average: "O(nk)",
+//       worst: "O(nk)"
+//     },
+//     spaceComplexity: "O(n + k)",
+//     extra: "Efficient for numbers with small digit counts. Works only with integers."
+//   },
 
-  "shell-sort": {
-    sortingName: "Shell Sort",
-    definition: "An optimization of insertion sort that allows exchange of far apart elements.",
-    detailTheory: "Shell Sort works by sorting elements far apart from each other and progressively reducing the gap between elements to be compared. It improves on insertion sort by moving out-of-place elements into position faster.",
-    code: [
-      {
-        language: "C",
-        code: `void shellSort(int arr[], int n) {
-  for (int gap = n / 2; gap > 0; gap /= 2) {
-    for (int i = gap; i < n; i++) {
-      int temp = arr[i];
-      int j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
-        arr[j] = arr[j - gap];
-      arr[j] = temp;
-    }
-  }
-}`
-      },
-      {
-        language: "C++",
-        code: `void shellSort(vector<int>& arr) {
-  int n = arr.size();
-  for (int gap = n / 2; gap > 0; gap /= 2) {
-    for (int i = gap; i < n; i++) {
-      int temp = arr[i];
-      int j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
-        arr[j] = arr[j - gap];
-      arr[j] = temp;
-    }
-  }
-}`
-      },
-      {
-        language: "Python",
-        code: `def shell_sort(arr):
-  n = len(arr)
-  gap = n // 2
+//   "shell-sort": {
+//     sortingName: "Shell Sort",
+//     definition: "An optimization of insertion sort that allows exchange of far apart elements.",
+//     detailTheory: "Shell Sort works by sorting elements far apart from each other and progressively reducing the gap between elements to be compared. It improves on insertion sort by moving out-of-place elements into position faster.",
+//     code: [
+//       {
+//         language: "C",
+//         code: `void shellSort(int arr[], int n) {
+//   for (int gap = n / 2; gap > 0; gap /= 2) {
+//     for (int i = gap; i < n; i++) {
+//       int temp = arr[i];
+//       int j;
+//       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+//         arr[j] = arr[j - gap];
+//       arr[j] = temp;
+//     }
+//   }
+// }`
+//       },
+//       {
+//         language: "C++",
+//         code: `void shellSort(vector<int>& arr) {
+//   int n = arr.size();
+//   for (int gap = n / 2; gap > 0; gap /= 2) {
+//     for (int i = gap; i < n; i++) {
+//       int temp = arr[i];
+//       int j;
+//       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+//         arr[j] = arr[j - gap];
+//       arr[j] = temp;
+//     }
+//   }
+// }`
+//       },
+//       {
+//         language: "Python",
+//         code: `def shell_sort(arr):
+//   n = len(arr)
+//   gap = n // 2
   
-  while gap > 0:
-    for i in range(gap, n):
-      temp = arr[i]
-      j = i
-      while j >= gap and arr[j - gap] > temp:
-        arr[j] = arr[j - gap]
-        j -= gap
-      arr[j] = temp
-    gap //= 2
-  return arr`
-      },
-      {
-        language: "JavaScript",
-        code: `function shellSort(arr) {
-  let n = arr.length;
-  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    for (let i = gap; i < n; i++) {
-      let temp = arr[i];
-      let j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-      }
-      arr[j] = temp;
-    }
-  }
-  return arr;
-}`
-      },
-      {
-        language: "Java",
-        code: `void shellSort(int arr[]) {
-  int n = arr.length;
-  for (int gap = n / 2; gap > 0; gap /= 2) {
-    for (int i = gap; i < n; i++) {
-      int temp = arr[i];
-      int j;
-      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
-        arr[j] = arr[j - gap];
-      }
-      arr[j] = temp;
-    }
-  }
-}`
-      }
-    ],
-    timeComplexity: {
-      best: "O(n log n)",
-      average: "O(n^(3/2))",
-      worst: "O(n²)"
-    },
-    spaceComplexity: "O(1)",
-    extra: "Improves on insertion sort. Performance depends on gap sequence."
-  },
+//   while gap > 0:
+//     for i in range(gap, n):
+//       temp = arr[i]
+//       j = i
+//       while j >= gap and arr[j - gap] > temp:
+//         arr[j] = arr[j - gap]
+//         j -= gap
+//       arr[j] = temp
+//     gap //= 2
+//   return arr`
+//       },
+//       {
+//         language: "JavaScript",
+//         code: `function shellSort(arr) {
+//   let n = arr.length;
+//   for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+//     for (let i = gap; i < n; i++) {
+//       let temp = arr[i];
+//       let j;
+//       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+//         arr[j] = arr[j - gap];
+//       }
+//       arr[j] = temp;
+//     }
+//   }
+//   return arr;
+// }`
+//       },
+//       {
+//         language: "Java",
+//         code: `void shellSort(int arr[]) {
+//   int n = arr.length;
+//   for (int gap = n / 2; gap > 0; gap /= 2) {
+//     for (int i = gap; i < n; i++) {
+//       int temp = arr[i];
+//       int j;
+//       for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+//         arr[j] = arr[j - gap];
+//       }
+//       arr[j] = temp;
+//     }
+//   }
+// }`
+//       }
+//     ],
+//     timeComplexity: {
+//       best: "O(n log n)",
+//       average: "O(n^(3/2))",
+//       worst: "O(n²)"
+//     },
+//     spaceComplexity: "O(1)",
+//     extra: "Improves on insertion sort. Performance depends on gap sequence."
+//   },
 
-  "counting-sort": {
-    sortingName: "Counting Sort",
-    definition: "A non-comparison sorting algorithm that counts the frequency of each element to determine their positions.",
-    detailTheory: "Counting Sort is used for integers within a range. It counts occurrences and calculates positions using prefix sums, then places elements into output.",
-    code: [
-      {
-        language: "C",
-        code: `void countingSort(int arr[], int n) {
-  int max = arr[0];
-  for (int i = 1; i < n; i++)
-    if (arr[i] > max)
-      max = arr[i];
+//   "counting-sort": {
+//     sortingName: "Counting Sort",
+//     definition: "A non-comparison sorting algorithm that counts the frequency of each element to determine their positions.",
+//     detailTheory: "Counting Sort is used for integers within a range. It counts occurrences and calculates positions using prefix sums, then places elements into output.",
+//     code: [
+//       {
+//         language: "C",
+//         code: `void countingSort(int arr[], int n) {
+//   int max = arr[0];
+//   for (int i = 1; i < n; i++)
+//     if (arr[i] > max)
+//       max = arr[i];
   
-  int count[max + 1];
-  for (int i = 0; i <= max; i++)
-    count[i] = 0;
+//   int count[max + 1];
+//   for (int i = 0; i <= max; i++)
+//     count[i] = 0;
   
-  for (int i = 0; i < n; i++)
-    count[arr[i]]++;
+//   for (int i = 0; i < n; i++)
+//     count[arr[i]]++;
   
-  for (int i = 1; i <= max; i++)
-    count[i] += count[i - 1];
+//   for (int i = 1; i <= max; i++)
+//     count[i] += count[i - 1];
   
-  int output[n];
-  for (int i = n - 1; i >= 0; i--) {
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-  }
+//   int output[n];
+//   for (int i = n - 1; i >= 0; i--) {
+//     output[count[arr[i]] - 1] = arr[i];
+//     count[arr[i]]--;
+//   }
   
-  for (int i = 0; i < n; i++)
-    arr[i] = output[i];
-}`
-      },
-      {
-        language: "C++",
-        code: `void countingSort(vector<int>& arr) {
-  int max = *max_element(arr.begin(), arr.end());
-  vector<int> count(max + 1, 0);
+//   for (int i = 0; i < n; i++)
+//     arr[i] = output[i];
+// }`
+//       },
+//       {
+//         language: "C++",
+//         code: `void countingSort(vector<int>& arr) {
+//   int max = *max_element(arr.begin(), arr.end());
+//   vector<int> count(max + 1, 0);
   
-  for (int num : arr)
-    count[num]++;
+//   for (int num : arr)
+//     count[num]++;
   
-  for (int i = 1; i <= max; i++)
-    count[i] += count[i - 1];
+//   for (int i = 1; i <= max; i++)
+//     count[i] += count[i - 1];
   
-  vector<int> output(arr.size());
-  for (int i = arr.size() - 1; i >= 0; i--) {
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-  }
+//   vector<int> output(arr.size());
+//   for (int i = arr.size() - 1; i >= 0; i--) {
+//     output[count[arr[i]] - 1] = arr[i];
+//     count[arr[i]]--;
+//   }
   
-  arr = output;
-}`
-      },
-      {
-        language: "Python",
-        code: `def counting_sort(arr):
-  max_val = max(arr)
-  count = [0] * (max_val + 1)
+//   arr = output;
+// }`
+//       },
+//       {
+//         language: "Python",
+//         code: `def counting_sort(arr):
+//   max_val = max(arr)
+//   count = [0] * (max_val + 1)
   
-  for num in arr:
-    count[num] += 1
+//   for num in arr:
+//     count[num] += 1
   
-  for i in range(1, len(count)):
-    count[i] += count[i - 1]
+//   for i in range(1, len(count)):
+//     count[i] += count[i - 1]
   
-  output = [0] * len(arr)
-  for num in reversed(arr):
-    output[count[num] - 1] = num
-    count[num] -= 1
+//   output = [0] * len(arr)
+//   for num in reversed(arr):
+//     output[count[num] - 1] = num
+//     count[num] -= 1
   
-  return output`
-      },
-      {
-        language: "JavaScript",
-        code: `function countingSort(arr) {
-  const max = Math.max(...arr);
-  const count = new Array(max + 1).fill(0);
+//   return output`
+//       },
+//       {
+//         language: "JavaScript",
+//         code: `function countingSort(arr) {
+//   const max = Math.max(...arr);
+//   const count = new Array(max + 1).fill(0);
   
-  for (const num of arr) {
-    count[num]++;
-  }
+//   for (const num of arr) {
+//     count[num]++;
+//   }
   
-  for (let i = 1; i <= max; i++) {
-    count[i] += count[i - 1];
-  }
+//   for (let i = 1; i <= max; i++) {
+//     count[i] += count[i - 1];
+//   }
   
-  const output = new Array(arr.length);
-  for (let i = arr.length - 1; i >= 0; i--) {
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-  }
+//   const output = new Array(arr.length);
+//   for (let i = arr.length - 1; i >= 0; i--) {
+//     output[count[arr[i]] - 1] = arr[i];
+//     count[arr[i]]--;
+//   }
   
-  return output;
-}`
-      },
-      {
-        language: "Java",
-        code: `void countingSort(int arr[]) {
-  int max = Arrays.stream(arr).max().getAsInt();
-  int[] count = new int[max + 1];
+//   return output;
+// }`
+//       },
+//       {
+//         language: "Java",
+//         code: `void countingSort(int arr[]) {
+//   int max = Arrays.stream(arr).max().getAsInt();
+//   int[] count = new int[max + 1];
   
-  for (int num : arr) {
-    count[num]++;
-  }
+//   for (int num : arr) {
+//     count[num]++;
+//   }
   
-  for (int i = 1; i <= max; i++) {
-    count[i] += count[i - 1];
-  }
+//   for (int i = 1; i <= max; i++) {
+//     count[i] += count[i - 1];
+//   }
   
-  int[] output = new int[arr.length];
-  for (int i = arr.length - 1; i >= 0; i--) {
-    output[count[arr[i]] - 1] = arr[i];
-    count[arr[i]]--;
-  }
+//   int[] output = new int[arr.length];
+//   for (int i = arr.length - 1; i >= 0; i--) {
+//     output[count[arr[i]] - 1] = arr[i];
+//     count[arr[i]]--;
+//   }
   
-  System.arraycopy(output, 0, arr, 0, arr.length);
-}`
-      }
-    ],
-    timeComplexity: {
-      best: "O(n + k)",
-      average: "O(n + k)",
-      worst: "O(n + k)"
-    },
-    spaceComplexity: "O(k)",
-    extra: "Fast for small integer ranges. Not suitable for large ranges or negative numbers."
-  },
+//   System.arraycopy(output, 0, arr, 0, arr.length);
+// }`
+//       }
+//     ],
+//     timeComplexity: {
+//       best: "O(n + k)",
+//       average: "O(n + k)",
+//       worst: "O(n + k)"
+//     },
+//     spaceComplexity: "O(k)",
+//     extra: "Fast for small integer ranges. Not suitable for large ranges or negative numbers."
+//   },
 
-  "bucket-sort": {
-    sortingName: "Bucket Sort",
-    definition: "A distribution sort that works by distributing elements into buckets and sorting them individually.",
-    detailTheory: "Bucket Sort divides the range of numbers into buckets, distributes the elements into these buckets, sorts each bucket (typically with insertion sort), and concatenates the results.",
-    code: [
-      {
-        language: "C",
-        code: `void bucketSort(float arr[], int n) {
-  // Create n empty buckets
-  float buckets[n][n];
-  int bucket_sizes[n];
-  for (int i = 0; i < n; i++)
-    bucket_sizes[i] = 0;
+//   "bucket-sort": {
+//     sortingName: "Bucket Sort",
+//     definition: "A distribution sort that works by distributing elements into buckets and sorting them individually.",
+//     detailTheory: "Bucket Sort divides the range of numbers into buckets, distributes the elements into these buckets, sorts each bucket (typically with insertion sort), and concatenates the results.",
+//     code: [
+//       {
+//         language: "C",
+//         code: `void bucketSort(float arr[], int n) {
+//   // Create n empty buckets
+//   float buckets[n][n];
+//   int bucket_sizes[n];
+//   for (int i = 0; i < n; i++)
+//     bucket_sizes[i] = 0;
   
-  // Put array elements in different buckets
-  for (int i = 0; i < n; i++) {
-    int bi = n * arr[i]; // Index in bucket
-    buckets[bi][bucket_sizes[bi]++] = arr[i];
-  }
+//   // Put array elements in different buckets
+//   for (int i = 0; i < n; i++) {
+//     int bi = n * arr[i]; // Index in bucket
+//     buckets[bi][bucket_sizes[bi]++] = arr[i];
+//   }
   
-  // Sort individual buckets
-  for (int i = 0; i < n; i++)
-    insertionSort(buckets[i], bucket_sizes[i]);
+//   // Sort individual buckets
+//   for (int i = 0; i < n; i++)
+//     insertionSort(buckets[i], bucket_sizes[i]);
   
-  // Concatenate all buckets into arr[]
-  int index = 0;
-  for (int i = 0; i < n; i++)
-    for (int j = 0; j < bucket_sizes[i]; j++)
-      arr[index++] = buckets[i][j];
-}`
-      },
-      {
-        language: "C++",
-        code: `void bucketSort(vector<float>& arr) {
-  int n = arr.size();
-  vector<vector<float>> buckets(n);
+//   // Concatenate all buckets into arr[]
+//   int index = 0;
+//   for (int i = 0; i < n; i++)
+//     for (int j = 0; j < bucket_sizes[i]; j++)
+//       arr[index++] = buckets[i][j];
+// }`
+//       },
+//       {
+//         language: "C++",
+//         code: `void bucketSort(vector<float>& arr) {
+//   int n = arr.size();
+//   vector<vector<float>> buckets(n);
   
-  // Put elements into different buckets
-  for (int i = 0; i < n; i++) {
-    int bi = n * arr[i]; // Index in bucket
-    buckets[bi].push_back(arr[i]);
-  }
+//   // Put elements into different buckets
+//   for (int i = 0; i < n; i++) {
+//     int bi = n * arr[i]; // Index in bucket
+//     buckets[bi].push_back(arr[i]);
+//   }
   
-  // Sort individual buckets
-  for (int i = 0; i < n; i++)
-    sort(buckets[i].begin(), buckets[i].end());
+//   // Sort individual buckets
+//   for (int i = 0; i < n; i++)
+//     sort(buckets[i].begin(), buckets[i].end());
   
-  // Concatenate all buckets into arr
-  int index = 0;
-  for (int i = 0; i < n; i++)
-    for (int j = 0; j < buckets[i].size(); j++)
-      arr[index++] = buckets[i][j];
-}`
-      },
-      {
-        language: "Python",
-        code: `def bucket_sort(arr):
-  max_val = max(arr)
-  size = max_val / len(arr)
-  buckets = [[] for _ in range(len(arr))]
+//   // Concatenate all buckets into arr
+//   int index = 0;
+//   for (int i = 0; i < n; i++)
+//     for (int j = 0; j < buckets[i].size(); j++)
+//       arr[index++] = buckets[i][j];
+// }`
+//       },
+//       {
+//         language: "Python",
+//         code: `def bucket_sort(arr):
+//   max_val = max(arr)
+//   size = max_val / len(arr)
+//   buckets = [[] for _ in range(len(arr))]
   
-  for num in arr:
-    i = int(num / size)
-    if i != len(arr):
-      buckets[i].append(num)
-    else:
-      buckets[len(arr) - 1].append(num)
+//   for num in arr:
+//     i = int(num / size)
+//     if i != len(arr):
+//       buckets[i].append(num)
+//     else:
+//       buckets[len(arr) - 1].append(num)
   
-  for bucket in buckets:
-    bucket.sort()
+//   for bucket in buckets:
+//     bucket.sort()
   
-  result = []
-  for bucket in buckets:
-    result += bucket
+//   result = []
+//   for bucket in buckets:
+//     result += bucket
   
-  return result`
-      },
-      {
-        language: "JavaScript",
-        code: `function bucketSort(arr) {
-  const n = arr.length;
-  const buckets = Array.from({ length: n }, () => []);
+//   return result`
+//       },
+//       {
+//         language: "JavaScript",
+//         code: `function bucketSort(arr) {
+//   const n = arr.length;
+//   const buckets = Array.from({ length: n }, () => []);
   
-  // Put elements into different buckets
-  for (const num of arr) {
-    const bi = Math.floor(n * num);
-    buckets[bi].push(num);
-  }
+//   // Put elements into different buckets
+//   for (const num of arr) {
+//     const bi = Math.floor(n * num);
+//     buckets[bi].push(num);
+//   }
   
-  // Sort individual buckets
-  for (const bucket of buckets) {
-    bucket.sort((a, b) => a - b);
-  }
+//   // Sort individual buckets
+//   for (const bucket of buckets) {
+//     bucket.sort((a, b) => a - b);
+//   }
   
-  // Concatenate all buckets
-  return buckets.flat();
-}`
-      },
-      {
-        language: "Java",
-        code: `void bucketSort(float[] arr) {
-  int n = arr.length;
-  ArrayList<Float>[] buckets = new ArrayList[n];
+//   // Concatenate all buckets
+//   return buckets.flat();
+// }`
+//       },
+//       {
+//         language: "Java",
+//         code: `void bucketSort(float[] arr) {
+//   int n = arr.length;
+//   ArrayList<Float>[] buckets = new ArrayList[n];
   
-  for (int i = 0; i < n; i++) {
-    buckets[i] = new ArrayList<>();
-  }
+//   for (int i = 0; i < n; i++) {
+//     buckets[i] = new ArrayList<>();
+//   }
   
-  // Put elements into different buckets
-  for (float num : arr) {
-    int bi = (int) (n * num);
-    buckets[bi].add(num);
-  }
+//   // Put elements into different buckets
+//   for (float num : arr) {
+//     int bi = (int) (n * num);
+//     buckets[bi].add(num);
+//   }
   
-  // Sort individual buckets
-  for (ArrayList<Float> bucket : buckets) {
-    Collections.sort(bucket);
-  }
+//   // Sort individual buckets
+//   for (ArrayList<Float> bucket : buckets) {
+//     Collections.sort(bucket);
+//   }
   
-  // Concatenate all buckets into arr
-  int index = 0;
-  for (ArrayList<Float> bucket : buckets) {
-    for (float num : bucket) {
-      arr[index++] = num;
-    }
-  }
-}`
-      }
-    ],
-    timeComplexity: {
-      best: "O(n + k)",
-      average: "O(n + k)",
-      worst: "O(n²)"
-    },
-    spaceComplexity: "O(n + k)",
-    extra: "Works best when input is uniformly distributed. Often used for floating-point numbers."
-  }
+//   // Concatenate all buckets into arr
+//   int index = 0;
+//   for (ArrayList<Float> bucket : buckets) {
+//     for (float num : bucket) {
+//       arr[index++] = num;
+//     }
+//   }
+// }`
+//       }
+//     ],
+//     timeComplexity: {
+//       best: "O(n + k)",
+//       average: "O(n + k)",
+//       worst: "O(n²)"
+//     },
+//     spaceComplexity: "O(n + k)",
+//     extra: "Works best when input is uniformly distributed. Often used for floating-point numbers."
+//   }
 };
 
 export default sortingAlgorithms;

@@ -13,10 +13,10 @@ const sortingAlgorithms = [
   "Insertion Sort",
   "Merge Sort",
   "Quick Sort",
-  "Heap Sort",
-  "Radix Sort",
-  "Shell Sort",
-  "Counting Sort"
+  // "Heap Sort",
+  // "Radix Sort",
+  // "Shell Sort",
+  // "Counting Sort"
 ];
 
 const algorithmIcons = {
@@ -25,10 +25,10 @@ const algorithmIcons = {
   "Insertion Sort": "📥",
   "Merge Sort": "🔄",
   "Quick Sort": "⚡",
-  "Heap Sort": "📊",
-  "Radix Sort": "🔢",
-  "Shell Sort": "🐚",
-  "Counting Sort": "🧮"
+  // "Heap Sort": "📊",
+  // "Radix Sort": "🔢",
+  // "Shell Sort": "🐚",
+  // "Counting Sort": "🧮"
 };
 
 export default function Sorting() {

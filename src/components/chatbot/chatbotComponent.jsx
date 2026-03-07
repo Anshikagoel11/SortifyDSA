@@ -7,7 +7,6 @@ import cleanChunk from "../../utils/cleanChunks";
 const QUICK_QUESTIONS = [
   "Explain Dijkstra's algorithm",
   "Time complexity of quicksort?",
-  "How to solve valid parentheses?",
   "BFS vs DFS difference",
 ];
 

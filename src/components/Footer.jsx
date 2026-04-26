@@ -31,7 +31,7 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-white">Connect With Me</h4>
             <div className="flex space-x-6 text-xl">
               <motion.a
-                href="https://www.linkedin.com/in/anshika-goel-25b537314/"
+                // href="https://www.linkedin.com/in/anshika-goel-25b537314/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
@@ -58,16 +58,16 @@ export default function Footer() {
                 <FaGithub />
               </motion.a> */}
               <motion.a
-                href="mailto:anshikadevv10@gmail.com"
+                // href="mailto:anshikadevv10@gmail.com"
                 whileHover={{ y: -2 }}
                 className="text-white hover:text-red-400 transition"
               >
                 <FaEnvelope />
               </motion.a>
             </div>
-            <p className="text-gray-400">
+            {/* <p className="text-gray-400">
               Have feedback? <a href="mailto:anshikadevv10@gmail.com" className="text-blue-400 hover:underline">Email me</a>!
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -77,7 +77,7 @@ export default function Footer() {
             className="text-gray-400"
             whileHover={{ scale: 1.02 }}
           >
-            Made with 🧋 by{" "}
+            {/* Made with 🧋 by{" "}
             <a 
               href="https://www.linkedin.com/in/anshika-goel-25b537314/" 
               target="_blank" 
@@ -85,7 +85,7 @@ export default function Footer() {
               className="text-blue-400 hover:underline"
             >
               Anshika Goel 
-            </a>
+            </a> */}
           </motion.p>
           <p className="text-gray-500 text-sm mt-2">
             © {new Date().getFullYear()} SortifyDSA. All rights reserved.
